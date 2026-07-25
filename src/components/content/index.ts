@@ -6,6 +6,7 @@ export type { Feature } from "@/components/content/feature-card";
 export { CtaBand } from "@/components/content/cta-band";
 export { Timeline } from "@/components/content/timeline";
 export { SponsorCard } from "@/components/content/sponsor-card";
+export { ProjectCard } from "@/components/content/project-card";
 export { OrganizerCard } from "@/components/content/organizer-card";
 export { FaqAccordion } from "@/components/content/faq-accordion";
 export { PageHeader } from "@/components/content/page-header";

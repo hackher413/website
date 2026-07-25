@@ -1,0 +1,58 @@
+import type { Metadata } from "next";
+
+import { Section } from "@/components/layout";
+import { PageHeader, ProjectCard, CtaBand, RevealGrid } from "@/components/content";
+import {
+  projectYears,
+  projectYearOrder,
+  projectsCta,
+} from "@/content/projects";
+
+export const metadata: Metadata = {
+  title: "Winners",
+  description:
+    "The standout projects built at Hack(H)er413 — a look at what our hackers made over one weekend.",
+};
+
+export default function ProjectsPage() {
+  return (
+    <>
+      <PageHeader
+        eyebrow="Winners"
+        title="What our hackers built."
+        lead="A weekend, an idea, and a room full of people cheering you on. Here are the projects that stood out."
+      />
+
+      <Section spacing="lg" className="pt-4 sm:pt-8">
+        <div className="flex flex-col gap-16">
+          {projectYearOrder.map((year) => {
+            const group = projectYears.find((y) => y.year === year);
+            if (!group || group.projects.length === 0) return null;
+
+            return (
+              <div key={year}>
+                <div className="mb-6">
+                  <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                    {year} winners
+                  </h2>
+                </div>
+                <RevealGrid className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                  {group.projects.map((project) => (
+                    <ProjectCard key={project.name} project={project} />
+                  ))}
+                </RevealGrid>
+              </div>
+            );
+          })}
+        </div>
+      </Section>
+
+      <CtaBand
+        title={projectsCta.title}
+        description={projectsCta.description}
+        primary={{ label: "Apply to hack", href: "/apply" }}
+        secondary={{ label: "See the schedule", href: "/schedule" }}
+      />
+    </>
+  );
+}
