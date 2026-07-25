@@ -15,10 +15,14 @@ const tones = {
   default: "",
   /** Subtle warm neutral band to separate sections. */
   muted: "bg-muted",
-  /** Soft honey wash — for highlight/CTA bands. */
-  honey: "bg-honey-soft",
-  /** Soft sky wash. */
-  sky: "bg-sky-soft",
+  /**
+   * Soft honey wash — for highlight/CTA bands. The wash is a constant light
+   * tint in both themes, so pin the text to the brand brown; otherwise dark
+   * mode's light foreground token would be invisible on it.
+   */
+  honey: "bg-honey-soft text-honey-foreground",
+  /** Soft sky wash. Same fixed-light reasoning as `honey`. */
+  sky: "bg-sky-soft text-sky-foreground",
   /** Inverted brand band (dark brown), used sparingly for emphasis. */
   brand: "bg-brand text-brand-foreground",
 } as const;
