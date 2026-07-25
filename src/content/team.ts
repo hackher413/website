@@ -3,7 +3,7 @@
  * OrganizerCard falls back to a monogram avatar so the page looks intentional
  * before real headshots are added.
  *
- * Roster reflects the 2026 organizing team.
+ * Roster reflects the 2027 organizing team.
  */
 
 export type Organizer = {
@@ -30,67 +30,124 @@ export const team: TeamGroup[] = [
   {
     name: "Directors",
     members: [
-      { name: "Ananya Koduru", role: "Co-Director", pronouns: "she/her" },
-      { name: "Advaya Venbakkam", role: "Co-Director", pronouns: "she/her" },
+      {
+        name: "Vidhika Tiwari",
+        role: "Co-Director",
+        pronouns: "she/her",
+        image: "/team/2027/vidhika-tiwari.jpg",
+        linkedin: "https://www.linkedin.com/in/vidhika-tiwari05/",
+      },
+      {
+        name: "Niharika Elangovan",
+        role: "Co-Director",
+        pronouns: "she/her",
+        image: "/team/2027/niharika-elangovan.jpg",
+        linkedin: "https://www.linkedin.com/in/niharika-elangovan-a90a1a293/",
+      },
     ],
   },
   {
     name: "Sponsorship & Finance",
     members: [
-      { name: "Carol Ding", role: "Head of Sponsorship", pronouns: "she/her" },
       {
-        name: "Kaustubha Vohra",
-        role: "Assistant Head of Sponsorship",
-        pronouns: "he/him",
+        name: "Parisa Singh",
+        role: "Head of Sponsorship",
+        pronouns: "she/her",
+        image: "/team/2027/parisa-singh.jpg",
+        linkedin: "https://www.linkedin.com/in/parisa-singh/",
       },
-      { name: "Naysa Arora", role: "Head of Finance", pronouns: "she/her" },
+      {
+        name: "Iris Cabral",
+        role: "Assistant Head of Sponsorship",
+        pronouns: "she/her",
+        image: "/team/2027/iris-cabral.jpg",
+        linkedin: "https://www.linkedin.com/in/iriscabral/",
+      },
+      {
+        name: "Naysa Arora",
+        role: "Head of Finance",
+        pronouns: "she/her",
+        image: "/team/2027/naysa-arora.jpg",
+        linkedin: "https://www.linkedin.com/in/naysa-arora",
+      },
     ],
   },
   {
     name: "Outreach & Marketing",
     members: [
-      { name: "Vidhika Tiwari", role: "Head of Outreach", pronouns: "she/her" },
-      { name: "Gianna Leidich", role: "Head of Marketing", pronouns: "she/her" },
-      { name: "Hiya Dagli", role: "Head of Social Media", pronouns: "she/her" },
       {
         name: "Rakshita Saroha",
-        role: "Head of Diversity & Inclusion",
+        role: "Head of Outreach",
         pronouns: "she/her",
+        image: "/team/2027/rakshita-saroha.jpg",
+        linkedin: "https://www.linkedin.com/in/rakshita-saroha/",
+      },
+      {
+        name: "Miranda Liskov",
+        role: "Assistant Head of Outreach",
+        pronouns: "she/her",
+        image: "/team/2027/miranda-liskov.jpg",
+        linkedin: "https://www.linkedin.com/in/miranda-liskov-05a230376/",
+      },
+      {
+        name: "Hiya Dagli",
+        role: "Head of Marketing",
+        pronouns: "she/her",
+        image: "/team/2027/hiya-dagli.jpg",
+        linkedin: "https://www.linkedin.com/in/hiyadagli/",
       },
     ],
   },
   {
     name: "Technology",
     members: [
-      { name: "Priyal Nanda", role: "Head of Technology", pronouns: "she/her" },
-      {
-        name: "Niharika Elangovan",
-        role: "Assistant Head of Technology",
-        pronouns: "she/her",
-      },
       {
         name: "Jennifer Ye",
-        role: "Assistant Head of Technology",
+        role: "Head of Technology",
         pronouns: "she/her",
+        image: "/team/2027/jennifer-ye.jpg",
+        linkedin: "https://www.linkedin.com/in/jenniferye1t/",
       },
       {
         name: "Jeba Shalin",
         role: "Assistant Head of Technology",
         pronouns: "she/her",
+        image: "/team/2027/jeba-shalin.jpg",
+        linkedin: "https://www.linkedin.com/in/jeba-shalin-562466314/",
+      },
+      {
+        name: "Linh Dang",
+        role: "Assistant Head of Technology",
+        pronouns: "she/her",
+        image: "/team/2027/linh-dang.jpg",
+        linkedin: "https://www.linkedin.com/in/linhdang-felix/",
+      },
+      {
+        name: "Sherry Nazifi",
+        role: "Assistant Head of Technology",
+        pronouns: "she/her",
+        image: "/team/2027/sherry-nazifi.jpg",
+        linkedin: "https://www.linkedin.com/in/shahrzad-nazifi-141ab8293/",
       },
     ],
   },
   {
-    name: "Logistics & Hardware",
+    name: "Logistics",
     members: [
-      { name: "Elizabeth Peter", role: "Head of Logistics", pronouns: "she/her" },
       {
         name: "Shriya Gautam",
+        role: "Head of Logistics",
+        pronouns: "she/her",
+        image: "/team/2027/shriya-gautam.jpg",
+        linkedin: "https://www.linkedin.com/in/shriyagautam5/",
+      },
+      {
+        name: "Soumya Shelke",
         role: "Assistant Head of Logistics",
         pronouns: "she/her",
+        image: "/team/2027/soumya-shelke.jpg",
+        linkedin: "https://www.linkedin.com/in/soumya-shelke-703830394/",
       },
-      { name: "Monil Bhavsar", role: "Co-Head of Hardware", pronouns: "he/him" },
-      { name: "Jessie Wang", role: "Co-Head of Hardware", pronouns: "she/her" },
     ],
   },
 ];
