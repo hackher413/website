@@ -1,9 +1,10 @@
 import * as React from "react";
 
+import { Navbar, Footer } from "@/components/layout";
+
 /**
- * Layout for all public marketing routes. The sticky Navbar and Footer are
- * added in Step 4; for now this establishes the semantic `<main>` landmark that
- * the "Skip to content" link targets.
+ * Layout for all public marketing routes: sticky Navbar, the semantic `<main>`
+ * landmark that the "Skip to content" link targets, and the Footer.
  */
 export default function SiteLayout({
   children,
@@ -11,8 +12,12 @@ export default function SiteLayout({
   children: React.ReactNode;
 }) {
   return (
-    <main id="main" className="flex-1">
-      {children}
-    </main>
+    <>
+      <Navbar />
+      <main id="main" className="flex-1">
+        {children}
+      </main>
+      <Footer />
+    </>
   );
 }
