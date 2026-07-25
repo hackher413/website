@@ -32,7 +32,11 @@ const RATE = 0.98;
 const BRAND_HUES = [46, 44, 200, 198];
 
 type Selection = { count: number; hue: number };
-type Source = { indices: number[]; hue: number; count: number };
+type Source = { indices: number[]; hue: number; count: number; hops: number };
+
+// How many cells outward a ripple travels before it stops seeding. Lower =
+// smaller, more contained bursts; higher = waves that sweep the whole comb.
+const RIPPLE_HOPS = 3;
 
 class Hex {
   x: number;
@@ -235,7 +239,7 @@ export function HoneycombCanvas({ className }: { className?: string }) {
             if (nb) {
               const indices: number[] = [];
               for (let k = 0; k < 3; k++) indices.push((j - 1 + k + 6) % 6);
-              nb.relate({ indices, hue: hex.hue, count: 0 });
+              nb.relate({ indices, hue: hex.hue, count: 0, hops: RIPPLE_HOPS });
             }
           }
         }
@@ -247,11 +251,14 @@ export function HoneycombCanvas({ className }: { className?: string }) {
       for (let i = hex.sources.length - 1; i >= 0; i--) {
         const src = hex.sources[i];
         const index = src.indices[rand(0, 3)];
-        if (hex.neighbors[index] && src.count === COUNT_MIN) {
+        // Only keep seeding forward while the ripple has hops left, so each
+        // burst stays a small local bloom instead of sweeping to the edge.
+        if (hex.neighbors[index] && src.count === COUNT_MIN && src.hops > 0) {
           hex.neighbors[index]!.relate({
             indices: src.indices,
             hue: src.hue,
             count: 0,
+            hops: src.hops - 1,
           });
         }
         if (++src.count === COUNT_MAX) hex.sources.splice(i, 1);
@@ -314,13 +321,16 @@ export function HoneycombCanvas({ className }: { className?: string }) {
     let lastMove = 0;
     const onPointerMove = (e: PointerEvent) => {
       const now = e.timeStamp;
-      // Throttle ignition so the cursor leaves a gentle trail, not a flood.
-      if (now - lastMove < 75) return;
+      // Cursor ignitions propagate (loud, like the idle bursts) so the trail
+      // disperses outward instead of feeling flat. The heavier throttle is what
+      // keeps that from stacking back into the old wall-to-wall flood: bursts
+      // fire at a burst-like cadence as the pointer moves, not every frame.
+      if (now - lastMove < 200) return;
       lastMove = now;
       igniteAt(e.clientX, e.clientY);
     };
     const onClick = (e: MouseEvent) => {
-      // A single, quiet ripple on click.
+      // A click sends a full ripple outward through the comb.
       igniteAt(e.clientX, e.clientY);
     };
 
@@ -341,11 +351,25 @@ export function HoneycombCanvas({ className }: { className?: string }) {
       hexes[rand(0, hexes.length)].select(46);
     }
 
-    // Occasional idle spark so the hive breathes when untouched — infrequent
-    // enough to feel ambient, not busy.
-    idleTimer = window.setInterval(() => {
-      if (hexes.length) hexes[rand(0, hexes.length)].select(brandHue());
-    }, 2600);
+    // Run the rAF loop and idle sparks only while the hero is on screen. Once
+    // scrolled past, both stop — the canvas does zero work behind the rest of
+    // the page — and resume seamlessly when the hero scrolls back into view.
+    let running = false;
+    const start = () => {
+      if (running) return;
+      running = true;
+      idleTimer = window.setInterval(() => {
+        if (hexes.length) hexes[rand(0, hexes.length)].select(brandHue());
+      }, 2600);
+      loop();
+    };
+    const stop = () => {
+      if (!running) return;
+      running = false;
+      cancelAnimationFrame(raf);
+      clearInterval(idleTimer);
+      idleTimer = 0;
+    };
 
     container.addEventListener("pointermove", onPointerMove);
     container.addEventListener("click", onClick);
@@ -357,12 +381,19 @@ export function HoneycombCanvas({ className }: { className?: string }) {
     };
     window.addEventListener("resize", onResize);
 
-    loop();
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) start();
+        else stop();
+      },
+      { threshold: 0 },
+    );
+    io.observe(container);
 
     return () => {
-      cancelAnimationFrame(raf);
+      stop();
       cancelAnimationFrame(resizeRaf);
-      clearInterval(idleTimer);
+      io.disconnect();
       container.removeEventListener("pointermove", onPointerMove);
       container.removeEventListener("click", onClick);
       window.removeEventListener("resize", onResize);
