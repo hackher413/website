@@ -3,19 +3,65 @@ import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
 import { Providers } from "@/components/providers";
+import { siteConfig } from "@/lib/site";
+import { OrganizationJsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
 
+const title = `${siteConfig.name} — Where women and gender minorities build in tech`;
+
 /**
- * Base metadata. Page-level SEO (OpenGraph, Twitter, JSON-LD, per-route titles)
- * is layered on in Step 9; this establishes the title template and defaults.
+ * Root metadata. `metadataBase` resolves all relative URLs (OG image, canonical)
+ * against the production origin, so social scrapers get absolute URLs. Per-route
+ * pages extend this via their own `metadata` export; the title `template`
+ * appends the brand to each page title.
  */
 export const metadata: Metadata = {
+  metadataBase: new URL(siteConfig.url),
   title: {
-    default: "Hack(H)er413 — Where women and gender minorities build in tech",
+    default: title,
     template: "%s · Hack(H)er413",
   },
-  description:
-    "Hack(H)er413 is a collegiate hackathon creating an inclusive, empowering space for women and gender minorities in technology.",
+  description: siteConfig.description,
+  applicationName: siteConfig.name,
+  keywords: [
+    "hackathon",
+    "Hack(H)er413",
+    "women in tech",
+    "gender minorities in tech",
+    "UMass Amherst",
+    "collegiate hackathon",
+    "diversity in tech",
+    "learn to code",
+  ],
+  authors: [{ name: siteConfig.name, url: siteConfig.url }],
+  creator: siteConfig.name,
+  publisher: siteConfig.name,
+  alternates: { canonical: "/" },
+  openGraph: {
+    type: "website",
+    locale: "en_US",
+    url: siteConfig.url,
+    siteName: siteConfig.name,
+    title,
+    description: siteConfig.description,
+  },
+  twitter: {
+    card: "summary_large_image",
+    title,
+    description: siteConfig.description,
+    creator: "@hackher413",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
 };
 
 export const viewport: Viewport = {
@@ -49,6 +95,7 @@ export default function RootLayout({
           </a>
           {children}
         </Providers>
+        <OrganizationJsonLd />
       </body>
     </html>
   );
