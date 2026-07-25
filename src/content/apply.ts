@@ -17,14 +17,18 @@ export const applyIntro = {
   lead: "Applications take about ten minutes. No experience required — just bring your curiosity.",
 };
 
-/** External application link. Update per cycle (or move to a CMS in Step 8). */
-export const applyUrl = "https://example.com/apply";
+/** External application link on the participant dashboard. */
+export const applyUrl = "https://dashboard.hackher413.com/apply";
 
 export const applyStatus = {
-  isOpen: true,
+  isOpen: false,
   /** Shown near the CTA. */
-  deadline: "Applications close two weeks before the event.",
+  deadline:
+    "Applications for 2026 are now closed. Join our mailing list to be the first to know when 2027 opens.",
 };
+
+/** Mailing-list signup, surfaced while applications are closed. */
+export const mailingListUrl = "https://forms.gle/YmY38wRxLSWWFQkKA";
 
 export type ApplyStep = {
   icon: LucideIcon;
@@ -54,7 +58,8 @@ export const applySteps: ApplyStep[] = [
 ];
 
 export const applyEligibility = [
-  "Currently enrolled college or university students.",
+  "Currently enrolled students, or those who graduated within the last 12 months.",
+  "Women and non-binary students — and the allies who support them.",
   "Beginners and first-time hackers are especially encouraged.",
   "All majors and disciplines welcome — not just CS.",
 ];

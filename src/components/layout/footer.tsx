@@ -4,7 +4,11 @@ import { Mail } from "lucide-react";
 import { footerNav, siteConfig } from "@/lib/site";
 import { Container } from "@/components/layout/container";
 import { Logo } from "@/components/layout/logo";
-import { InstagramIcon, LinkedInIcon } from "@/components/icons/brand-icons";
+import {
+  InstagramIcon,
+  LinkedInIcon,
+  DiscordIcon,
+} from "@/components/icons/brand-icons";
 
 const socialLinks = [
   {
@@ -13,6 +17,7 @@ const socialLinks = [
     Icon: InstagramIcon,
   },
   { label: "LinkedIn", href: siteConfig.social.linkedin, Icon: LinkedInIcon },
+  { label: "Discord", href: siteConfig.social.discord, Icon: DiscordIcon },
   { label: "Email", href: siteConfig.social.email, Icon: Mail },
 ];
 
@@ -73,7 +78,10 @@ export function Footer() {
           <p>
             © {year} {siteConfig.name}. All rights reserved.
           </p>
-          <p>Built with care in Western Massachusetts.</p>
+          <p>
+            Made with ♥ at the College of Information &amp; Computer Sciences,
+            UMass Amherst.
+          </p>
         </div>
       </Container>
     </footer>

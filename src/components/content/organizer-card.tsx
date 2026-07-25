@@ -40,7 +40,14 @@ export function OrganizerCard({ organizer }: { organizer: Organizer }) {
           {initials(organizer.name)}
         </span>
       )}
-      <h3 className="mt-4 font-semibold">{organizer.name}</h3>
+      <h3 className="mt-4 font-semibold">
+        {organizer.name}
+        {organizer.pronouns ? (
+          <span className="ml-1.5 text-xs font-normal text-muted-foreground">
+            ({organizer.pronouns})
+          </span>
+        ) : null}
+      </h3>
       <p className="text-sm text-muted-foreground">{organizer.role}</p>
       {organizer.linkedin ? (
         <a

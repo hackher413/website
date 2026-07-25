@@ -21,25 +21,25 @@ export type ScheduleDay = {
 };
 
 export const scheduleNote =
-  "Schedule is tentative and subject to change. Times are shown in Eastern Time.";
+  "A representative 24-hour schedule. Exact times are announced closer to the event and shown in Eastern Time.";
 
 export const schedule: ScheduleDay[] = [
   {
     label: "Day 1",
-    date: "Saturday",
+    date: "Saturday, Feb 21",
     events: [
       {
         time: "9:00 AM",
         title: "Check-in & breakfast",
         description: "Grab your badge, swag, and a bite. Find a comfy spot.",
-        location: "Main Hall",
+        location: "CS Building Lobby",
         kind: "meal",
       },
       {
         time: "10:30 AM",
         title: "Opening ceremony",
         description: "Welcome, mission, sponsors, and how the weekend works.",
-        location: "Auditorium",
+        location: "Main Auditorium",
         kind: "ceremony",
       },
       {
@@ -51,7 +51,7 @@ export const schedule: ScheduleDay[] = [
       {
         time: "1:00 PM",
         title: "Lunch",
-        location: "Main Hall",
+        location: "CS Building Lobby",
         kind: "meal",
       },
       {
@@ -71,47 +71,56 @@ export const schedule: ScheduleDay[] = [
       {
         time: "7:00 PM",
         title: "Dinner & mentor mixer",
-        location: "Main Hall",
+        location: "CS Building Lobby",
         kind: "meal",
       },
       {
-        time: "9:00 PM",
-        title: "Late-night game break",
-        description: "Step away from the keyboard and recharge.",
+        time: "10:00 PM",
+        title: "Late-night activities",
+        description: "Step away from the keyboard, play some games, recharge.",
         kind: "activity",
       },
     ],
   },
   {
     label: "Day 2",
-    date: "Sunday",
+    date: "Sunday, Feb 22",
     events: [
       {
         time: "8:00 AM",
         title: "Breakfast",
-        location: "Main Hall",
+        location: "CS Building Lobby",
         kind: "meal",
       },
       {
-        time: "11:00 AM",
+        time: "10:30 AM",
         title: "Submissions due",
         description: "Push your code and submit your project on Devpost.",
         kind: "milestone",
       },
       {
-        time: "12:00 PM",
+        time: "11:00 AM",
         title: "Project expo & judging",
         description: "Demo your build to judges and fellow hackers.",
         location: "Main Hall",
         kind: "activity",
       },
       {
-        time: "2:00 PM",
+        time: "1:00 PM",
         title: "Closing ceremony & awards",
         description: "Celebrate the weekend and crown the winners.",
-        location: "Auditorium",
+        location: "Main Auditorium",
         kind: "ceremony",
       },
     ],
   },
+];
+
+/** Prize categories awarded at the closing ceremony. */
+export const prizeCategories = [
+  { title: "Best Software Hack", description: "The strongest software build of the weekend." },
+  { title: "Best Hardware Hack", description: "The most impressive hardware creation." },
+  { title: "Best AI Hack", description: "The most creative use of AI." },
+  { title: "Best DEI Hack", description: "The project that best advances diversity, equity, and inclusion." },
+  { title: "Best Beginner Hack", description: "The standout project from first-time hackers." },
 ];

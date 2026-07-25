@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { HoneycombCanvas } from "@/components/honeycomb/honeycomb-canvas";
+import { event } from "@/content/event";
 
 /**
  * The signature hero: an immersive, glowing honeycomb canvas with the headline
@@ -43,7 +44,7 @@ export function HoneycombHero() {
             variants={fadeUp}
             className="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-[#fbf6ee]/70 backdrop-blur"
           >
-            Hack(H)er413 · Western Massachusetts
+            {event.dates} · UMass Amherst
           </motion.p>
           <motion.h1
             variants={fadeUp}

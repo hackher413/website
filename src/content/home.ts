@@ -17,10 +17,10 @@ import {
 export type HomeStat = { value: string; label: string };
 
 export const homeStats: HomeStat[] = [
-  { value: "500+", label: "Hackers" },
-  { value: "36", label: "Hours" },
-  { value: "40+", label: "Workshops" },
-  { value: "$10k", label: "In prizes" },
+  { value: "400+", label: "Attendees" },
+  { value: "80+", label: "Universities" },
+  { value: "19", label: "Countries" },
+  { value: "24", label: "Hours" },
 ];
 
 export type HomeFeature = {
@@ -65,13 +65,13 @@ export const homeMission = {
   eyebrow: "Our mission",
   title: "Technology is better when everyone helps build it.",
   body: [
-    "Hack(H)er413 is a collegiate hackathon on a mission to close the gender gap in tech — not with a lecture, but with a weekend of building, learning, and community.",
-    "We create an environment where women and gender minorities can take creative risks, learn new skills, and discover they belong in this industry, exactly as they are.",
+    "Our mission is to create a welcoming and inclusive environment for all women — cis and trans — and non-binary students of every ethnic, gender, socioeconomic, and educational background.",
+    "We bring students together to innovate, learn, and feel safe while doing so — a weekend where taking creative risks and discovering you belong in tech is exactly the point.",
   ],
 };
 
 export const homeCta = {
   title: "Ready to build something with us?",
   description:
-    "Applications are open. Bring your curiosity — we'll bring the rest.",
+    "Bring your curiosity — we'll bring the mentors, workshops, food, and a room full of people cheering you on.",
 };

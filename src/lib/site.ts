@@ -13,10 +13,12 @@ export const siteConfig = {
   url: "https://www.hackher413.com",
   tagline: "Where women and gender minorities build in tech.",
   description:
-    "Hack(H)er413 is a collegiate hackathon creating an inclusive, empowering space for women and gender minorities in technology.",
+    "Hack(H)er413 is a collegiate hackathon at UMass Amherst creating a welcoming, inclusive space for women and gender minorities to innovate, learn, and feel safe while doing so.",
   social: {
     instagram: "https://www.instagram.com/hackher413/",
     linkedin: "https://www.linkedin.com/company/hackher413/",
+    facebook: "https://www.facebook.com/HackHer413/",
+    discord: "https://discord.gg/RkaCr7Y9",
     email: "mailto:hackher413@gmail.com",
   },
 } as const;

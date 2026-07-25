@@ -24,19 +24,25 @@ export const faq: FaqCategory[] = [
     name: "The basics",
     items: [
       {
-        question: "Who can participate?",
+        question: "What is a hackathon?",
         answer:
-          "Hack(H)er413 is designed for women and gender minorities, and is open to all college students who support our mission. You don't need to be a computer science major — all disciplines are welcome.",
+          "A hackathon is an invention marathon. Students come together to build cool software and hardware creations over 24 hours — with mentors, workshops, food, and prizes along the way.",
+      },
+      {
+        question: "Do I need to be a student to attend?",
+        answer:
+          "Yes. Hack(H)er413 is open to students currently enrolled in a college or university, as well as those who graduated within the last 12 months.",
+      },
+      {
+        question:
+          "I don't identify as a woman or non-binary student. Can I still participate?",
+        answer:
+          "Absolutely. While our mission centers women and non-binary students, everyone is encouraged to apply — allies are always welcome.",
       },
       {
         question: "Do I need experience to attend?",
         answer:
-          "Not at all. A huge share of our hackers are first-timers. We run beginner tracks, starter kits, and mentor support specifically so you can learn as you go.",
-      },
-      {
-        question: "How much does it cost?",
-        answer:
-          "Nothing. Hack(H)er413 is completely free to attend, including meals and swag, thanks to our sponsors.",
+          "Not at all. A huge share of our hackers are first-timers — 88 attendees came to their very first hackathon last year. Beginner-friendly workshops and mentors are here to help you learn as you go.",
       },
     ],
   },
@@ -44,19 +50,19 @@ export const faq: FaqCategory[] = [
     name: "Logistics",
     items: [
       {
+        question: "Do I have to pay to attend?",
+        answer:
+          "Nope. Attending Hack(H)er413 is completely free, including meals and swag, thanks to our sponsors.",
+      },
+      {
+        question: "Are travel reimbursements offered?",
+        answer:
+          "There are no travel reimbursements offered this year.",
+      },
+      {
         question: "What should I bring?",
         answer:
-          "Your laptop and charger, a student ID, and any toiletries if you plan to stay overnight. We'll provide food, wifi, and plenty of caffeine.",
-      },
-      {
-        question: "Can I come with a team?",
-        answer:
-          "Yes — bring a team of up to four, or come solo and form one at the event during team formation. We'll help you find teammates.",
-      },
-      {
-        question: "Is travel reimbursed?",
-        answer:
-          "We offer limited travel reimbursement for eligible attendees. Details are shared with accepted applicants closer to the event.",
+          "Your laptop and charger, a student ID, and any toiletries or comfort items if you plan to stay overnight. We'll provide food, wifi, and plenty of caffeine.",
       },
     ],
   },
@@ -71,12 +77,12 @@ export const faq: FaqCategory[] = [
       {
         question: "Are there prizes?",
         answer:
-          "Yes. We award prizes across several categories, plus sponsor challenges. But the biggest win is what you learn and the people you meet.",
+          "Yes. We award prizes across several categories — including Best Software, Hardware, AI, DEI, and Beginner hacks — plus sponsor challenges. But the biggest win is what you learn and the people you meet.",
       },
       {
         question: "Is there a code of conduct?",
         answer:
-          "Absolutely. Everyone agrees to our code of conduct, which we enforce to keep the event safe, inclusive, and welcoming for all.",
+          "Yes. Everyone agrees to the MLH Code of Conduct, which we strictly enforce to keep the event safe, inclusive, and welcoming for all.",
       },
     ],
   },

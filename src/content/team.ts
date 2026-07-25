@@ -2,11 +2,14 @@
  * Team content. Organizers grouped by team (committee). `image` is optional —
  * OrganizerCard falls back to a monogram avatar so the page looks intentional
  * before real headshots are added.
+ *
+ * Roster reflects the 2026 organizing team.
  */
 
 export type Organizer = {
   name: string;
   role: string;
+  pronouns?: string;
   /** Path under /public, e.g. "/team/jane.jpg". Optional. */
   image?: string;
   linkedin?: string;
@@ -20,44 +23,74 @@ export type TeamGroup = {
 export const teamIntro = {
   eyebrow: "Our team",
   title: "The people behind the hive.",
-  lead: "Hack(H)er413 is organized entirely by students who volunteer their time to build something bigger than themselves.",
+  lead: "Hack(H)er413 is organized entirely by UMass Amherst students who volunteer their time to build something bigger than themselves.",
 };
 
 export const team: TeamGroup[] = [
   {
     name: "Directors",
     members: [
-      { name: "Ada Rivera", role: "Executive Director" },
-      { name: "Priya Nadar", role: "Deputy Director" },
+      { name: "Ananya Koduru", role: "Co-Director", pronouns: "she/her" },
+      { name: "Advaya Venbakkam", role: "Co-Director", pronouns: "she/her" },
     ],
   },
   {
-    name: "Logistics",
+    name: "Sponsorship & Finance",
     members: [
-      { name: "Sam Okafor", role: "Operations Lead" },
-      { name: "Jordan Lee", role: "Venue & Safety" },
-      { name: "Mina Torres", role: "Food & Supplies" },
+      { name: "Carol Ding", role: "Head of Sponsorship", pronouns: "she/her" },
+      {
+        name: "Kaustubha Vohra",
+        role: "Assistant Head of Sponsorship",
+        pronouns: "he/him",
+      },
+      { name: "Naysa Arora", role: "Head of Finance", pronouns: "she/her" },
     ],
   },
   {
-    name: "Sponsorship",
+    name: "Outreach & Marketing",
     members: [
-      { name: "Robin Chen", role: "Sponsorship Lead" },
-      { name: "Alex Morgan", role: "Partnerships" },
+      { name: "Vidhika Tiwari", role: "Head of Outreach", pronouns: "she/her" },
+      { name: "Gianna Leidich", role: "Head of Marketing", pronouns: "she/her" },
+      { name: "Hiya Dagli", role: "Head of Social Media", pronouns: "she/her" },
+      {
+        name: "Rakshita Saroha",
+        role: "Head of Diversity & Inclusion",
+        pronouns: "she/her",
+      },
     ],
   },
   {
-    name: "Design & Web",
+    name: "Technology",
     members: [
-      { name: "Kai Patel", role: "Design Lead" },
-      { name: "Noor Haddad", role: "Web Developer" },
+      { name: "Priyal Nanda", role: "Head of Technology", pronouns: "she/her" },
+      {
+        name: "Niharika Elangovan",
+        role: "Assistant Head of Technology",
+        pronouns: "she/her",
+      },
+      {
+        name: "Jennifer Ye",
+        role: "Assistant Head of Technology",
+        pronouns: "she/her",
+      },
+      {
+        name: "Jeba Shalin",
+        role: "Assistant Head of Technology",
+        pronouns: "she/her",
+      },
     ],
   },
   {
-    name: "Marketing",
+    name: "Logistics & Hardware",
     members: [
-      { name: "Lena Fischer", role: "Marketing Lead" },
-      { name: "Tomás Ruiz", role: "Social Media" },
+      { name: "Elizabeth Peter", role: "Head of Logistics", pronouns: "she/her" },
+      {
+        name: "Shriya Gautam",
+        role: "Assistant Head of Logistics",
+        pronouns: "she/her",
+      },
+      { name: "Monil Bhavsar", role: "Co-Head of Hardware", pronouns: "he/him" },
+      { name: "Jessie Wang", role: "Co-Head of Hardware", pronouns: "she/her" },
     ],
   },
 ];

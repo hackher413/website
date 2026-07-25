@@ -11,6 +11,7 @@ import {
   applyUrl,
   applyStatus,
   applyEligibility,
+  mailingListUrl,
 } from "@/content/apply";
 
 export const metadata: Metadata = {
@@ -19,6 +20,10 @@ export const metadata: Metadata = {
 };
 
 export default function ApplyPage() {
+  const isOpen = applyStatus.isOpen;
+  const ctaHref = isOpen ? applyUrl : mailingListUrl;
+  const ctaLabel = isOpen ? "Start your application" : "Join the mailing list";
+
   return (
     <>
       <PageHeader
@@ -29,9 +34,9 @@ export default function ApplyPage() {
 
       <Section spacing="md">
         <div className="flex flex-col items-start gap-4">
-          <Button asChild size="xl" variant="honey" disabled={!applyStatus.isOpen}>
-            <a href={applyUrl} target="_blank" rel="noopener noreferrer">
-              {applyStatus.isOpen ? "Start your application" : "Applications closed"}
+          <Button asChild size="xl" variant="honey">
+            <a href={ctaHref} target="_blank" rel="noopener noreferrer">
+              {ctaLabel}
               <ArrowRight aria-hidden="true" />
             </a>
           </Button>
@@ -73,12 +78,14 @@ export default function ApplyPage() {
             The hive is waiting for you.
           </h2>
           <p className="mt-4 text-lead text-brand-foreground/70 text-pretty">
-            Ten minutes now, an unforgettable weekend later.
+            {isOpen
+              ? "Ten minutes now, an unforgettable weekend later."
+              : "Applications for 2026 have closed — join the list and we'll reach out the moment 2027 opens."}
           </p>
           <div className="mt-8">
             <Button asChild size="xl" variant="honey">
-              <a href={applyUrl} target="_blank" rel="noopener noreferrer">
-                Apply now
+              <a href={ctaHref} target="_blank" rel="noopener noreferrer">
+                {ctaLabel}
                 <ArrowRight aria-hidden="true" />
               </a>
             </Button>

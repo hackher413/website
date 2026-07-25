@@ -14,11 +14,11 @@ export type HoneycombStat = {
 };
 
 export const honeycombStats: HoneycombStat[] = [
-  { value: "500+", label: "hackers" },
-  { value: "36", label: "hours" },
-  { value: "40+", label: "workshops" },
-  { value: "$10k", label: "in prizes" },
-  { value: "1", label: "unforgettable weekend" },
+  { value: "400+", label: "attendees" },
+  { value: "80+", label: "universities" },
+  { value: "19", label: "countries" },
+  { value: "24", label: "hours" },
+  { value: "45", label: "majors" },
   { value: "100%", label: "beginner friendly" },
-  { value: "24/7", label: "mentorship" },
+  { value: "free", label: "to attend" },
 ];

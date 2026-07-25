@@ -32,7 +32,7 @@ export default function SponsorsPage() {
             const tierSponsors = sponsors.filter((s) => s.tier === tier);
             if (tierSponsors.length === 0) return null;
             const meta = tierMeta[tier];
-            const featured = tier === "presenting";
+            const featured = tier === "current";
 
             return (
               <div key={tier}>

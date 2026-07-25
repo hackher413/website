@@ -48,8 +48,8 @@ export default function AboutPage() {
 
       <CtaBand
         title="Come see what we mean."
-        description="The best way to understand Hack(H)er413 is to be there. Applications are open."
-        primary={{ label: "Apply now", href: applyNav.href }}
+        description="The best way to understand Hack(H)er413 is to be there. Get on the list for 2027."
+        primary={{ label: "Get involved", href: applyNav.href }}
         secondary={{ label: "View the schedule", href: "/schedule" }}
       />
     </>

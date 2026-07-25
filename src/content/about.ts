@@ -15,7 +15,7 @@ import {
 export const aboutIntro = {
   eyebrow: "About us",
   title: "We're building a more welcoming front door to tech.",
-  lead: "Hack(H)er413 is a collegiate hackathon in Western Massachusetts, created for women and gender minorities and open to everyone who shares our mission.",
+  lead: "Hack(H)er413 is a collegiate hackathon at UMass Amherst, created for women and non-binary students and open to allies who share our mission.",
 };
 
 export const aboutStory = {
@@ -23,8 +23,8 @@ export const aboutStory = {
   title: "Started by students who wanted a seat at the table.",
   body: [
     "Hack(H)er413 began with a simple observation: hackathons are incredible places to learn, but too many people never walk through the door because they don't see themselves reflected inside.",
-    "So a group of students in the 413 set out to build the event they wished they'd had — one where a first-timer is just as celebrated as a seasoned competitor, where mentors outnumber the intimidating jargon, and where the whole weekend is designed around belonging.",
-    "Every year we grow, but the mission stays fixed: close the gender gap in tech by making the on-ramp genuinely accessible.",
+    "So a group of students at UMass Amherst set out to build the event they wished they'd had — one where a first-timer is just as celebrated as a seasoned competitor, where mentors outnumber the intimidating jargon, and where the whole weekend is designed around belonging.",
+    "Every year we grow — most recently welcoming 400+ attendees from 80+ universities across 19 countries — but the mission stays fixed: create a space where women and non-binary students innovate, learn, and feel safe while doing so.",
   ],
 };
 
@@ -67,8 +67,8 @@ export const aboutValues: AboutValue[] = [
 ];
 
 export const aboutStats = [
-  { value: "500+", label: "Hackers" },
-  { value: "36", label: "Hours" },
-  { value: "50+", label: "Mentors" },
-  { value: "8", label: "Years running" },
+  { value: "400+", label: "Attendees" },
+  { value: "80+", label: "Universities" },
+  { value: "45", label: "Majors" },
+  { value: "88", label: "First-timers" },
 ];
