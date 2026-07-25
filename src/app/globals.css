@@ -4,127 +4,240 @@
 
 @custom-variant dark (&:is(.dark *));
 
+/* -------------------------------------------------------------------------- */
+/*  Theme registration                                                        */
+/*  Maps CSS custom properties -> Tailwind utilities (bg-*, text-*, etc.).    */
+/*  Semantic colors resolve from :root / .dark below. Brand colors and the    */
+/*  type scale are defined statically here because they don't change per      */
+/*  theme.                                                                    */
+/* -------------------------------------------------------------------------- */
 @theme inline {
+  /* Fonts */
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-geist-sans);
+
+  /* Semantic surface + text colors (values in :root / .dark) */
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
   --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  /* -- Brand colors (constant across light/dark) ------------------------- */
+  /* The dark warm brown that anchors the identity. */
+  --color-brand: #43302e;
+  --color-brand-foreground: #fffdf7;
+  /* Accent 1 — honey. Pastel, so text on it is always the brand brown. */
+  --color-honey: #fff1b5;
+  --color-honey-foreground: #43302e;
+  --color-honey-soft: #fff8da;
+  /* Accent 2 — sky. */
+  --color-sky: #c1dbe8;
+  --color-sky-foreground: #43302e;
+  --color-sky-soft: #e6f1f7;
+
+  /* Chart palette (future dataviz / stat visuals) leans on the brand. */
+  --color-chart-1: var(--chart-1);
+  --color-chart-2: var(--chart-2);
+  --color-chart-3: var(--chart-3);
+  --color-chart-4: var(--chart-4);
+  --color-chart-5: var(--chart-5);
+
+  /* Sidebar tokens (kept for shadcn component compatibility) */
+  --color-sidebar: var(--sidebar);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-ring: var(--sidebar-ring);
+
+  /* -- Type scale -------------------------------------------------------- */
+  /* Fluid display sizes for large marketing typography. Pair utilities:    */
+  /* text-display-2xl, text-display-xl, text-display, text-lead.            */
+  --text-display-2xl: clamp(2.75rem, 1.4rem + 5.6vw, 5.25rem);
+  --text-display-2xl--line-height: 1.02;
+  --text-display-2xl--letter-spacing: -0.032em;
+  --text-display-2xl--font-weight: 600;
+
+  --text-display-xl: clamp(2.25rem, 1.3rem + 3.8vw, 3.75rem);
+  --text-display-xl--line-height: 1.05;
+  --text-display-xl--letter-spacing: -0.028em;
+  --text-display-xl--font-weight: 600;
+
+  --text-display: clamp(1.875rem, 1.25rem + 2.2vw, 2.875rem);
+  --text-display--line-height: 1.1;
+  --text-display--letter-spacing: -0.022em;
+  --text-display--font-weight: 600;
+
+  --text-lead: 1.25rem;
+  --text-lead--line-height: 1.65;
+  --text-lead--letter-spacing: -0.006em;
+
+  /* Radius — friendly but not childish. */
   --radius-sm: calc(var(--radius) * 0.6);
   --radius-md: calc(var(--radius) * 0.8);
   --radius-lg: var(--radius);
   --radius-xl: calc(var(--radius) * 1.4);
   --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
+  --radius-3xl: calc(var(--radius) * 2.4);
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Light theme (default)                                                     */
+/* -------------------------------------------------------------------------- */
 :root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
+  --radius: 0.75rem;
+
+  --background: #ffffff;
+  --foreground: #43302e;
+
+  --card: #ffffff;
+  --card-foreground: #43302e;
+
+  --popover: #ffffff;
+  --popover-foreground: #43302e;
+
+  /* Primary = brand brown with warm-white text. */
+  --primary: #43302e;
+  --primary-foreground: #fffdf7;
+
+  /* Warm neutral surfaces so nothing reads as cold gray. */
+  --secondary: #f6f1ec;
+  --secondary-foreground: #43302e;
+
+  --muted: #f6f1ec;
+  --muted-foreground: #6e5a57;
+
+  /* shadcn "accent" = hover/active surface (NOT a brand accent). */
+  --accent: #f1e9e2;
+  --accent-foreground: #43302e;
+
+  --destructive: #c0392b;
+
+  --border: #ece4de;
+  --input: #ece4de;
+  --ring: #43302e;
+
+  --chart-1: #fff1b5;
+  --chart-2: #c1dbe8;
+  --chart-3: #43302e;
+  --chart-4: #d9a441;
+  --chart-5: #7fb0c8;
+
+  --sidebar: #ffffff;
+  --sidebar-foreground: #43302e;
+  --sidebar-primary: #43302e;
+  --sidebar-primary-foreground: #fffdf7;
+  --sidebar-accent: #f1e9e2;
+  --sidebar-accent-foreground: #43302e;
+  --sidebar-border: #ece4de;
+  --sidebar-ring: #43302e;
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Dark theme — warm, not black. A deep espresso brown.                      */
+/* -------------------------------------------------------------------------- */
 .dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
+  --background: #1b1513;
+  --foreground: #f5efe7;
+
+  --card: #241c19;
+  --card-foreground: #f5efe7;
+
+  --popover: #241c19;
+  --popover-foreground: #f5efe7;
+
+  /* Primary inverts: light surface, dark text. */
+  --primary: #f5efe7;
+  --primary-foreground: #1b1513;
+
+  --secondary: #2e2521;
+  --secondary-foreground: #f5efe7;
+
+  --muted: #2e2521;
+  --muted-foreground: #b8a9a2;
+
+  --accent: #362b26;
+  --accent-foreground: #f5efe7;
+
+  --destructive: #e5544b;
+
+  --border: #3a2f2a;
+  --input: #3a2f2a;
+  --ring: #d8c8a0;
+
+  --chart-1: #fff1b5;
+  --chart-2: #c1dbe8;
+  --chart-3: #f5efe7;
+  --chart-4: #d9a441;
+  --chart-5: #7fb0c8;
+
+  --sidebar: #241c19;
+  --sidebar-foreground: #f5efe7;
+  --sidebar-primary: #f5efe7;
+  --sidebar-primary-foreground: #1b1513;
+  --sidebar-accent: #362b26;
+  --sidebar-accent-foreground: #f5efe7;
+  --sidebar-border: #3a2f2a;
+  --sidebar-ring: #d8c8a0;
 }
 
+/* -------------------------------------------------------------------------- */
+/*  Base layer                                                                */
+/* -------------------------------------------------------------------------- */
 @layer base {
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
-  }
+
   html {
     @apply font-sans;
+    scroll-behavior: smooth;
+    /* Offset anchor targets for the sticky navbar. */
+    scroll-padding-top: 5rem;
+    -webkit-text-size-adjust: 100%;
+    text-rendering: optimizeLegibility;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Brand-flavored text selection. */
+  ::selection {
+    background-color: var(--color-honey);
+    color: var(--color-honey-foreground);
+  }
+
+  /* Respect users who prefer reduced motion. */
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
+    }
   }
 }
