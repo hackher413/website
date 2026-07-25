@@ -25,19 +25,29 @@ export function SponsorCard({
       href={sponsor.url}
       target="_blank"
       rel="noopener noreferrer"
+      title={sponsor.name}
+      aria-label={sponsor.name}
       className={cn(
-        "group flex items-center justify-center rounded-xl border border-border/70 bg-card p-6 transition-all duration-300 hover:border-border hover:shadow-md hover:shadow-brand/5",
+        "group relative flex items-center justify-center rounded-xl border border-border/70 bg-card p-6 transition-all duration-300 hover:border-border hover:shadow-md hover:shadow-brand/5",
         featured ? "min-h-32" : "min-h-24",
       )}
     >
       {sponsor.logo ? (
-        <Image
-          src={sponsor.logo}
-          alt={sponsor.name}
-          width={featured ? 240 : 160}
-          height={featured ? 96 : 64}
-          className="max-h-16 w-auto object-contain opacity-80 transition-opacity group-hover:opacity-100"
-        />
+        <>
+          <Image
+            src={sponsor.logo}
+            alt={sponsor.name}
+            width={featured ? 240 : 160}
+            height={featured ? 96 : 64}
+            className="max-h-16 w-auto object-contain opacity-80 transition-opacity group-hover:opacity-100"
+          />
+          <span
+            className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-xs font-medium text-background opacity-0 shadow-sm transition-opacity duration-200 group-hover:opacity-100"
+            aria-hidden="true"
+          >
+            {sponsor.name}
+          </span>
+        </>
       ) : (
         <span
           className={cn(

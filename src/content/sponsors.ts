@@ -18,31 +18,30 @@ export type Sponsor = {
 
 export const sponsors: Sponsor[] = [
   // Current sponsors
-  { name: "Manning CICS", url: "https://www.cics.umass.edu/", tier: "current" },
-  { name: "WFUM", url: "https://example.com", tier: "current" },
-  { name: "Innovate413", url: "https://example.com", tier: "current" },
+  { name: "Manning CICS", url: "https://www.cics.umass.edu/", logo: "/sponsors/manning-cics.jpg", tier: "current" },
+  { name: "WFUM", url: "https://example.com", logo: "/sponsors/wfum.jpeg", tier: "current" },
+  { name: "Innovate413", url: "https://example.com", logo: "/sponsors/innovate413.avif", tier: "current" },
 
   // Past sponsors
-  { name: "Massachusetts State Lottery", url: "https://example.com", tier: "past" },
-  { name: "Akamai", url: "https://www.akamai.com/", tier: "past" },
-  { name: "Travelers Insurance", url: "https://www.travelers.com/", tier: "past" },
-  { name: "Nord Security", url: "https://nordsecurity.com/", tier: "past" },
-  { name: "MassMutual", url: "https://www.massmutual.com/", tier: "past" },
+  { name: "Massachusetts State Lottery", url: "https://example.com", logo: "/sponsors/mass-lottery.webp", tier: "past" },
+  { name: "Akamai", url: "https://www.akamai.com/", logo: "/sponsors/akamai.webp", tier: "past" },
+  { name: "Travelers Insurance", url: "https://www.travelers.com/", logo: "/sponsors/travelers.png", tier: "past" },
+  { name: "Nord Security", url: "https://nordsecurity.com/", logo: "/sponsors/nord-security.png", tier: "past" },
+  { name: "MassMutual", url: "https://www.massmutual.com/", logo: "/sponsors/massmutual.webp", tier: "past" },
 
   // Past contributors
-  { name: "Adobe Express", url: "https://www.adobe.com/express/", tier: "contributor" },
-  { name: "Insight Global", url: "https://insightglobal.com/", tier: "contributor" },
-  { name: "Subway", url: "https://www.subway.com/", tier: "contributor" },
-  { name: "Incogni", url: "https://incogni.com/", tier: "contributor" },
-  { name: "Wolfram", url: "https://www.wolfram.com/", tier: "contributor" },
+  { name: "Adobe Express", url: "https://www.adobe.com/express/", logo: "/sponsors/adobe-express.png", tier: "contributor" },
+  { name: "Insight Global", url: "https://insightglobal.com/", logo: "/sponsors/insight-global.png", tier: "contributor" },
+  { name: "Subway", url: "https://www.subway.com/", logo: "/sponsors/subway.jpg", tier: "contributor" },
+  { name: "Incogni", url: "https://incogni.com/", logo: "/sponsors/incogni.png", tier: "contributor" },
+  { name: "Wolfram", url: "https://www.wolfram.com/", logo: "/sponsors/wolfram.png", tier: "contributor" },
 
   // Past partners
-  { name: "Sticker Mule", url: "https://www.stickermule.com/", tier: "partner" },
-  { name: "Major League Hacking", url: "https://mlh.io/", tier: "partner" },
-  { name: "Google Cloud", url: "https://cloud.google.com/", tier: "partner" },
-  { name: "Stand Out Stickers", url: "https://www.standoutstickers.com/", tier: "partner" },
-  { name: "MathWorks", url: "https://www.mathworks.com/", tier: "partner" },
-  { name: "Echo3D", url: "https://www.echo3d.com/", tier: "partner" },
+  { name: "Sticker Mule", url: "https://www.stickermule.com/", logo: "/sponsors/sticker-mule.png", tier: "partner" },
+  { name: "Google Cloud", url: "https://cloud.google.com/", logo: "/sponsors/google-cloud.png", tier: "partner" },
+  { name: "Stand Out Stickers", url: "https://www.standoutstickers.com/", logo: "/sponsors/standout-stickers.png", tier: "partner" },
+  { name: "MathWorks", url: "https://www.mathworks.com/", logo: "/sponsors/mathworks.png", tier: "partner" },
+  { name: "Echo3D", url: "https://www.echo3d.com/", logo: "/sponsors/echo3d.avif", tier: "partner" },
 ];
 
 export const tierMeta: Record<
