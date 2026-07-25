@@ -1,15 +1,46 @@
 import type { Metadata } from "next";
 
 import { Section } from "@/components/layout";
+import { PageHeader, FaqAccordion, CtaBand } from "@/components/content";
+import { applyNav, siteConfig } from "@/lib/site";
+import { faq, faqIntro } from "@/content/faq";
 
-export const metadata: Metadata = { title: "FAQ" };
+export const metadata: Metadata = {
+  title: "FAQ",
+  description: faqIntro.lead,
+};
 
-/** Placeholder — real content is built in Step 7. */
 export default function FaqPage() {
   return (
-    <Section spacing="lg">
-      <h1 className="text-display-xl font-heading">FAQ</h1>
-      <p className="mt-4 text-lead text-muted-foreground">Coming soon.</p>
-    </Section>
+    <>
+      <PageHeader
+        eyebrow={faqIntro.eyebrow}
+        title={faqIntro.title}
+        lead={faqIntro.lead}
+      />
+
+      <Section spacing="lg">
+        <div className="flex flex-col gap-14">
+          {faq.map((category, i) => (
+            <div
+              key={category.name}
+              className="grid gap-6 lg:grid-cols-[minmax(0,16rem)_1fr] lg:gap-12"
+            >
+              <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground lg:pt-4">
+                {category.name}
+              </h2>
+              <FaqAccordion items={category.items} idPrefix={`faq-${i}`} />
+            </div>
+          ))}
+        </div>
+      </Section>
+
+      <CtaBand
+        title="Still have a question?"
+        description="We're real people and we're happy to help. Drop us a line anytime."
+        primary={{ label: "Email us", href: siteConfig.social.email }}
+        secondary={{ label: "Apply now", href: applyNav.href }}
+      />
+    </>
   );
 }

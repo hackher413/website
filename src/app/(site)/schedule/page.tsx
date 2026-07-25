@@ -1,15 +1,48 @@
 import type { Metadata } from "next";
 
 import { Section } from "@/components/layout";
+import { PageHeader, Timeline, CtaBand } from "@/components/content";
+import { applyNav } from "@/lib/site";
+import { schedule, scheduleNote } from "@/content/schedule";
 
-export const metadata: Metadata = { title: "Schedule" };
+export const metadata: Metadata = {
+  title: "Schedule",
+  description:
+    "The full weekend, hour by hour — ceremonies, workshops, meals, and judging.",
+};
 
-/** Placeholder — real content is built in Step 7. */
 export default function SchedulePage() {
   return (
-    <Section spacing="lg">
-      <h1 className="text-display-xl font-heading">Schedule</h1>
-      <p className="mt-4 text-lead text-muted-foreground">Coming soon.</p>
-    </Section>
+    <>
+      <PageHeader
+        eyebrow="Schedule"
+        title="The whole weekend, hour by hour."
+        lead="Two days of building, learning, and community. Here's how it flows."
+      />
+
+      <Section spacing="lg">
+        <div className="grid gap-14 lg:grid-cols-2 lg:gap-16">
+          {schedule.map((day) => (
+            <div key={day.label}>
+              <div className="mb-8 flex items-baseline gap-3">
+                <h2 className="text-display font-heading">{day.label}</h2>
+                <span className="text-lead text-muted-foreground">
+                  {day.date}
+                </span>
+              </div>
+              <Timeline events={day.events} />
+            </div>
+          ))}
+        </div>
+        <p className="mt-14 text-sm text-muted-foreground">{scheduleNote}</p>
+      </Section>
+
+      <CtaBand
+        title="Ready to join us?"
+        description="Applications are open — grab your spot before they close."
+        primary={{ label: "Apply now", href: applyNav.href }}
+        secondary={{ label: "Read the FAQ", href: "/faq" }}
+      />
+    </>
   );
 }
