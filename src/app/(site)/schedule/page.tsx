@@ -28,7 +28,7 @@ export default function SchedulePage() {
         lead="24 hours of building, learning, and community. Here's how it flows."
       />
 
-      <Section spacing="sm">
+      <Section spacing="sm" className="pt-4 sm:pt-8">
         <dl className="flex flex-col gap-4 sm:flex-row sm:gap-10">
           {facts.map(({ icon: Icon, label }) => (
             <div key={label} className="flex items-center gap-2.5">

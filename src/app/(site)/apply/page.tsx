@@ -32,7 +32,7 @@ export default function ApplyPage() {
         lead={applyIntro.lead}
       />
 
-      <Section spacing="md">
+      <Section spacing="md" className="pt-4 sm:pt-8">
         <div className="flex flex-col items-start gap-4">
           <Button asChild size="xl" variant="honey">
             <a href={ctaHref} target="_blank" rel="noopener noreferrer">

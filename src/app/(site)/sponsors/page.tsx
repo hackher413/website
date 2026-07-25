@@ -26,7 +26,7 @@ export default function SponsorsPage() {
         lead="Our sponsors don't just fund the weekend — they help us open the door to tech a little wider."
       />
 
-      <Section spacing="lg">
+      <Section spacing="lg" className="pt-4 sm:pt-8">
         <div className="flex flex-col gap-16">
           {tierOrder.map((tier) => {
             const tierSponsors = sponsors.filter((s) => s.tier === tier);

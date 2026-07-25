@@ -19,7 +19,7 @@ export default function FaqPage() {
         lead={faqIntro.lead}
       />
 
-      <Section spacing="lg">
+      <Section spacing="lg" className="pt-4 sm:pt-8">
         <div className="flex flex-col gap-14">
           {faq.map((category, i) => (
             <div

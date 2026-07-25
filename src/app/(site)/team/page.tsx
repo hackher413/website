@@ -19,7 +19,7 @@ export default function TeamPage() {
         lead={teamIntro.lead}
       />
 
-      <Section spacing="lg">
+      <Section spacing="lg" className="pt-4 sm:pt-8">
         <div className="flex flex-col gap-16">
           {team.map((group) => (
             <div key={group.name}>
