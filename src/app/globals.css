@@ -38,12 +38,13 @@
   --color-ring: var(--ring);
 
   /* -- Brand colors (constant across light/dark) ------------------------- */
-  /* The dark warm brown that anchors the identity. */
-  --color-brand: #43302e;
-  --color-brand-foreground: #fffdf7;
-  /* Accent 1 — honey. Pastel, so text on it is always the brand brown. */
+  /* A softer, warmer brown — pulled toward honey so it anchors without
+     dominating. Honey yellow now carries more of the identity. */
+  --color-brand: #5a4326;
+  --color-brand-foreground: #fffdf2;
+  /* Accent 1 — honey, the buttermilk yellow that now carries the identity. */
   --color-honey: #fff1b5;
-  --color-honey-foreground: #43302e;
+  --color-honey-foreground: #5a4326;
   --color-honey-soft: #fff8da;
   /* Accent 2 — sky. */
   --color-sky: #c1dbe8;
@@ -104,50 +105,51 @@
 :root {
   --radius: 0.75rem;
 
-  --background: #ffffff;
-  --foreground: #43302e;
+  /* Buttermilk-tinted background — clearly yellow, not white. */
+  --background: #fff8da;
+  --foreground: #5a4326;
 
-  --card: #ffffff;
-  --card-foreground: #43302e;
+  --card: #fffcee;
+  --card-foreground: #5a4326;
 
-  --popover: #ffffff;
-  --popover-foreground: #43302e;
+  --popover: #fffcee;
+  --popover-foreground: #5a4326;
 
-  /* Primary = brand brown with warm-white text. */
-  --primary: #43302e;
-  --primary-foreground: #fffdf7;
+  /* Primary = softer brown with warm-white text. */
+  --primary: #5a4326;
+  --primary-foreground: #fffdf2;
 
-  /* Warm neutral surfaces so nothing reads as cold gray. */
-  --secondary: #f6f1ec;
-  --secondary-foreground: #43302e;
+  /* Buttermilk surfaces so the palette reads yellow, not brown. */
+  --secondary: #fff1b5;
+  --secondary-foreground: #5a4326;
 
-  --muted: #f6f1ec;
-  --muted-foreground: #6e5a57;
+  --muted: #ffeea8;
+  --muted-foreground: #8a6f45;
 
   /* shadcn "accent" = hover/active surface (NOT a brand accent). */
-  --accent: #f1e9e2;
-  --accent-foreground: #43302e;
+  --accent: #ffe88f;
+  --accent-foreground: #5a4326;
 
   --destructive: #c0392b;
 
-  --border: #ece4de;
-  --input: #ece4de;
-  --ring: #43302e;
+  --border: #f5e39a;
+  --input: #f5e39a;
+  --ring: #d9a441;
 
   --chart-1: #fff1b5;
   --chart-2: #c1dbe8;
-  --chart-3: #43302e;
+  --chart-3: #5a4326;
   --chart-4: #d9a441;
   --chart-5: #7fb0c8;
 
-  --sidebar: #ffffff;
-  --sidebar-foreground: #43302e;
-  --sidebar-primary: #43302e;
-  --sidebar-primary-foreground: #fffdf7;
-  --sidebar-accent: #f1e9e2;
-  --sidebar-accent-foreground: #43302e;
-  --sidebar-border: #ece4de;
-  --sidebar-ring: #43302e;
+  --sidebar: #fff8da;
+  --sidebar-foreground: #5a4326;
+  --sidebar-primary: #5a4326;
+  --sidebar-primary-foreground: #fffdf2;
+  --sidebar-accent: #ffe88f;
+  --sidebar-accent-foreground: #5a4326;
+  --sidebar-border: #f5e39a;
+  --sidebar-ring: #d9a441;
 }
 
 /* -------------------------------------------------------------------------- */
