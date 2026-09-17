@@ -7,18 +7,57 @@ import { ArrowRight } from "lucide-react";
 
 import { Section } from "@/components/layout";
 import { Button } from "@/components/ui/button";
-import { fadeUp, inViewOnce, staggerContainer } from "@/lib/motion";
+import { fadeUp, inViewOnce } from "@/lib/motion";
+
+export type CtaLink = {
+  label: string;
+  href: string;
+  external?: boolean;
+};
 
 type CtaBandProps = {
   title: React.ReactNode;
   description?: React.ReactNode;
-  primary: { label: string; href: string };
-  secondary?: { label: string; href: string };
+  primary: CtaLink;
+  secondary?: CtaLink;
 };
 
+function CtaButton({
+  link,
+  variant,
+  className,
+}: {
+  link: CtaLink;
+  variant: "honey" | "outline";
+  className?: string;
+}) {
+  const content = (
+    <>
+      {link.label}
+      {variant === "honey" ? <ArrowRight aria-hidden="true" /> : null}
+    </>
+  );
+
+  if (link.external) {
+    return (
+      <Button asChild size="xl" variant={variant} className={className}>
+        <a href={link.href} target="_blank" rel="noopener noreferrer">
+          {content}
+        </a>
+      </Button>
+    );
+  }
+
+  return (
+    <Button asChild size="xl" variant={variant} className={className}>
+      <Link href={link.href}>{content}</Link>
+    </Button>
+  );
+}
+
 /**
- * Reusable closing call-to-action band on the inverted brand surface. Shared by
- * the homepage and other pages for a consistent conversion moment.
+ * Closing call-to-action on the inverted brand surface. One subtle fade-in —
+ * not a full stagger stack.
  */
 export function CtaBand({ title, description, primary, secondary }: CtaBandProps) {
   return (
@@ -27,44 +66,25 @@ export function CtaBand({ title, description, primary, secondary }: CtaBandProps
         initial="hidden"
         whileInView="visible"
         viewport={inViewOnce}
-        variants={staggerContainer}
+        variants={fadeUp}
         className="mx-auto flex max-w-2xl flex-col items-center text-center"
       >
-        <motion.h2
-          variants={fadeUp}
-          className="text-display font-heading text-balance"
-        >
-          {title}
-        </motion.h2>
+        <h2 className="text-display font-heading text-balance">{title}</h2>
         {description ? (
-          <motion.p
-            variants={fadeUp}
-            className="mt-4 text-lead text-brand-foreground/70 text-pretty"
-          >
+          <p className="mt-4 text-lead text-brand-foreground/70 text-pretty">
             {description}
-          </motion.p>
+          </p>
         ) : null}
-        <motion.div
-          variants={fadeUp}
-          className="mt-8 flex flex-wrap justify-center gap-4"
-        >
-          <Button asChild size="xl" variant="honey">
-            <Link href={primary.href}>
-              {primary.label}
-              <ArrowRight aria-hidden="true" />
-            </Link>
-          </Button>
+        <div className="mt-8 flex flex-wrap justify-center gap-4">
+          <CtaButton link={primary} variant="honey" />
           {secondary ? (
-            <Button
-              asChild
-              size="xl"
+            <CtaButton
+              link={secondary}
               variant="outline"
               className="border-brand-foreground/25 bg-transparent text-brand-foreground hover:bg-brand-foreground/10 hover:text-brand-foreground"
-            >
-              <Link href={secondary.href}>{secondary.label}</Link>
-            </Button>
+            />
           ) : null}
-        </motion.div>
+        </div>
       </motion.div>
     </Section>
   );

@@ -19,15 +19,13 @@ export default function NotFound() {
     <main className="flex min-h-[70vh] items-center">
       <Container>
         <div className="mx-auto flex max-w-xl flex-col items-center text-center">
-          <p className="font-mono text-sm uppercase tracking-widest text-muted-foreground">
-            404
-          </p>
+          <p className="text-sm text-muted-foreground">404</p>
           <h1 className="mt-4 text-display-xl font-heading text-balance">
-            This cell&rsquo;s empty.
+            Page not found.
           </h1>
           <p className="mt-4 text-lead text-muted-foreground text-pretty">
-            The page you&rsquo;re looking for isn&rsquo;t part of the hive.
-            Let&rsquo;s get you back to somewhere familiar.
+            That URL doesn&rsquo;t exist. Let&rsquo;s get you back somewhere
+            familiar.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-4">
             <Button asChild size="xl" variant="honey">

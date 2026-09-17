@@ -7,6 +7,7 @@ import {
   projectYearOrder,
   projectsCta,
 } from "@/content/projects";
+import { primaryCta } from "@/content/apply";
 
 export const metadata: Metadata = {
   title: "Winners",
@@ -32,7 +33,7 @@ export default function ProjectsPage() {
             return (
               <div key={year}>
                 <div className="mb-6">
-                  <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                  <h2 className="text-sm font-medium text-muted-foreground">
                     {year} winners
                   </h2>
                 </div>
@@ -50,7 +51,7 @@ export default function ProjectsPage() {
       <CtaBand
         title={projectsCta.title}
         description={projectsCta.description}
-        primary={{ label: "Apply to hack", href: "/apply" }}
+        primary={primaryCta}
         secondary={{ label: "See the schedule", href: "/schedule" }}
       />
     </>

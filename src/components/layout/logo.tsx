@@ -2,28 +2,45 @@ import Link from "next/link";
 
 import { cn } from "@/lib/utils";
 
+type LogoProps = {
+  className?: string;
+  href?: string;
+  /** Larger wordmark for hero / display contexts. */
+  size?: "md" | "lg" | "display";
+  /** Light text on espresso / dark surfaces. */
+  tone?: "default" | "onDark";
+  /** When false, renders a non-linking wordmark (e.g. in the hero). */
+  linked?: boolean;
+};
+
+const sizeClass = {
+  md: "text-lg",
+  lg: "text-2xl sm:text-3xl",
+  display: "text-4xl sm:text-5xl md:text-6xl",
+} as const;
+
 /**
- * Wordmark for Hack(H)er413. The parenthetical "(H)" is the brand's signature
- * detail, so it's emphasized with the honey accent. Purely typographic — scales
- * crisply and needs no image asset.
+ * Wordmark for Hack(H)er413. The parenthetical "(H)" is the brand signature,
+ * emphasized with honey. Purely typographic — scales crisply with no image.
  */
 export function Logo({
   className,
   href = "/",
-}: {
-  className?: string;
-  href?: string;
-}) {
-  return (
-    <Link
-      href={href}
-      aria-label="Hack(H)er413 home"
-      className={cn(
-        "group inline-flex items-baseline font-heading text-lg font-semibold tracking-tight text-foreground rounded-sm",
-        "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
-        className,
-      )}
-    >
+  size = "md",
+  tone = "default",
+  linked = true,
+}: LogoProps) {
+  const classes = cn(
+    "group inline-flex items-baseline font-heading font-semibold tracking-tight rounded-sm",
+    sizeClass[size],
+    tone === "onDark" ? "text-cream" : "text-foreground",
+    linked &&
+      "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
+    className,
+  );
+
+  const mark = (
+    <>
       <span>Hack</span>
       <span
         aria-hidden="true"
@@ -32,7 +49,27 @@ export function Logo({
         (H)
       </span>
       <span>er</span>
-      <span className="text-muted-foreground">413</span>
+      <span
+        className={
+          tone === "onDark" ? "text-cream/55" : "text-muted-foreground"
+        }
+      >
+        413
+      </span>
+    </>
+  );
+
+  if (!linked) {
+    return (
+      <span className={classes} aria-label="Hack(H)er413">
+        {mark}
+      </span>
+    );
+  }
+
+  return (
+    <Link href={href} aria-label="Hack(H)er413 home" className={classes}>
+      {mark}
     </Link>
   );
 }

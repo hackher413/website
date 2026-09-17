@@ -1,14 +1,9 @@
-"use client";
-
-import * as React from "react";
-import { motion } from "framer-motion";
 import { MapPin } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { fadeUp, inViewOnce, staggerContainer } from "@/lib/motion";
 import type { EventKind, ScheduleEvent } from "@/content/schedule";
 
-/** Marker accent per event kind. Meals/activities stay quiet; milestones pop. */
+/** Marker accent per event kind. */
 const kindDot: Record<EventKind, string> = {
   ceremony: "bg-honey border-honey",
   milestone: "bg-sky border-sky",
@@ -18,23 +13,15 @@ const kindDot: Record<EventKind, string> = {
 };
 
 /**
- * Vertical timeline of schedule events. A single continuous rail on the left,
- * with a marker per event and staggered scroll-in reveals. Reusable for any
- * time-ordered list.
+ * Vertical timeline of schedule events. Continuous rail on the left with a
+ * marker per event.
  */
 export function Timeline({ events }: { events: ScheduleEvent[] }) {
   return (
-    <motion.ol
-      initial="hidden"
-      whileInView="visible"
-      viewport={inViewOnce}
-      variants={staggerContainer}
-      className="relative ml-1.5 border-l border-border"
-    >
+    <ol className="relative ml-1.5 border-l border-border">
       {events.map((event, i) => (
-        <motion.li
+        <li
           key={`${event.time}-${i}`}
-          variants={fadeUp}
           className="relative pb-10 pl-8 last:pb-0"
         >
           <span
@@ -44,9 +31,7 @@ export function Timeline({ events }: { events: ScheduleEvent[] }) {
             )}
             aria-hidden="true"
           />
-          <div className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
-            {event.time}
-          </div>
+          <div className="text-sm text-muted-foreground">{event.time}</div>
           <h3 className="mt-1 text-lg font-semibold text-balance">
             {event.title}
           </h3>
@@ -61,8 +46,8 @@ export function Timeline({ events }: { events: ScheduleEvent[] }) {
               {event.location}
             </p>
           ) : null}
-        </motion.li>
+        </li>
       ))}
-    </motion.ol>
+    </ol>
   );
 }

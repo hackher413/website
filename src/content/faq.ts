@@ -16,7 +16,7 @@ export type FaqCategory = {
 export const faqIntro = {
   eyebrow: "FAQ",
   title: "Questions? We've got answers.",
-  lead: "Everything you need to know before you apply. Still stuck? Reach out — we're happy to help.",
+  lead: "Practical details before you apply or show up. Still stuck? Email us — we're happy to help.",
 };
 
 export const faq: FaqCategory[] = [

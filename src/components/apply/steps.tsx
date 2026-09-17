@@ -1,18 +1,20 @@
-"use client";
-
-import { FeatureCard, RevealGrid } from "@/components/content";
 import { applySteps } from "@/content/apply";
 
 /**
- * The "how it works" steps grid. Client component so the Lucide icons in
- * `applySteps` stay on the client side of the boundary.
+ * Numbered how-it-works steps — not the same card pattern as homepage features.
  */
 export function ApplySteps() {
   return (
-    <RevealGrid className="mt-10 grid gap-6 sm:grid-cols-3">
-      {applySteps.map((step) => (
-        <FeatureCard key={step.title} {...step} tone="sky" />
+    <ol className="mt-10 grid gap-10 sm:grid-cols-3 sm:gap-8">
+      {applySteps.map((step, index) => (
+        <li key={step.title} className="flex flex-col gap-3">
+          <span className="font-mono text-xs tabular-nums text-muted-foreground">
+            {String(index + 1).padStart(2, "0")}
+          </span>
+          <h3 className="font-heading text-xl font-semibold">{step.title}</h3>
+          <p className="text-muted-foreground text-pretty">{step.description}</p>
+        </li>
       ))}
-    </RevealGrid>
+    </ol>
   );
 }

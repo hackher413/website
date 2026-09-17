@@ -1,19 +1,27 @@
 import type { Metadata, Viewport } from "next";
+import { Fraunces } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
 import { GeistMono } from "geist/font/mono";
 
 import { Providers } from "@/components/providers";
 import { siteConfig } from "@/lib/site";
+import { brand } from "@/lib/design/tokens";
 import { OrganizationJsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
+
+const fraunces = Fraunces({
+  subsets: ["latin"],
+  variable: "--font-fraunces",
+  display: "swap",
+  axes: ["SOFT", "WONK", "opsz"],
+});
 
 const title = `${siteConfig.name} — Where women and gender minorities build in tech`;
 
 /**
  * Root metadata. `metadataBase` resolves all relative URLs (OG image, canonical)
- * against the production origin, so social scrapers get absolute URLs. Per-route
- * pages extend this via their own `metadata` export; the title `template`
- * appends the brand to each page title.
+ * against the production origin. Per-route pages extend this via their own
+ * `metadata` export; the title `template` appends the brand to each page title.
  */
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
@@ -65,10 +73,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
-    { media: "(prefers-color-scheme: dark)", color: "#1b1513" },
-  ],
+  themeColor: brand.honeySoft,
 };
 
 export default function RootLayout({
@@ -79,14 +84,11 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      // Fonts are self-hosted via the `geist` package — no runtime fetch.
-      // suppressHydrationWarning is required for next-themes' class injection.
-      className={`${GeistSans.variable} ${GeistMono.variable} h-full`}
+      className={`${GeistSans.variable} ${GeistMono.variable} ${fraunces.variable} h-full`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">
         <Providers>
-          {/* Keyboard users can jump straight to content. */}
           <a
             href="#main"
             className="sr-only rounded-md bg-primary px-4 py-2 text-sm font-medium text-primary-foreground focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100]"

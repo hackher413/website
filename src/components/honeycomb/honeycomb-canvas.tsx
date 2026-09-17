@@ -3,6 +3,8 @@
 import * as React from "react";
 import { useReducedMotion } from "framer-motion";
 
+import { brand } from "@/lib/design/tokens";
+
 /**
  * The signature honeycomb — a faithful reimagining of the original's canvas
  * effect, rebuilt for React/TS and recolored on-brand.
@@ -21,8 +23,7 @@ import { useReducedMotion } from "framer-motion";
  * blue light against the espresso field.
  *
  * Perf: pure canvas + a single rAF loop; no per-cell React. Accessibility: it's
- * decorative (aria-hidden); the same stats live in the Step 6 stats band, and
- * reduced-motion renders a calm static comb with no animation loop.
+ * decorative (aria-hidden). Reduced-motion renders a calm static comb.
  */
 
 const RADIUS = 26;
@@ -267,7 +268,7 @@ export function HoneycombCanvas({ className }: { className?: string }) {
 
     const paintStatic = () => {
       // Reduced motion: draw the comb once with a soft central bloom, no loop.
-      ctx.fillStyle = "#1b1210";
+      ctx.fillStyle = brand.espresso;
       ctx.fillRect(0, 0, width, height);
       const cxp = width / 2;
       const cyp = height * 0.5;
@@ -405,7 +406,7 @@ export function HoneycombCanvas({ className }: { className?: string }) {
       ref={containerRef}
       className={className}
       aria-hidden="true"
-      style={{ background: "#1b1210" }}
+      style={{ background: brand.espresso }}
     >
       <canvas ref={canvasRef} className="block h-full w-full" />
     </div>

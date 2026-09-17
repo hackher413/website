@@ -2,22 +2,18 @@ import { ImageResponse } from "next/og";
 
 import { siteConfig } from "@/lib/site";
 import { event } from "@/content/event";
+import { brand } from "@/lib/design/tokens";
 
 /**
- * Default social share image for the whole site, generated at build time with
- * next/og. Brand espresso background with a honeycomb-inspired accent and the
- * wordmark — no static asset to keep in sync. Individual routes could add their
- * own opengraph-image later; this is the sitewide fallback.
+ * Default social share image — espresso field, honeycomb accents, wordmark.
+ * Colors come from the shared brand tokens so OG matches the live site.
  */
 export const alt = `${siteConfig.name} — Where women and gender minorities build in tech`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 
 export default function Image() {
-  const brown = "#1b1210";
-  const cream = "#fbf6ee";
-  const honey = "#fff1b5";
-  const sky = "#c1dbe8";
+  const { espresso, cream, honey, sky } = brand;
 
   return new ImageResponse(
     (
@@ -28,12 +24,11 @@ export default function Image() {
           display: "flex",
           flexDirection: "column",
           justifyContent: "space-between",
-          background: brown,
+          background: espresso,
           padding: "80px",
           fontFamily: "sans-serif",
         }}
       >
-        {/* Decorative hex row across the top */}
         <div style={{ display: "flex", gap: "16px" }}>
           {[honey, sky, honey, sky, honey, sky, honey, sky].map((c, i) => (
             <div
@@ -54,10 +49,9 @@ export default function Image() {
           <div
             style={{
               display: "flex",
-              fontSize: 34,
-              color: honey,
-              letterSpacing: "0.2em",
-              textTransform: "uppercase",
+              fontSize: 28,
+              color: cream,
+              opacity: 0.65,
               marginBottom: 24,
             }}
           >
@@ -66,7 +60,7 @@ export default function Image() {
           <div
             style={{
               display: "flex",
-              fontSize: 78,
+              fontSize: 72,
               fontWeight: 700,
               color: cream,
               lineHeight: 1.05,
@@ -91,7 +85,7 @@ export default function Image() {
             style={{
               display: "flex",
               background: honey,
-              color: brown,
+              color: brand.brown,
               borderRadius: 10,
               padding: "0 10px",
               margin: "0 4px",

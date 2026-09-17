@@ -38,7 +38,7 @@ export const mainNav: NavItem[] = [
   { title: "FAQ", href: "/faq" },
 ];
 
-/** The primary conversion action, surfaced as a button in the Navbar. */
+/** The primary conversion action — prefer `primaryCta` from content/apply. */
 export const applyNav: NavItem = { title: "Apply", href: "/apply" };
 
 /** Footer link groups. */

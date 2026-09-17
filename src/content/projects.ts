@@ -120,7 +120,7 @@ export const projectYearOrder = projectYears
   .sort((a, b) => b - a);
 
 export const projectsCta = {
-  title: "Your project could be here next year.",
+  title: "Your project could be here in 2027.",
   description:
-    "Bring an idea — or just your curiosity — and build something worth showing off over one unforgettable weekend.",
+    "Bring an idea — or just your curiosity — and ship something you're proud of before Sunday demos.",
 };

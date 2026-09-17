@@ -4,26 +4,25 @@ import * as React from "react";
 import Link from "next/link";
 import { motion } from "framer-motion";
 
-import { applyNav } from "@/lib/site";
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
+import { Logo } from "@/components/layout/logo";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 import { HoneycombCanvas } from "@/components/honeycomb/honeycomb-canvas";
 import { event } from "@/content/event";
+import { primaryCta } from "@/content/apply";
 
 /**
- * The signature hero: an immersive, glowing honeycomb canvas with the headline
- * and CTAs overlaid. The canvas renders on a dark espresso field, so the hero
- * is intentionally dark in BOTH themes — copy is always light for contrast.
+ * Signature hero: immersive honeycomb canvas with the brand wordmark as the
+ * primary signal. Canvas is always espresso; copy stays cream for contrast.
  */
 export function HoneycombHero() {
+  const primary = primaryCta;
+
   return (
-    <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-center overflow-hidden bg-[#1b1210] text-[#fbf6ee]">
-      {/* Glowing honeycomb fills the hero and reacts to the pointer. */}
+    <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-center overflow-hidden bg-espresso text-cream">
       <HoneycombCanvas className="absolute inset-0" />
 
-      {/* Radial vignette focuses attention on the headline without hiding the
-          hive. Pointer events pass through to the canvas. */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
@@ -40,47 +39,59 @@ export function HoneycombHero() {
           animate="visible"
           className="mx-auto flex max-w-3xl flex-col items-center"
         >
+          <motion.div variants={fadeUp}>
+            <Logo linked={false} size="display" tone="onDark" />
+          </motion.div>
+
           <motion.p
             variants={fadeUp}
-            className="rounded-full border border-white/15 bg-white/5 px-4 py-1.5 font-mono text-xs uppercase tracking-widest text-[#fbf6ee]/70 backdrop-blur"
+            className="mt-5 text-sm text-cream/60 sm:text-base"
           >
-            {event.dates} · UMass Amherst
+            {event.isConcluded
+              ? `${event.year} · UMass Amherst`
+              : `${event.dates} · UMass Amherst`}
           </motion.p>
+
           <motion.h1
             variants={fadeUp}
-            className="mt-6 text-display-2xl font-heading text-balance"
+            className="mt-8 text-display-xl font-heading text-balance"
           >
             Where women and gender minorities build in tech.
           </motion.h1>
+
           <motion.p
             variants={fadeUp}
-            className="mt-6 max-w-xl text-lead text-[#fbf6ee]/75 text-pretty"
+            className="mt-5 max-w-xl text-lead text-cream/75 text-pretty"
           >
-            A collegiate hackathon creating an inclusive, empowering space to
-            learn, build, and belong. Beginners welcome — always.
+            {event.isConcluded
+              ? event.concludedMessage
+              : "A collegiate hackathon at UMass Amherst — learn, build, and meet your people. Beginners welcome."}
           </motion.p>
+
           <motion.div
             variants={fadeUp}
             className="pointer-events-auto mt-10 flex flex-wrap justify-center gap-4"
           >
             <Button asChild size="xl" variant="honey">
-              <Link href={applyNav.href}>Apply now</Link>
+              {primary.external ? (
+                <a href={primary.href} target="_blank" rel="noopener noreferrer">
+                  {primary.label}
+                </a>
+              ) : (
+                <Link href={primary.href}>{primary.label}</Link>
+              )}
             </Button>
             <Button
               asChild
               size="xl"
               variant="outline"
-              className="border-white/25 bg-white/5 text-[#fbf6ee] hover:bg-white/10 hover:text-white"
+              className="border-white/25 bg-white/5 text-cream hover:bg-white/10 hover:text-white"
             >
-              <Link href="/about">Learn more</Link>
+              <Link href={event.isConcluded ? "/projects" : "/about"}>
+                {event.isConcluded ? "See 2026 winners" : "Learn more"}
+              </Link>
             </Button>
           </motion.div>
-          <motion.p
-            variants={fadeUp}
-            className="mt-6 text-sm text-[#fbf6ee]/50"
-          >
-            Move through the hive — click to send a ripple of light.
-          </motion.p>
         </motion.div>
       </Container>
     </section>

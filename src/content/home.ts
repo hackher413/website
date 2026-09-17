@@ -7,57 +7,39 @@ import {
 } from "lucide-react";
 
 /**
- * Homepage content.
- *
- * Local, typed content module — the intermediate step toward Sanity (Step 8).
- * Keeping copy out of the JSX means editors (and, later, a CMS) can change it
- * without touching components. Icons stay in code since they're presentational.
+ * Homepage content. Copy lives here so it can change without touching JSX.
  */
-
-export type HomeStat = { value: string; label: string };
-
-export const homeStats: HomeStat[] = [
-  { value: "400+", label: "Attendees" },
-  { value: "80+", label: "Universities" },
-  { value: "19", label: "Countries" },
-  { value: "24", label: "Hours" },
-];
 
 export type HomeFeature = {
   icon: LucideIcon;
   title: string;
   description: string;
-  tone: "honey" | "sky";
 };
 
 export const homeFeatures: HomeFeature[] = [
   {
     icon: HeartHandshake,
-    title: "Built for belonging",
+    title: "Designed around you",
     description:
-      "A space designed for women and gender minorities to feel seen, supported, and celebrated — from your first commit to your final demo.",
-    tone: "honey",
+      "Tracks, mentors, and the room itself are set up so women and gender minorities feel supported from first commit to final demo.",
   },
   {
     icon: Sparkles,
-    title: "Beginners genuinely welcome",
+    title: "First-timers thrive here",
     description:
-      "Never been to a hackathon? Perfect. Guided tracks, starter kits, and mentors make your first build approachable and fun.",
-    tone: "sky",
+      "Guided tracks, starter kits, and mentors who expect beginners — 88 first-timers built with us in 2026.",
   },
   {
     icon: Wrench,
-    title: "Learn by making",
+    title: "Workshops you can ship from",
     description:
-      "Hands-on workshops in web, AI, hardware, and design. Turn an idea into something real over one unforgettable weekend.",
-    tone: "honey",
+      "Web, AI, hardware, and design sessions that turn into real projects before Sunday's demos.",
   },
   {
     icon: Users,
-    title: "Find your people",
+    title: "Teammates who stick around",
     description:
-      "Meet teammates, mentors, and companies who care. The connections you make here outlast the weekend.",
-    tone: "sky",
+      "Meet builders, mentors, and recruiters who stay in touch long after the closing ceremony.",
   },
 ];
 
@@ -66,12 +48,12 @@ export const homeMission = {
   title: "Technology is better when everyone helps build it.",
   body: [
     "Our mission is to create a welcoming and inclusive environment for all women — cis and trans — and non-binary students of every ethnic, gender, socioeconomic, and educational background.",
-    "We bring students together to innovate, learn, and feel safe while doing so — a weekend where taking creative risks and discovering you belong in tech is exactly the point.",
+    "We bring students together to innovate, learn, and feel safe while doing so — a weekend where taking creative risks is exactly the point.",
   ],
 };
 
 export const homeCta = {
-  title: "Ready to build something with us?",
+  title: "2026 is a wrap — 2027 is next.",
   description:
-    "Bring your curiosity — we'll bring the mentors, workshops, food, and a room full of people cheering you on.",
+    "Applications are closed for this year. Join the list and we'll email you the moment the next cycle opens.",
 };

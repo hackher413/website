@@ -6,7 +6,8 @@ import { usePathname } from "next/navigation";
 import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
-import { applyNav, mainNav, siteConfig } from "@/lib/site";
+import { mainNav, siteConfig } from "@/lib/site";
+import { primaryCta } from "@/content/apply";
 import { Button } from "@/components/ui/button";
 import {
   Sheet,
@@ -18,9 +19,7 @@ import {
 } from "@/components/ui/sheet";
 import { Container } from "@/components/layout/container";
 import { Logo } from "@/components/layout/logo";
-import { ThemeToggle } from "@/components/theme-toggle";
 
-/** Is `href` the active route (exact match or a nested child)? */
 function useIsActive() {
   const pathname = usePathname();
   return React.useCallback(
@@ -30,12 +29,37 @@ function useIsActive() {
   );
 }
 
+function NavCta({
+  className,
+  size,
+}: {
+  className?: string;
+  size?: "default" | "xl";
+}) {
+  const cta = primaryCta;
+  if (cta.external) {
+    return (
+      <Button asChild size={size} className={className}>
+        <a href={cta.href} target="_blank" rel="noopener noreferrer">
+          {cta.label}
+        </a>
+      </Button>
+    );
+  }
+  return (
+    <Button asChild size={size} className={className}>
+      <Link href={cta.href}>{cta.label}</Link>
+    </Button>
+  );
+}
+
 export function Navbar() {
+  const pathname = usePathname();
   const isActive = useIsActive();
   const [scrolled, setScrolled] = React.useState(false);
   const [open, setOpen] = React.useState(false);
+  const overHero = pathname === "/" && !scrolled;
 
-  // Add a subtle border + blur once the page is scrolled.
   React.useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 8);
     onScroll();
@@ -49,13 +73,14 @@ export function Navbar() {
         "sticky top-0 z-50 w-full transition-colors duration-300",
         scrolled
           ? "border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
-          : "border-b border-transparent bg-background/0",
+          : overHero
+            ? "border-b border-transparent bg-transparent"
+            : "border-b border-transparent bg-background/0",
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-4">
-        <Logo />
+        <Logo tone={overHero ? "onDark" : "default"} />
 
-        {/* Desktop nav */}
         <nav
           aria-label="Primary"
           className="hidden items-center gap-1 md:flex"
@@ -70,9 +95,13 @@ export function Navbar() {
                 className={cn(
                   "rounded-md px-3 py-2 text-sm font-medium transition-colors",
                   "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                  active
-                    ? "text-foreground"
-                    : "text-muted-foreground hover:text-foreground",
+                  overHero
+                    ? active
+                      ? "text-cream"
+                      : "text-cream/70 hover:text-cream"
+                    : active
+                      ? "text-foreground"
+                      : "text-muted-foreground hover:text-foreground",
                 )}
               >
                 {item.title}
@@ -82,18 +111,18 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <ThemeToggle />
-          <Button asChild className="hidden md:inline-flex">
-            <Link href={applyNav.href}>{applyNav.title}</Link>
-          </Button>
+          <NavCta className="hidden md:inline-flex" />
 
-          {/* Mobile menu */}
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>
               <Button
                 variant="ghost"
                 size="icon"
-                className="md:hidden"
+                className={cn(
+                  "md:hidden",
+                  overHero &&
+                    "text-cream hover:bg-white/10 hover:text-cream",
+                )}
                 aria-label="Open menu"
               >
                 <Menu className="size-5" />
@@ -129,9 +158,9 @@ export function Navbar() {
                   );
                 })}
                 <SheetClose asChild>
-                  <Button asChild size="xl" className="mt-4">
-                    <Link href={applyNav.href}>{applyNav.title}</Link>
-                  </Button>
+                  <span className="mt-4 block">
+                    <NavCta size="xl" className="w-full" />
+                  </span>
                 </SheetClose>
               </nav>
             </SheetContent>

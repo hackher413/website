@@ -22,7 +22,7 @@ export type TeamGroup = {
 
 export const teamIntro = {
   eyebrow: "Our team",
-  title: "The people behind the hive.",
+  title: "The students who put this on.",
   lead: "Hack(H)er413 is organized entirely by UMass Amherst students who volunteer their time to build something bigger than themselves.",
 };
 

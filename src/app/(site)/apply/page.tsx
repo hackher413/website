@@ -56,7 +56,7 @@ export default function ApplyPage() {
               Who should apply
             </h2>
             <p className="mt-4 text-lead text-muted-foreground text-pretty">
-              If any of this sounds like you, we want to see your application.
+              If any of this sounds like you, we want to hear from you next cycle.
             </p>
           </div>
           <ul className="flex flex-col gap-4">
@@ -72,29 +72,24 @@ export default function ApplyPage() {
         </div>
       </Section>
 
-      <Section tone="brand" spacing="lg">
-        <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-          <h2 className="text-display font-heading text-balance">
-            The hive is waiting for you.
-          </h2>
-          <p className="mt-4 text-lead text-brand-foreground/70 text-pretty">
+      <Section spacing="lg">
+        <div className="mx-auto flex max-w-xl flex-col items-start gap-4 border-t border-border pt-12">
+          <p className="text-lg text-muted-foreground text-pretty">
             {isOpen
-              ? "Ten minutes now, an unforgettable weekend later."
-              : "Applications for 2026 have closed — join the list and we'll reach out the moment 2027 opens."}
+              ? "Ten minutes on the form. Then show up and build."
+              : "Applications for 2026 have closed — join the list and we'll reach out when 2027 opens."}
           </p>
-          <div className="mt-8">
-            <Button asChild size="xl" variant="honey">
-              <a href={ctaHref} target="_blank" rel="noopener noreferrer">
-                {ctaLabel}
-                <ArrowRight aria-hidden="true" />
-              </a>
-            </Button>
-          </div>
-          <p className="mt-6 text-sm text-brand-foreground/60">
+          <Button asChild size="xl" variant="honey">
+            <a href={ctaHref} target="_blank" rel="noopener noreferrer">
+              {ctaLabel}
+              <ArrowRight aria-hidden="true" />
+            </a>
+          </Button>
+          <p className="text-sm text-muted-foreground">
             Questions first?{" "}
             <Link
               href="/faq"
-              className="underline underline-offset-4 hover:text-brand-foreground"
+              className="underline underline-offset-4 hover:text-foreground"
             >
               Read the FAQ
             </Link>

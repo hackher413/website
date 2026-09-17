@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 
 import { Section } from "@/components/layout";
-import { PageHeader, OrganizerCard, CtaBand, RevealGrid } from "@/components/content";
-import { applyNav } from "@/lib/site";
+import { PageHeader, OrganizerCard, RevealGrid } from "@/components/content";
+import { Button } from "@/components/ui/button";
+import { siteConfig } from "@/lib/site";
 import { team, teamIntro } from "@/content/team";
 
 export const metadata: Metadata = {
@@ -25,7 +27,7 @@ export default function TeamPage() {
             const featured = group.name === "Directors";
             return (
               <div key={group.name}>
-                <h2 className="mb-8 flex items-center gap-2.5 font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                <h2 className="mb-8 flex items-center gap-2.5 text-sm font-medium text-muted-foreground">
                   <span
                     aria-hidden="true"
                     className="inline-block size-2.5 bg-honey"
@@ -57,12 +59,25 @@ export default function TeamPage() {
         </div>
       </Section>
 
-      <CtaBand
-        title="Want to build this with us?"
-        description="Organizers, mentors, volunteers — there's a place in the hive for you."
-        primary={{ label: "Apply to attend", href: applyNav.href }}
-        secondary={{ label: "See our sponsors", href: "/sponsors" }}
-      />
+      <Section spacing="lg">
+        <div className="mx-auto max-w-lg text-center">
+          <h2 className="font-heading text-display text-balance">
+            Want to organize with us?
+          </h2>
+          <p className="mt-4 text-muted-foreground text-pretty">
+            Mentors, volunteers, and future organizers — email us and we&apos;ll
+            point you to the right place.
+          </p>
+          <div className="mt-8 flex flex-wrap justify-center gap-3">
+            <Button asChild size="xl" variant="honey">
+              <a href={siteConfig.social.email}>Email the team</a>
+            </Button>
+            <Button asChild size="xl" variant="outline">
+              <Link href="/sponsors">See our sponsors</Link>
+            </Button>
+          </div>
+        </div>
+      </Section>
     </>
   );
 }

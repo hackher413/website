@@ -7,14 +7,13 @@ import {
 
 /**
  * Apply-page content. The application itself lives in an external form; this
- * page sells the decision and sets expectations. `applyUrl` is the one link to
- * update each cycle.
+ * page sets expectations. `applyUrl` is the one link to update each cycle.
  */
 
 export const applyIntro = {
   eyebrow: "Apply",
-  title: "Your spot at the hive is waiting.",
-  lead: "Applications take about ten minutes. No experience required — just bring your curiosity.",
+  title: "Applications for 2026 are closed.",
+  lead: "Join the mailing list to hear when 2027 opens — no experience required, just curiosity.",
 };
 
 /** External application link on the participant dashboard. */
@@ -29,6 +28,22 @@ export const applyStatus = {
 
 /** Mailing-list signup, surfaced while applications are closed. */
 export const mailingListUrl = "https://forms.gle/YmY38wRxLSWWFQkKA";
+
+/**
+ * Sitewide primary conversion action. Navbar, hero, and page CTAs should use
+ * this so open/closed state stays consistent.
+ */
+export const primaryCta = applyStatus.isOpen
+  ? {
+      label: "Apply now",
+      href: "/apply",
+      external: false as const,
+    }
+  : {
+      label: "Join the 2027 list",
+      href: mailingListUrl,
+      external: true as const,
+    };
 
 export type ApplyStep = {
   icon: LucideIcon;

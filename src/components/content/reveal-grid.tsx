@@ -1,16 +1,10 @@
-"use client";
-
 import * as React from "react";
-import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
-import { inViewOnce, staggerContainer } from "@/lib/motion";
 
 /**
- * A generic staggered scroll-in container. Lets Server Component pages compose a
- * grid/list of already-animating children (StatCard, FeatureCard, SponsorCard,
- * OrganizerCard) without themselves becoming client components. Children supply
- * their own `fadeUp` variants; this element orchestrates the stagger.
+ * Layout wrapper for grids/lists. Intentionally static — scroll-stagger on every
+ * card was making the site feel like a template.
  */
 export function RevealGrid({
   className,
@@ -19,15 +13,5 @@ export function RevealGrid({
   className?: string;
   children: React.ReactNode;
 }) {
-  return (
-    <motion.div
-      initial="hidden"
-      whileInView="visible"
-      viewport={inViewOnce}
-      variants={staggerContainer}
-      className={cn(className)}
-    >
-      {children}
-    </motion.div>
-  );
+  return <div className={cn(className)}>{children}</div>;
 }

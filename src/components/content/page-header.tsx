@@ -7,14 +7,7 @@ import { Container } from "@/components/layout";
 import { fadeUp, staggerContainer } from "@/lib/motion";
 
 /**
- * Top-of-page header for interior (non-home) pages. Larger than SectionHeading
- * — it uses the display-xl scale and adds generous top padding to clear the
- * sticky navbar. Animates in on mount (not on scroll) since it's above the fold.
- *
- * Modest bottom padding gives white breathing room before the first band —
- * important when that band is tinted (e.g. About's honey stats). Plain first
- * sections trim their own top padding (see interior pages) so the two don't
- * stack into an oversized void.
+ * Top-of-page header for interior pages. Animates once on mount (above the fold).
  */
 export function PageHeader({
   eyebrow,
@@ -36,7 +29,7 @@ export function PageHeader({
         {eyebrow ? (
           <motion.span
             variants={fadeUp}
-            className="font-mono text-xs uppercase tracking-widest text-muted-foreground"
+            className="text-sm font-medium text-muted-foreground"
           >
             {eyebrow}
           </motion.span>

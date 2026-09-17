@@ -22,8 +22,8 @@ export default function SponsorsPage() {
     <>
       <PageHeader
         eyebrow="Sponsors"
-        title="Powered by partners who believe in belonging."
-        lead="Our sponsors don't just fund the weekend — they help us open the door to tech a little wider."
+        title="Partners who invest in the next builders."
+        lead="Our sponsors fund the weekend and help more people walk through the door."
       />
 
       <Section spacing="lg" className="pt-4 sm:pt-8">
@@ -37,7 +37,7 @@ export default function SponsorsPage() {
             return (
               <div key={tier}>
                 <div className="mb-6">
-                  <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground">
+                  <h2 className="text-sm font-medium text-muted-foreground">
                     {meta.label}
                   </h2>
                   {meta.blurb ? (
@@ -62,7 +62,11 @@ export default function SponsorsPage() {
       <CtaBand
         title={sponsorCta.title}
         description={sponsorCta.description}
-        primary={{ label: "Get in touch", href: siteConfig.social.email }}
+        primary={{
+          label: "Get in touch",
+          href: siteConfig.social.email,
+          external: true,
+        }}
         secondary={{ label: "Meet the team", href: "/team" }}
       />
     </>

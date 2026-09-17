@@ -1,19 +1,27 @@
-"use client";
-
-import { FeatureCard, RevealGrid } from "@/components/content";
 import { aboutValues } from "@/content/about";
 
 /**
- * The values grid. A client component so the Lucide icon components in
- * `aboutValues` never cross the Server→Client boundary (functions aren't
- * serializable as props) — the same pattern as the homepage Features section.
+ * Values as a simple editorial grid — no icon cards.
  */
 export function Values() {
   return (
-    <RevealGrid className="mt-14 grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-      {aboutValues.map((value) => (
-        <FeatureCard key={value.title} {...value} />
-      ))}
-    </RevealGrid>
+    <ul className="mt-14 grid gap-10 sm:grid-cols-2 lg:gap-x-12 lg:gap-y-14">
+      {aboutValues.map((value) => {
+        const Icon = value.icon;
+        return (
+          <li key={value.title} className="flex flex-col gap-3">
+            <Icon
+              className="size-5 text-honey-foreground"
+              aria-hidden="true"
+              strokeWidth={1.5}
+            />
+            <h3 className="font-heading text-xl font-semibold">{value.title}</h3>
+            <p className="text-muted-foreground text-pretty">
+              {value.description}
+            </p>
+          </li>
+        );
+      })}
+    </ul>
   );
 }

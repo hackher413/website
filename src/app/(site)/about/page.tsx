@@ -9,8 +9,9 @@ import {
   RevealProse,
 } from "@/components/content";
 import { Values } from "@/components/about/values";
-import { applyNav } from "@/lib/site";
-import { aboutIntro, aboutStory, aboutStats } from "@/content/about";
+import { primaryCta } from "@/content/apply";
+import { aboutStats } from "@/content/event";
+import { aboutIntro, aboutStory } from "@/content/about";
 
 export const metadata: Metadata = {
   title: "About",
@@ -49,7 +50,7 @@ export default function AboutPage() {
       <CtaBand
         title="Come see what we mean."
         description="The best way to understand Hack(H)er413 is to be there. Get on the list for 2027."
-        primary={{ label: "Get involved", href: applyNav.href }}
+        primary={primaryCta}
         secondary={{ label: "View the schedule", href: "/schedule" }}
       />
     </>

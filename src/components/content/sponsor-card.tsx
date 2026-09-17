@@ -1,16 +1,10 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
-import { fadeUp } from "@/lib/motion";
 import type { Sponsor } from "@/content/sponsors";
 
 /**
- * A single sponsor tile. Links out to the sponsor, with a subtle hover lift.
- * Falls back to a styled wordmark when no logo asset is provided, so the grid
- * always reads as intentional. `featured` enlarges the presenting sponsor.
+ * Sponsor tile. Links out; falls back to a wordmark when no logo is provided.
  */
 export function SponsorCard({
   sponsor,
@@ -20,15 +14,14 @@ export function SponsorCard({
   featured?: boolean;
 }) {
   return (
-    <motion.a
-      variants={fadeUp}
+    <a
       href={sponsor.url}
       target="_blank"
       rel="noopener noreferrer"
       title={sponsor.name}
       aria-label={sponsor.name}
       className={cn(
-        "group relative flex items-center justify-center rounded-xl border border-border/70 bg-card p-6 transition-all duration-300 hover:border-border hover:shadow-md hover:shadow-brand/5",
+        "group relative flex items-center justify-center rounded-xl border border-border/70 bg-card p-6 transition-colors duration-300 hover:border-border",
         featured ? "min-h-32" : "min-h-24",
       )}
     >
@@ -58,6 +51,6 @@ export function SponsorCard({
           {sponsor.name}
         </span>
       )}
-    </motion.a>
+    </a>
   );
 }

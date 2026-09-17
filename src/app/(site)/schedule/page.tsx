@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { CalendarDays, Clock, MapPin } from "lucide-react";
 
 import { Section } from "@/components/layout";
-import { PageHeader, Timeline, CtaBand } from "@/components/content";
-import { applyNav } from "@/lib/site";
+import { PageHeader, Timeline } from "@/components/content";
 import { schedule, scheduleNote, prizeCategories } from "@/content/schedule";
 import { event } from "@/content/event";
+import { primaryCta } from "@/content/apply";
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
 
 export const metadata: Metadata = {
   title: "Schedule",
@@ -65,27 +67,48 @@ export default function SchedulePage() {
           Winners are crowned at the closing ceremony across these categories,
           plus sponsor challenges.
         </p>
-        <ul className="mt-10 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <dl className="mt-10 grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
           {prizeCategories.map((prize) => (
-            <li
-              key={prize.title}
-              className="rounded-xl border border-border/70 bg-card p-6"
-            >
-              <h3 className="font-semibold">{prize.title}</h3>
-              <p className="mt-1 text-sm text-muted-foreground text-pretty">
+            <div key={prize.title}>
+              <dt className="font-heading text-lg font-semibold">
+                {prize.title}
+              </dt>
+              <dd className="mt-1 text-sm text-muted-foreground text-pretty">
                 {prize.description}
-              </p>
-            </li>
+              </dd>
+            </div>
           ))}
-        </ul>
+        </dl>
       </Section>
 
-      <CtaBand
-        title="Want to be part of it?"
-        description="Join our mailing list to hear the moment 2027 applications open."
-        primary={{ label: "Get involved", href: applyNav.href }}
-        secondary={{ label: "Read the FAQ", href: "/faq" }}
-      />
+      <Section spacing="lg">
+        <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <p className="max-w-md text-lg text-muted-foreground text-pretty">
+            Want the 2027 dates first? Join the list — we&apos;ll email you when
+            applications open.
+          </p>
+          <div className="flex flex-wrap gap-3">
+            {primaryCta.external ? (
+              <Button asChild size="xl" variant="honey">
+                <a
+                  href={primaryCta.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {primaryCta.label}
+                </a>
+              </Button>
+            ) : (
+              <Button asChild size="xl" variant="honey">
+                <Link href={primaryCta.href}>{primaryCta.label}</Link>
+              </Button>
+            )}
+            <Button asChild size="xl" variant="outline">
+              <Link href="/faq">Read the FAQ</Link>
+            </Button>
+          </div>
+        </div>
+      </Section>
     </>
   );
 }

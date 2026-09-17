@@ -19,11 +19,11 @@ export type Sponsor = {
 export const sponsors: Sponsor[] = [
   // Current sponsors
   { name: "Manning CICS", url: "https://www.cics.umass.edu/", logo: "/sponsors/manning-cics.jpg", tier: "current" },
-  { name: "WFUM", url: "https://example.com", logo: "/sponsors/wfum.jpeg", tier: "current" },
-  { name: "Innovate413", url: "https://example.com", logo: "/sponsors/innovate413.avif", tier: "current" },
+  { name: "WFUM", url: "https://womenforumass.org/wfum/", logo: "/sponsors/wfum.jpeg", tier: "current" },
+  { name: "Innovate413", url: "https://www.innovate413.org/", logo: "/sponsors/innovate413.avif", tier: "current" },
 
   // Past sponsors
-  { name: "Massachusetts State Lottery", url: "https://example.com", logo: "/sponsors/mass-lottery.webp", tier: "past" },
+  { name: "Massachusetts State Lottery", url: "https://www.masslottery.com/", logo: "/sponsors/mass-lottery.webp", tier: "past" },
   { name: "Akamai", url: "https://www.akamai.com/", logo: "/sponsors/akamai.webp", tier: "past" },
   { name: "Travelers Insurance", url: "https://www.travelers.com/", logo: "/sponsors/travelers.png", tier: "past" },
   { name: "Nord Security", url: "https://nordsecurity.com/", logo: "/sponsors/nord-security.png", tier: "past" },
@@ -49,8 +49,8 @@ export const tierMeta: Record<
   { label: string; blurb: string; columns: string }
 > = {
   current: {
-    label: "This year's sponsors",
-    blurb: "The partners making our 2026 event possible.",
+    label: "2026 sponsors",
+    blurb: "The partners who made our most recent event possible.",
     columns: "grid-cols-1 sm:grid-cols-3",
   },
   past: {
@@ -79,7 +79,7 @@ export const tierOrder: SponsorTier[] = [
 ];
 
 export const sponsorCta = {
-  title: "Want to sponsor Hack(H)er413?",
+  title: "Sponsor the next Hack(H)er413.",
   description:
-    "Partner with us to reach hundreds of driven, early-career builders and help close the gender gap in tech.",
+    "Reach hundreds of early-career builders and help open the door to tech a little wider.",
 };

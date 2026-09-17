@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 
 import { Section } from "@/components/layout";
-import { PageHeader, FaqAccordion, CtaBand } from "@/components/content";
-import { applyNav, siteConfig } from "@/lib/site";
+import { PageHeader, FaqAccordion } from "@/components/content";
+import { siteConfig } from "@/lib/site";
 import { faq, faqIntro } from "@/content/faq";
 
 export const metadata: Metadata = {
@@ -26,7 +26,7 @@ export default function FaqPage() {
               key={category.name}
               className="grid gap-6 lg:grid-cols-[minmax(0,16rem)_1fr] lg:gap-12"
             >
-              <h2 className="font-mono text-xs uppercase tracking-widest text-muted-foreground lg:pt-4">
+              <h2 className="text-sm font-medium text-muted-foreground lg:pt-4">
                 {category.name}
               </h2>
               <FaqAccordion items={category.items} idPrefix={`faq-${i}`} />
@@ -35,12 +35,20 @@ export default function FaqPage() {
         </div>
       </Section>
 
-      <CtaBand
-        title="Still have a question?"
-        description="We're real people and we're happy to help. Drop us a line anytime."
-        primary={{ label: "Email us", href: siteConfig.social.email }}
-        secondary={{ label: "Apply now", href: applyNav.href }}
-      />
+      <Section spacing="lg">
+        <div className="border-t border-border pt-12">
+          <p className="text-lg text-muted-foreground text-pretty">
+            Still stuck? We&apos;re real people —{" "}
+            <a
+              href={siteConfig.social.email}
+              className="font-medium text-foreground underline underline-offset-4"
+            >
+              email us
+            </a>{" "}
+            anytime.
+          </p>
+        </div>
+      </Section>
     </>
   );
 }

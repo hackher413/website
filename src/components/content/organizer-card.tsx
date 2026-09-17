@@ -1,21 +1,12 @@
-"use client";
-
 import Image from "next/image";
-import { motion } from "framer-motion";
 
 import { cn } from "@/lib/utils";
-import { fadeUp } from "@/lib/motion";
 import { LinkedInIcon } from "@/components/icons/brand-icons";
 import type { Organizer } from "@/content/team";
 
-/**
- * Pointy-top hexagon, matching the honeycomb hero geometry. A regular hex is
- * ~0.866 as wide as it is tall, so the avatar container uses that aspect ratio.
- */
 const HEX_CLIP =
   "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
 
-/** Initials for the fallback monogram avatar. */
 function initials(name: string) {
   return name
     .split(" ")
@@ -26,10 +17,7 @@ function initials(name: string) {
 }
 
 /**
- * A single organizer rendered as a honeycomb cell: a hexagon avatar (photo or
- * monogram fallback) framed by a honey rim, with name, role, and an optional
- * LinkedIn link. `featured` enlarges the cell for Directors. Part of a
- * staggered grid reveal.
+ * Organizer as a honeycomb cell: hexagon avatar with name, role, optional LinkedIn.
  */
 export function OrganizerCard({
   organizer,
@@ -39,28 +27,23 @@ export function OrganizerCard({
   featured?: boolean;
 }) {
   return (
-    <motion.div
-      variants={fadeUp}
+    <div
       className={cn(
         "group flex flex-col items-center text-center",
-        // Featured cells sit in a flex-wrap row, so they need an explicit width.
         featured && "w-44 sm:w-52",
       )}
     >
-      {/* Honeycomb cell: honey frame + inset avatar, both hex-clipped. */}
       <div
         className={cn(
           "relative aspect-[0.866] w-full transition-transform duration-300 ease-out group-hover:-translate-y-1",
           featured ? "max-w-44 sm:max-w-52" : "max-w-28 sm:max-w-32",
         )}
       >
-        {/* Honey rim — brightens and lifts a soft glow on hover. */}
         <div
           aria-hidden="true"
-          className="absolute inset-0 bg-honey transition-all duration-300 group-hover:bg-honey-foreground group-hover:drop-shadow-[0_8px_20px_rgba(217,164,65,0.35)]"
+          className="absolute inset-0 bg-honey transition-colors duration-300 group-hover:bg-honey-foreground"
           style={{ clipPath: HEX_CLIP }}
         />
-        {/* Inset by a few px so the frame reads as a border around the photo. */}
         <div
           className="absolute inset-[3px] overflow-hidden"
           style={{ clipPath: HEX_CLIP }}
@@ -114,6 +97,6 @@ export function OrganizerCard({
           <LinkedInIcon className="size-4" />
         </a>
       ) : null}
-    </motion.div>
+    </div>
   );
 }
