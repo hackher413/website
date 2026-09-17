@@ -90,6 +90,13 @@ export const team: TeamGroup[] = [
         linkedin: "https://www.linkedin.com/in/miranda-liskov-05a230376/",
       },
       {
+        name: "Nandita Lajeesh",
+        role: "Assistant Head of Outreach",
+        pronouns: "she/her",
+        image: "/team/2027/nandita-lajeesh.jpg",
+        linkedin: "https://www.linkedin.com/in/nandita-lajeesh/",
+      },
+      {
         name: "Hiya Dagli",
         role: "Head of Marketing",
         pronouns: "she/her",
@@ -121,13 +128,6 @@ export const team: TeamGroup[] = [
         pronouns: "she/her",
         image: "/team/2027/linh-dang.jpg",
         linkedin: "https://www.linkedin.com/in/linhdang-felix/",
-      },
-      {
-        name: "Sherry Nazifi",
-        role: "Assistant Head of Technology",
-        pronouns: "she/her",
-        image: "/team/2027/sherry-nazifi.jpg",
-        linkedin: "https://www.linkedin.com/in/shahrzad-nazifi-141ab8293/",
       },
     ],
   },
