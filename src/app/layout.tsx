@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import localFont from "next/font/local";
+import { Analytics } from "@vercel/analytics/next";
 
 import { Providers } from "@/components/providers";
 import { siteConfig } from "@/lib/site";
@@ -103,6 +104,7 @@ export default function RootLayout({
           {children}
         </Providers>
         <OrganizationJsonLd />
+        <Analytics />
       </body>
     </html>
   );
