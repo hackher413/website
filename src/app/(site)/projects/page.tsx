@@ -12,7 +12,7 @@ import { primaryCta } from "@/content/apply";
 export const metadata: Metadata = {
   title: "Winners",
   description:
-    "The standout projects built at Hack(H)er413 — a look at what our hackers made over one weekend.",
+    "The standout projects built at Hack(H)er413 - a look at what our hackers made over one weekend.",
 };
 
 export default function ProjectsPage() {

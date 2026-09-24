@@ -14,7 +14,7 @@ import {
 export const metadata: Metadata = {
   title: "Sponsors",
   description:
-    "The companies and partners who make Hack(H)er413 possible — and how to join them.",
+    "The companies and partners who make Hack(H)er413 possible - and how to join them.",
 };
 
 export default function SponsorsPage() {

@@ -6,20 +6,20 @@ import { useReducedMotion } from "framer-motion";
 import { brand } from "@/lib/design/tokens";
 
 /**
- * The signature honeycomb — a faithful reimagining of the original's canvas
+ * The signature honeycomb - a faithful reimagining of the original's canvas
  * effect, rebuilt for React/TS and recolored on-brand.
  *
  * How it works (and why it glows, unlike a flat SVG grid):
  *  - A full hex grid is drawn to a <canvas> with additive ("lighter") blending
  *    over a dark warm-brown base, so overlapping light *adds up* into real glow.
  *  - Each frame paints a low-alpha wash over the whole canvas, leaving decaying
- *    comet-like afterimages — the trail.
+ *    comet-like afterimages - the trail.
  *  - "Igniting" a cell (pointer move / click / idle auto-spark) starts a
- *    selection that, after a few frames, RELATES to its neighbors — so a wave
+ *    selection that, after a few frames, RELATES to its neighbors - so a wave
  *    ripples outward hex-to-hex through the comb.
  *
  * Recoloring: the original cycled rainbow hues. We restrict to the brand accent
- * hues — honey (~48°) and sky (~200°) — so ripples read as warm gold and cool
+ * hues - honey (~48°) and sky (~200°) - so ripples read as warm gold and cool
  * blue light against the espresso field.
  *
  * Perf: pure canvas + a single rAF loop; no per-cell React. Accessibility: it's
@@ -208,7 +208,7 @@ export function HoneycombCanvas({ className }: { className?: string }) {
     const drawSelections = (targets: { count: number; hue: number }[]) => {
       for (const t of targets) {
         // Additive blending sums overlapping glows, so keep per-layer alpha low
-        // and luminance modest — otherwise stacked cells blow out to white.
+        // and luminance modest - otherwise stacked cells blow out to white.
         const fl = fillLuminance(t.count);
         ctx.fillStyle = `hsla(${t.hue}, 60%, ${fl}%, 0.2)`;
         ctx.fill();
@@ -224,7 +224,7 @@ export function HoneycombCanvas({ className }: { className?: string }) {
       ctx.translate(hex.x, hex.y);
       drawHexPath();
       // Faint base so the comb is always visible (warm brown baseline).
-      ctx.fillStyle = `hsla(20, 30%, ${LUM_MIN}%, 0.16)`;
+      ctx.fillStyle = `hsla(20, 30%, ${LUM_MIN}%, 0.1)`;
       ctx.fill();
 
       drawSelections(hex.selections);
@@ -247,7 +247,7 @@ export function HoneycombCanvas({ className }: { className?: string }) {
         if (++sel.count === COUNT_MAX * 2) hex.selections.splice(i, 1);
       }
       // Sources propagate directionally, so the wave keeps moving outward. Pick
-      // ONLY from the 3 forward directions (indices has exactly 3 entries) —
+      // ONLY from the 3 forward directions (indices has exactly 3 entries) -
       // indexing past that hits undefined and kills the wave prematurely.
       for (let i = hex.sources.length - 1; i >= 0; i--) {
         const src = hex.sources[i];
@@ -280,9 +280,9 @@ export function HoneycombCanvas({ className }: { className?: string }) {
         const d = Math.hypot(hex.x - cxp, hex.y - cyp);
         const bloom = Math.max(0, 1 - d / (Math.max(width, height) * 0.5));
         const hue = hex.x < width / 2 ? 46 : 200;
-        ctx.fillStyle = `hsla(${hue}, 90%, ${LUM_MIN + bloom * 30}%, 0.35)`;
+        ctx.fillStyle = `hsla(${hue}, 90%, ${LUM_MIN + bloom * 30}%, 0.28)`;
         ctx.fill();
-        ctx.strokeStyle = `hsla(20, 40%, ${LUM_MIN + bloom * 20}%, 0.5)`;
+        ctx.strokeStyle = `hsla(20, 40%, ${LUM_MIN + bloom * 20}%, 0.32)`;
         ctx.stroke();
         ctx.restore();
       }
@@ -302,7 +302,7 @@ export function HoneycombCanvas({ className }: { className?: string }) {
           best = hex;
         }
       }
-      // Don't re-ignite an already-lit cell — stacking selections on one hex is
+      // Don't re-ignite an already-lit cell - stacking selections on one hex is
       // what causes the additive blow-out to white.
       if (best && bestD < RADIUS * 1.2 && best.selections.length === 0) {
         best.select(brandHue());
@@ -353,8 +353,8 @@ export function HoneycombCanvas({ className }: { className?: string }) {
     }
 
     // Run the rAF loop and idle sparks only while the hero is on screen. Once
-    // scrolled past, both stop — the canvas does zero work behind the rest of
-    // the page — and resume seamlessly when the hero scrolls back into view.
+    // scrolled past, both stop - the canvas does zero work behind the rest of
+    // the page - and resume seamlessly when the hero scrolls back into view.
     let running = false;
     const start = () => {
       if (running) return;

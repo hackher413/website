@@ -1,3 +1,4 @@
+import Image from "next/image";
 import Link from "next/link";
 
 import { cn } from "@/lib/utils";
@@ -19,9 +20,15 @@ const sizeClass = {
   display: "text-4xl sm:text-5xl md:text-6xl",
 } as const;
 
+const beeClass = {
+  md: "h-7 sm:h-8",
+  lg: "h-9 sm:h-10",
+  display: "h-12 sm:h-14",
+} as const;
+
 /**
- * Wordmark for Hack(H)er413. The parenthetical "(H)" is the brand signature,
- * emphasized with honey. Purely typographic — scales crisply with no image.
+ * Brand mark: pixel bee + Hack(H)er413 wordmark.
+ * Bee is the year's logo; type adapts for light vs dark surfaces.
  */
 export function Logo({
   className,
@@ -31,7 +38,7 @@ export function Logo({
   linked = true,
 }: LogoProps) {
   const classes = cn(
-    "group inline-flex items-baseline font-heading font-semibold tracking-tight rounded-sm",
+    "group inline-flex items-center gap-2 font-heading font-semibold tracking-tight rounded-sm",
     sizeClass[size],
     tone === "onDark" ? "text-cream" : "text-foreground",
     linked &&
@@ -41,20 +48,39 @@ export function Logo({
 
   const mark = (
     <>
-      <span>Hack</span>
-      <span
-        aria-hidden="true"
-        className="mx-0.5 rounded-[0.3em] bg-honey px-1 text-honey-foreground transition-colors duration-300 group-hover:bg-sky group-hover:text-sky-foreground"
-      >
-        (H)
-      </span>
-      <span>er</span>
-      <span
-        className={
-          tone === "onDark" ? "text-cream/55" : "text-muted-foreground"
-        }
-      >
-        413
+      <Image
+        src="/brand/bee.png"
+        alt=""
+        width={486}
+        height={390}
+        unoptimized
+        className={cn(beeClass[size], "w-auto shrink-0")}
+        style={{
+          imageRendering: "pixelated",
+          ...(tone === "onDark"
+            ? {
+                filter:
+                  "drop-shadow(0 0 0.55px rgba(251,246,238,0.9)) drop-shadow(0 0 0.55px rgba(251,246,238,0.9))",
+              }
+            : {}),
+        }}
+      />
+      <span className="inline-flex items-baseline">
+        <span>Hack</span>
+        <span
+          aria-hidden="true"
+          className="mx-0.5 rounded-[0.3em] bg-honey px-1 text-honey-foreground transition-colors duration-300 group-hover:bg-sky group-hover:text-sky-foreground"
+        >
+          (H)
+        </span>
+        <span>er</span>
+        <span
+          className={
+            tone === "onDark" ? "text-cream/70" : "text-foreground/55"
+          }
+        >
+          413
+        </span>
       </span>
     </>
   );

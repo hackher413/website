@@ -1,11 +1,11 @@
 /**
- * Core event facts — the yearly-changing details referenced across pages.
+ * Core event facts - the yearly-changing details referenced across pages.
  * Kept in one place so a new cycle is a single edit.
  */
 
 export const event = {
   /** Display date range for the current cycle. */
-  dates: "February 21–22, 2026",
+  dates: "February 21-22, 2026",
   year: 2026,
   duration: "24 hours",
   venue: {
@@ -20,7 +20,7 @@ export const event = {
    */
   isConcluded: true,
   concludedMessage:
-    "Our 2026 hackathon has wrapped — thank you to everyone who joined us. Stay tuned for 2027!",
+    "Our 2026 hackathon has wrapped - thank you to everyone who joined us. Stay tuned for 2027!",
 } as const;
 
 export type EventStat = { value: string; label: string };

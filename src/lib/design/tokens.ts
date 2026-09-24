@@ -6,7 +6,7 @@
  */
 
 export const brand = {
-  /** Soft brown — primary brand / body text on light surfaces. */
+  /** Soft brown - primary brand / body text on light surfaces. */
   brown: "#5a4326",
   /** Warm cream on brown surfaces. */
   brownForeground: "#fffdf2",

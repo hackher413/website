@@ -1,7 +1,7 @@
 import { aboutValues } from "@/content/about";
 
 /**
- * Values as a simple editorial grid — no icon cards.
+ * Values as a simple editorial grid - no icon cards.
  */
 export function Values() {
   return (

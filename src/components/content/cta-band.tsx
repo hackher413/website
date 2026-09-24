@@ -56,7 +56,7 @@ function CtaButton({
 }
 
 /**
- * Closing call-to-action on the inverted brand surface. One subtle fade-in —
+ * Closing call-to-action on the inverted brand surface. One subtle fade-in -
  * not a full stagger stack.
  */
 export function CtaBand({ title, description, primary, secondary }: CtaBandProps) {

@@ -27,7 +27,7 @@ export const homeFeatures: HomeFeature[] = [
     icon: Sparkles,
     title: "First-timers thrive here",
     description:
-      "Guided tracks, starter kits, and mentors who expect beginners — 88 first-timers built with us in 2026.",
+      "Guided tracks, starter kits, and mentors who expect beginners - 88 first-timers built with us in 2026.",
   },
   {
     icon: Wrench,
@@ -47,13 +47,13 @@ export const homeMission = {
   eyebrow: "Our mission",
   title: "Technology is better when everyone helps build it.",
   body: [
-    "Our mission is to create a welcoming and inclusive environment for all women — cis and trans — and non-binary students of every ethnic, gender, socioeconomic, and educational background.",
-    "We bring students together to innovate, learn, and feel safe while doing so — a weekend where taking creative risks is exactly the point.",
+    "Our mission is to create a welcoming and inclusive environment for all women - cis and trans - and non-binary students of every ethnic, gender, socioeconomic, and educational background.",
+    "We bring students together to innovate, learn, and feel safe while doing so - a weekend where taking creative risks is exactly the point.",
   ],
 };
 
 export const homeCta = {
-  title: "2026 is a wrap — 2027 is next.",
+  title: "2026 is a wrap - 2027 is next.",
   description:
     "Applications are closed for this year. Join the list and we'll email you the moment the next cycle opens.",
 };

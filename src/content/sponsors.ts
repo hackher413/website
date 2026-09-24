@@ -1,6 +1,6 @@
 /**
  * Sponsors content. Grouped by tier; tiers render largest-first with decreasing
- * prominence. `logo` is optional — until real assets land we fall back to a
+ * prominence. `logo` is optional - until real assets land we fall back to a
  * styled wordmark in the SponsorCard, so the page never looks broken.
  *
  * Names reflect current and past supporters of Hack(H)er413.

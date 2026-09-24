@@ -1,5 +1,5 @@
 /**
- * Team content. Organizers grouped by team (committee). `image` is optional —
+ * Team content. Organizers grouped by team (committee). `image` is optional -
  * OrganizerCard falls back to a monogram avatar so the page looks intentional
  * before real headshots are added.
  *

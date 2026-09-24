@@ -13,7 +13,7 @@ import {
 export const applyIntro = {
   eyebrow: "Apply",
   title: "Applications for 2026 are closed.",
-  lead: "Join the mailing list to hear when 2027 opens — no experience required, just curiosity.",
+  lead: "Join the mailing list to hear when 2027 opens - no experience required, just curiosity.",
 };
 
 /** External application link on the participant dashboard. */
@@ -74,7 +74,7 @@ export const applySteps: ApplyStep[] = [
 
 export const applyEligibility = [
   "Currently enrolled students, or those who graduated within the last 12 months.",
-  "Women and non-binary students — and the allies who support them.",
+  "Women and non-binary students - and the allies who support them.",
   "Beginners and first-time hackers are especially encouraged.",
-  "All majors and disciplines welcome — not just CS.",
+  "All majors and disciplines welcome - not just CS.",
 ];

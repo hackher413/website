@@ -1,0 +1,61 @@
+ID,Task,Feature slice,Owner,Deadline,Meeting checkpoint,Priority,Depends on,Done when,Notes,Status
+1,"Confirm stack + feature ownership (Jenn=Platform/Launch, Dev2=Applicant, Dev3=Organizer)",Planning,All three,2026-09-24,Meeting 1,P0,,Ownership agreed; rename Dev2/Dev3 to real names,,Todo
+2,Import CSV → Sheets + GitHub Project; replace Dev 2/Dev 3 with names,Planning,Jenn,2026-09-24,Meeting 1,P0,,Board live,,Todo
+3,Create Neon project; DATABASE_URL in shared secrets vault,Platform,Jenn,2026-09-24,Meeting 1,P0,,All three can read secrets,,Todo
+4,Create Clerk app (dev+prod); invite other two; define roles,Platform,Jenn,2026-09-24,Meeting 1,P0,,All three are organizers,,Todo
+5,Create Resend account; DNS verify hackher413.com; share API key to vault,Organizer,Dev 3,2026-09-24,Meeting 1,P0,,From-address chosen; Jenn+Dev2 have access,,Todo
+6,Draft 2027 question list (required/optional; resume yes/no),Applicant,Dev 2,2026-09-24,Meeting 1,P0,,Ready for director approval,,Todo
+7,"Draft organizer review needs (columns, actions, CSV fields)",Organizer,Dev 3,2026-09-24,Meeting 1,P0,,Short doc for queue UX,,Todo
+8,Confirm open target Mon Nov 16 + announce channels,Launch,Jenn,2026-09-24,Meeting 1,P1,,Datetime + timezone set,,Todo
+9,Drizzle setup + applications migration (core + customFields JSON),Platform,Jenn,2026-10-01,Meeting 2,P0,"3,4",Local + Neon migrations work,,Todo
+10,Clerk in Next: middleware + requireUser/requireOrganizer helpers,Platform,Jenn,2026-10-01,Meeting 2,P0,4,Helpers ready for other slices,,Todo
+11,Add Vercel env wiring docs + verify Preview has DB/Clerk/Resend,Platform,Jenn,2026-10-01,Meeting 2,P0,"3,4,5",PR previews usable,,Todo
+12,Verify Resend domain; merge shared sendEmail() helper; test all three,Organizer,Dev 3,2026-10-01,Meeting 2,P0,5,Helper merged; tests received,,Todo
+13,"Scaffold /apply/form + /apply/status (auth stubs, site UI)",Applicant,Dev 2,2026-10-01,Meeting 2,P0,10,Signed-in stubs render,,Todo
+14,Commit application-form config from approved questions,Applicant,Dev 2,2026-10-01,Meeting 2,P0,6,Config is SSOT,,Todo
+15,Scaffold /organizer/apps list + detail (organizer-gated stubs),Organizer,Dev 3,2026-10-01,Meeting 2,P0,10,Non-organizers get 403,,Todo
+16,Map form fields → DB with Jenn (core vs customFields) in PR,Applicant,Dev 2,2026-10-01,Meeting 2,P0,"9,14",Schema supports form,,Todo
+17,Apply form UI from config + Zod (desktop + mobile),Applicant,Dev 2,2026-10-08,Meeting 3,P0,"13,14",Validation + UX solid,,Todo
+18,Server actions: draft + submit (one app per user),Applicant,Dev 2,2026-10-08,Meeting 3,P0,"9,10,16",Persists; no double submit,,Todo
+19,Confirmation email on submit (template + sendEmail),Applicant,Dev 2,2026-10-08,Meeting 3,P0,"12,18",Confirm email delivered,,Todo
+20,Status page: status + submitted-at,Applicant,Dev 2,2026-10-08,Meeting 3,P0,18,All statuses display,,Todo
+21,Marketing /apply CTA → auth → form (remove old dashboard link),Applicant,Dev 2,2026-10-08,Meeting 3,P1,13,In-repo path only,,Todo
+22,Organizer list reads live applications from DB,Organizer,Dev 3,2026-10-08,Meeting 3,P0,"9,15,18",Shows test submissions,,Todo
+23,Seed script: create ~10 fake applications for organizer UI testing,Organizer,Dev 3,2026-10-08,Meeting 3,P1,9,Dev3 can build UI without waiting on form,,Todo
+24,PR review/unblock on auth+DB helpers; short README for platform APIs,Platform,Jenn,2026-10-08,Meeting 3,P0,"9,10",Other slices unblocked on preview,,Todo
+25,Organizer search + detail view (all fields),Organizer,Dev 3,2026-10-15,Meeting 4,P0,22,Find/open any app,,Todo
+26,Actions: Accept/Deny/Waitlist (+ flag) with actor + timestamp,Organizer,Dev 3,2026-10-15,Meeting 4,P0,25,Audited status updates,,Todo
+27,Decision emails on status change (3 templates),Organizer,Dev 3,2026-10-15,Meeting 4,P0,"12,26",Sends on action; 100/day batch notes,,Todo
+28,CSV export for directors,Organizer,Dev 3,2026-10-15,Meeting 4,P1,25,Download works,,Todo
+29,Resume upload OR URL fields end-to-end (per Sep 24 decision),Applicant,Dev 2,2026-10-15,Meeting 4,P1,"6,18",On form + detail view,,Todo
+30,Unify email chrome (footer/from-name) across confirm + decision templates,Organizer,Dev 3,2026-10-15,Meeting 4,P1,"19,27",Pair w/ Dev2; one look,,Todo
+31,IDOR/security checks on application writes + organizer status updates,Platform,Jenn,2026-10-15,Meeting 4,P0,"18,26",Own-app only; organizer-only status,,Todo
+32,Open/closed flag + deadline copy; block submit when closed,Applicant,Dev 2,2026-10-22,Meeting 5,P0,,Toggle controls form + CTAs,,Todo
+33,Required MLH / CoC / liability checkboxes,Applicant,Dev 2,2026-10-22,Meeting 5,P0,17,Cannot submit without,,Todo
+34,Rate-limit submits + role-gate regression test,Platform,Jenn,2026-10-22,Meeting 5,P0,"10,18",Abuse path covered,,Todo
+35,Director sign-off on email copy (confirm + 3 decisions),Launch,Jenn,2026-10-22,Meeting 5,P0,"19,27",Copy approved,,Todo
+36,Privacy one-liner on apply form footer,Applicant,Dev 2,2026-10-22,Meeting 5,P1,,Shown on form,,Todo
+37,Organizer: prevent decision email double-send; status transition rules,Organizer,Dev 3,2026-10-22,Meeting 5,P0,"26,27",Safe re-clicks; valid transitions only,,Todo
+38,"Dogfood E2E: each submits, each reviews, decisions email",All features,All three,2026-10-22,Meeting 5,P0,"20,26,27",Bugs → feature owner,,Todo
+39,Clear P0 bugs on your slice from dogfood,All features,All three,2026-10-29,Meeting 6,P0,38,No open P0 on your feature,,Todo
+40,"Applicant polish: mobile, errors, empty states",Applicant,Dev 2,2026-10-29,Meeting 6,P1,"17,20",Phone-ready,,Todo
+41,"Organizer polish: mobile, empty/search states",Organizer,Dev 3,2026-10-29,Meeting 6,P1,25,Phone-ready,,Todo
+42,"Smoke: ~20 apps, CSV, ~20 decision emails + batching runbook section",Organizer,Dev 3,2026-10-29,Meeting 6,P1,"27,28",Batch plan written,,Todo
+43,"2027 public copy (apply.ts, CTAs, FAQ); keep isOpen false",Applicant,Dev 2,2026-10-29,Meeting 6,P1,32,"Copy ready, closed",,Todo
+44,Document DB snapshot + CSV backup steps in launch runbook,Organizer,Dev 3,2026-10-29,Meeting 6,P1,28,Backup path clear,,Todo
+45,Prod dry run - verify your slice on production URL,All features,All three,2026-11-05,Meeting 7,P0,39,Owner sign-off per slice,,Todo
+46,Train directors on organizer queue (30 min),Organizer,Dev 3,2026-11-05,Meeting 7,P0,26,≥2 non-eng can review,,Todo
+47,"Write launch runbook (open steps, rollback, on-call)",Launch,Jenn,2026-11-05,Meeting 7,P0,,Includes Nov 16 watch chart,,Todo
+48,Wipe test apps; confirm prod DB clean,Platform,Jenn,2026-11-05,Meeting 7,P0,45,Ready for real apps,,Todo
+49,Draft announce posts - do not send,Launch,Jenn,2026-11-05,Meeting 7,P1,8,Timed for Nov 16,,Todo
+50,Applicant prod checklist: confirm email + status on prod,Applicant,Dev 2,2026-11-05,Meeting 7,P0,45,Signed off,,Todo
+51,Feature freeze vote - launch blockers only after this,All features,All three,2026-11-12,Meeting 8,P0,45,Ready to open next week,,Todo
+52,"Pre-open infra checklist (Clerk, Resend, DNS, env, backup)",Platform,Jenn,2026-11-12,Meeting 8,P0,47,Checked off in meeting,,Todo
+53,Rehearse closed→open toggle; document flip steps,Applicant,Dev 2,2026-11-12,Meeting 8,P0,32,Open procedure known,,Todo
+54,Pre-open organizer check: empty queue + decision email OK,Organizer,Dev 3,2026-11-12,Meeting 8,P0,27,Day-one ready,,Todo
+55,Optional soft open to officers/friends 24-48h,Launch,Jenn,2026-11-13,Soft open,P1,51,Owners fix issues,,Todo
+56,"PUBLIC OPEN: flip isOpen, deploy, announce",Launch,Jenn,2026-11-16,Launch week,P0,"52,53,54",Live week before Thanksgiving,,Todo
+57,Launch watch: platform/auth/Resend errors,Platform,Jenn,2026-11-16,Launch week,P0,56,On-call; page owners,,Todo
+58,Launch watch: submits + confirmation emails,Applicant,Dev 2,2026-11-16,Launch week,P0,56,First apps + inbox OK,,Todo
+59,Launch watch: first 10 apps correct in queue,Organizer,Dev 3,2026-11-17,Launch week,P0,56,No mapping bugs,,Todo
+60,Hotfix only through Thanksgiving,All features,All three,2026-11-19,Meeting 9,P0,56,No new features,,Todo

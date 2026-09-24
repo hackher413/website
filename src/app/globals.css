@@ -10,7 +10,7 @@
 /*  Keep hex values in sync with src/lib/design/tokens.ts.                    */
 /* -------------------------------------------------------------------------- */
 @theme inline {
-  /* Fonts — Fraunces for display, Geist for UI/body. */
+  /* Fonts - Fraunces for display, Geist for UI/body. */
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
   --font-heading: var(--font-fraunces), var(--font-geist-sans);
@@ -35,7 +35,7 @@
   --color-input: var(--input);
   --color-ring: var(--ring);
 
-  /* Brand colors — single source mirrored in tokens.ts */
+  /* Brand colors - single source mirrored in tokens.ts */
   --color-brand: #5a4326;
   --color-brand-foreground: #fffdf2;
   --color-honey: #fff1b5;
@@ -90,7 +90,7 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Light theme only — buttermilk marketing site, no dark mode.               */
+/*  Light theme only - buttermilk marketing site, no dark mode.               */
 /* -------------------------------------------------------------------------- */
 :root {
   --radius: 0.75rem;

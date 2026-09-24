@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 export const metadata: Metadata = {
   title: "Schedule",
   description:
-    "The full weekend, hour by hour — ceremonies, workshops, meals, judging, and prizes.",
+    "The full weekend, hour by hour - ceremonies, workshops, meals, judging, and prizes.",
 };
 
 const facts = [
@@ -84,7 +84,7 @@ export default function SchedulePage() {
       <Section spacing="lg">
         <div className="flex flex-col items-start gap-4 sm:flex-row sm:items-center sm:justify-between">
           <p className="max-w-md text-lg text-muted-foreground text-pretty">
-            Want the 2027 dates first? Join the list — we&apos;ll email you when
+            Want the 2027 dates first? Join the list - we&apos;ll email you when
             applications open.
           </p>
           <div className="flex flex-wrap gap-3">

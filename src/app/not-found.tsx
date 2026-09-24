@@ -11,7 +11,7 @@ export const metadata: Metadata = {
 
 /**
  * Root 404. Lives at the app root (not inside the (site) group) so it renders
- * without the marketing chrome would-be mismatch — but we still give it the
+ * without the marketing chrome would-be mismatch - but we still give it the
  * brand voice and a clear way home.
  */
 export default function NotFound() {

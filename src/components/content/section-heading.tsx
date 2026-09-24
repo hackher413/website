@@ -13,7 +13,7 @@ type SectionHeadingProps = {
 };
 
 /**
- * Standard section header — eyebrow / title / description. Static (no scroll
+ * Standard section header - eyebrow / title / description. Static (no scroll
  * reveal) so motion stays reserved for the hero and a few key moments.
  */
 export function SectionHeading({

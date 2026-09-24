@@ -46,7 +46,7 @@ export const projectYears: ProjectYear[] = [
       {
         name: "Hiring Manager Pro",
         description:
-          "Structured hiring decisions — because they shouldn't rely on vibes alone.",
+          "Structured hiring decisions - because they shouldn't rely on vibes alone.",
         url: "https://devpost.com/software/hiring-manager-pro",
         image: "/projects/hiring-manager-pro.png",
       },
@@ -99,7 +99,7 @@ export const projectYears: ProjectYear[] = [
       },
       {
         name: "ShareBooth",
-        description: "A photobooth from anywhere — capture the moment, together.",
+        description: "A photobooth from anywhere - capture the moment, together.",
         url: "https://devpost.com/software/sharebooth",
         image: "/projects/sharebooth.png",
       },
@@ -122,5 +122,5 @@ export const projectYearOrder = projectYears
 export const projectsCta = {
   title: "Your project could be here in 2027.",
   description:
-    "Bring an idea — or just your curiosity — and ship something you're proud of before Sunday demos.",
+    "Bring an idea - or just your curiosity - and ship something you're proud of before Sunday demos.",
 };

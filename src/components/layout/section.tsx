@@ -16,7 +16,7 @@ const tones = {
   /** Subtle warm neutral band to separate sections. */
   muted: "bg-muted",
   /**
-   * Soft honey wash — for highlight/CTA bands. The wash is a constant light
+   * Soft honey wash - for highlight/CTA bands. The wash is a constant light
    * tint in both themes, so pin the text to the brand brown; otherwise dark
    * mode's light foreground token would be invisible on it.
    */
@@ -35,7 +35,7 @@ type SectionProps = React.ComponentProps<"section"> & {
   /** Max content width, forwarded to the inner Container. */
   width?: React.ComponentProps<typeof Container>["width"];
   /**
-   * When true, children are rendered directly without the inner Container —
+   * When true, children are rendered directly without the inner Container -
    * for full-bleed sections (e.g. the honeycomb hero) that manage their own
    * horizontal layout.
    */

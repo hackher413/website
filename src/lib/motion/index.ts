@@ -7,12 +7,12 @@
  * components.
  *
  * For accessibility, wrap usage with the `useReducedMotion` hook from
- * `framer-motion` — or use `<MotionConfig reducedMotion="user">` at the app
- * root — so animations collapse gracefully when the user prefers reduced motion.
+ * `framer-motion` - or use `<MotionConfig reducedMotion="user">` at the app
+ * root - so animations collapse gracefully when the user prefers reduced motion.
  */
 import type { Transition, Variants } from "framer-motion";
 
-/** Signature easing curve — a gentle, confident ease-out. */
+/** Signature easing curve - a gentle, confident ease-out. */
 export const ease = [0.22, 1, 0.36, 1] as const;
 
 export const duration = {
@@ -38,7 +38,7 @@ export const fadeUp: Variants = {
   },
 };
 
-/** Plain fade — for backgrounds and decorative layers. */
+/** Plain fade - for backgrounds and decorative layers. */
 export const fade: Variants = {
   hidden: { opacity: 0 },
   visible: { opacity: 1, transition: { duration: duration.slow, ease } },

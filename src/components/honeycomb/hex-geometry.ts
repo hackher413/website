@@ -106,7 +106,7 @@ export function hexagonRowLengths(radius: number): number[] {
  * Build a dense, edge-to-edge honeycomb field that fully tiles a `width` ×
  * `height` box (measured from the container). Used for the immersive hero
  * background: the viewBox equals the pixel box, so cell centers ARE pixel
- * coordinates — no scaling math needed to place overlays or hit-test the
+ * coordinates - no scaling math needed to place overlays or hit-test the
  * pointer.
  *
  * `odd-r` offset layout, pointy-top. We overscan by a row/column on every edge

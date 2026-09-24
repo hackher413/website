@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/content";
 import { homeFeatures } from "@/content/home";
 
 /**
- * "Why Hack(H)er413" — editorial list, not icon cards.
+ * "Why Hack(H)er413" - editorial list, not icon cards.
  */
 export function Features() {
   return (
@@ -12,7 +12,7 @@ export function Features() {
         align="center"
         eyebrow="Why Hack(H)er413"
         title="A weekend built so you can actually build."
-        description="Mentors, workshops, and a room that expects beginners — not just another hackathon flyer."
+        description="Mentors, workshops, and a room that expects beginners - not just another hackathon flyer."
       />
       <ul className="mx-auto mt-14 max-w-3xl divide-y divide-border/80">
         {homeFeatures.map((feature) => {

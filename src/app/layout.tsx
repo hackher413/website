@@ -16,7 +16,7 @@ const fraunces = Fraunces({
   axes: ["SOFT", "WONK", "opsz"],
 });
 
-const title = `${siteConfig.name} — Where women and gender minorities build in tech`;
+const title = `${siteConfig.name} - Where women and gender minorities build in tech`;
 
 /**
  * Root metadata. `metadataBase` resolves all relative URLs (OG image, canonical)

@@ -65,7 +65,7 @@ export default function TeamPage() {
             Want to organize with us?
           </h2>
           <p className="mt-4 text-muted-foreground text-pretty">
-            Mentors, volunteers, and future organizers — email us and we&apos;ll
+            Mentors, volunteers, and future organizers - email us and we&apos;ll
             point you to the right place.
           </p>
           <div className="mt-8 flex flex-wrap justify-center gap-3">

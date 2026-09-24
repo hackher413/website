@@ -6,7 +6,7 @@ import { homeCta } from "@/content/home";
 import { primaryCta } from "@/content/apply";
 
 /**
- * Homepage — honeycomb hero, mission, why attend, closing CTA.
+ * Homepage - honeycomb hero, mission, why attend, closing CTA.
  * CTAs follow `primaryCta` so open/closed event state stays consistent.
  */
 export default function Home() {

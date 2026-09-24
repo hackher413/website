@@ -38,7 +38,7 @@ export default function FaqPage() {
       <Section spacing="lg">
         <div className="border-t border-border pt-12">
           <p className="text-lg text-muted-foreground text-pretty">
-            Still stuck? We&apos;re real people —{" "}
+            Still stuck? We&apos;re real people -{" "}
             <a
               href={siteConfig.social.email}
               className="font-medium text-foreground underline underline-offset-4"

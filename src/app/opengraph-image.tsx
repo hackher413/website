@@ -5,10 +5,10 @@ import { event } from "@/content/event";
 import { brand } from "@/lib/design/tokens";
 
 /**
- * Default social share image — espresso field, honeycomb accents, wordmark.
+ * Default social share image - espresso field, honeycomb accents, wordmark.
  * Colors come from the shared brand tokens so OG matches the live site.
  */
-export const alt = `${siteConfig.name} — Where women and gender minorities build in tech`;
+export const alt = `${siteConfig.name} - Where women and gender minorities build in tech`;
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 

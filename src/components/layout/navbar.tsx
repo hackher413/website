@@ -72,10 +72,10 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-50 w-full transition-colors duration-300",
         scrolled
-          ? "border-b border-border bg-background/80 backdrop-blur-md supports-[backdrop-filter]:bg-background/60"
+          ? "border-b border-border/80 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/85"
           : overHero
-            ? "border-b border-transparent bg-transparent"
-            : "border-b border-transparent bg-background/0",
+            ? "border-b border-white/10 bg-espresso/70 backdrop-blur-md supports-[backdrop-filter]:bg-espresso/55"
+            : "border-b border-border/60 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/85",
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-4">
@@ -98,10 +98,10 @@ export function Navbar() {
                   overHero
                     ? active
                       ? "text-cream"
-                      : "text-cream/70 hover:text-cream"
+                      : "text-cream/80 hover:text-cream"
                     : active
                       ? "text-foreground"
-                      : "text-muted-foreground hover:text-foreground",
+                      : "text-foreground/70 hover:text-foreground",
                 )}
               >
                 {item.title}
@@ -111,7 +111,13 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
-          <NavCta className="hidden md:inline-flex" />
+          <NavCta
+            className={cn(
+              "hidden md:inline-flex",
+              overHero &&
+                "bg-honey text-honey-foreground hover:bg-honey/90",
+            )}
+          />
 
           <Sheet open={open} onOpenChange={setOpen}>
             <SheetTrigger asChild>

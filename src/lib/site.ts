@@ -1,5 +1,5 @@
 /**
- * Static site configuration — the single source of truth for routes, external
+ * Static site configuration - the single source of truth for routes, external
  * links, and org identity used by the Navbar, Footer, and SEO layer.
  *
  * Yearly/editable content (dates, sponsors, apply URL, etc.) will live in the
@@ -38,7 +38,7 @@ export const mainNav: NavItem[] = [
   { title: "FAQ", href: "/faq" },
 ];
 
-/** The primary conversion action — prefer `primaryCta` from content/apply. */
+/** The primary conversion action - prefer `primaryCta` from content/apply. */
 export const applyNav: NavItem = { title: "Apply", href: "/apply" };
 
 /** Footer link groups. */

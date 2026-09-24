@@ -16,7 +16,7 @@ export type FaqCategory = {
 export const faqIntro = {
   eyebrow: "FAQ",
   title: "Questions? We've got answers.",
-  lead: "Practical details before you apply or show up. Still stuck? Email us — we're happy to help.",
+  lead: "Practical details before you apply or show up. Still stuck? Email us - we're happy to help.",
 };
 
 export const faq: FaqCategory[] = [
@@ -26,7 +26,7 @@ export const faq: FaqCategory[] = [
       {
         question: "What is a hackathon?",
         answer:
-          "A hackathon is an invention marathon. Students come together to build cool software and hardware creations over 24 hours — with mentors, workshops, food, and prizes along the way.",
+          "A hackathon is an invention marathon. Students come together to build cool software and hardware creations over 24 hours - with mentors, workshops, food, and prizes along the way.",
       },
       {
         question: "Do I need to be a student to attend?",
@@ -37,12 +37,12 @@ export const faq: FaqCategory[] = [
         question:
           "I don't identify as a woman or non-binary student. Can I still participate?",
         answer:
-          "Absolutely. While our mission centers women and non-binary students, everyone is encouraged to apply — allies are always welcome.",
+          "Absolutely. While our mission centers women and non-binary students, everyone is encouraged to apply - allies are always welcome.",
       },
       {
         question: "Do I need experience to attend?",
         answer:
-          "Not at all. A huge share of our hackers are first-timers — 88 attendees came to their very first hackathon last year. Beginner-friendly workshops and mentors are here to help you learn as you go.",
+          "Not at all. A huge share of our hackers are first-timers - 88 attendees came to their very first hackathon last year. Beginner-friendly workshops and mentors are here to help you learn as you go.",
       },
     ],
   },
@@ -72,12 +72,12 @@ export const faq: FaqCategory[] = [
       {
         question: "What can I build?",
         answer:
-          "Anything you can dream up — web apps, mobile apps, hardware, games, AI projects, and more. Your project just needs to be built primarily during the event.",
+          "Anything you can dream up - web apps, mobile apps, hardware, games, AI projects, and more. Your project just needs to be built primarily during the event.",
       },
       {
         question: "Are there prizes?",
         answer:
-          "Yes. We award prizes across several categories — including Best Software, Hardware, AI, DEI, and Beginner hacks — plus sponsor challenges. But the biggest win is what you learn and the people you meet.",
+          "Yes. We award prizes across several categories - including Best Software, Hardware, AI, DEI, and Beginner hacks - plus sponsor challenges. But the biggest win is what you learn and the people you meet.",
       },
       {
         question: "Is there a code of conduct?",

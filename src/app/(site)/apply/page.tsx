@@ -77,7 +77,7 @@ export default function ApplyPage() {
           <p className="text-lg text-muted-foreground text-pretty">
             {isOpen
               ? "Ten minutes on the form. Then show up and build."
-              : "Applications for 2026 have closed — join the list and we'll reach out when 2027 opens."}
+              : "Applications for 2026 have closed - join the list and we'll reach out when 2027 opens."}
           </p>
           <Button asChild size="xl" variant="honey">
             <a href={ctaHref} target="_blank" rel="noopener noreferrer">

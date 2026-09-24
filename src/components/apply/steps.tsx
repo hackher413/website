@@ -1,7 +1,7 @@
 import { applySteps } from "@/content/apply";
 
 /**
- * Numbered how-it-works steps — not the same card pattern as homepage features.
+ * Numbered how-it-works steps - not the same card pattern as homepage features.
  */
 export function ApplySteps() {
   return (

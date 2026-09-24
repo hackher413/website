@@ -3,7 +3,7 @@ import { SectionHeading } from "@/components/content";
 import { homeMission } from "@/content/home";
 
 /**
- * Mission teaser — two-column on desktop: heading left, prose right.
+ * Mission teaser - two-column on desktop: heading left, prose right.
  */
 export function Mission() {
   return (
