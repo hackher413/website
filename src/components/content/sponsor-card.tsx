@@ -4,7 +4,8 @@ import { cn } from "@/lib/utils";
 import type { Sponsor } from "@/content/sponsors";
 
 /**
- * Sponsor tile. Links out; falls back to a wordmark when no logo is provided.
+ * Open sponsor mark — logo (or wordmark) + name on the page background.
+ * No card chrome; hover lifts opacity like organizer tiles.
  */
 export function SponsorCard({
   sponsor,
@@ -18,40 +19,54 @@ export function SponsorCard({
       href={sponsor.url}
       target="_blank"
       rel="noopener noreferrer"
-      title={sponsor.name}
       aria-label={sponsor.name}
       className={cn(
-        "group relative flex items-center justify-center rounded-xl border border-border/70 bg-card p-6 transition-colors duration-300 hover:border-border",
-        featured ? "min-h-32" : "min-h-24",
+        "group flex flex-col items-center gap-3 text-center transition-transform duration-300 ease-out hover:-translate-y-1",
+        featured ? "w-40 sm:w-48" : "w-full",
       )}
     >
-      {sponsor.logo ? (
-        <>
+      <div
+        className={cn(
+          "flex w-full items-center justify-center",
+          featured ? "h-16 sm:h-20" : "h-12 sm:h-14",
+        )}
+      >
+        {sponsor.logo ? (
           <Image
             src={sponsor.logo}
-            alt={sponsor.name}
+            alt=""
             width={featured ? 240 : 160}
             height={featured ? 96 : 64}
-            sizes={featured ? "(min-width: 640px) 240px, 45vw" : "(min-width: 640px) 160px, 40vw"}
-            className="max-h-16 w-auto max-w-full object-contain opacity-80 transition-opacity group-hover:opacity-100"
+            sizes={
+              featured
+                ? "(min-width: 640px) 192px, 160px"
+                : "(min-width: 640px) 140px, 30vw"
+            }
+            className={cn(
+              "max-w-full object-contain opacity-70 transition-opacity duration-300 group-hover:opacity-100",
+              featured ? "max-h-16 sm:max-h-20" : "max-h-12 sm:max-h-14",
+            )}
           />
+        ) : (
           <span
-            className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-xs font-medium text-background opacity-0 shadow-sm transition-opacity duration-200 group-hover:opacity-100"
-            aria-hidden="true"
+            className={cn(
+              "font-heading font-semibold text-foreground/70 transition-colors group-hover:text-foreground",
+              featured ? "text-xl sm:text-2xl" : "text-base sm:text-lg",
+            )}
           >
             {sponsor.name}
           </span>
-        </>
-      ) : (
-        <span
-          className={cn(
-            "text-center font-semibold text-muted-foreground transition-colors group-hover:text-foreground",
-            featured ? "text-2xl" : "text-lg",
-          )}
-        >
-          {sponsor.name}
-        </span>
-      )}
+        )}
+      </div>
+      <span
+        className={cn(
+          "text-sm font-medium text-muted-foreground transition-colors group-hover:text-foreground",
+          featured && "text-base",
+          !sponsor.logo && "sr-only",
+        )}
+      >
+        {sponsor.name}
+      </span>
     </a>
   );
 }

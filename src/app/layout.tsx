@@ -20,7 +20,8 @@ const fraunces = Fraunces({
   adjustFontFallback: true,
 });
 
-const title = `${siteConfig.name} - Where women and gender minorities build in tech`;
+const defaultTitle = siteConfig.name;
+const socialTitle = `${siteConfig.name} - ${siteConfig.tagline.replace(/\.$/, "")}`;
 
 /**
  * Root metadata. `metadataBase` resolves all relative URLs (OG image, canonical)
@@ -30,7 +31,7 @@ const title = `${siteConfig.name} - Where women and gender minorities build in t
 export const metadata: Metadata = {
   metadataBase: new URL(siteConfig.url),
   title: {
-    default: title,
+    default: defaultTitle,
     template: "%s · Hack(H)er413",
   },
   description: siteConfig.description,
@@ -54,12 +55,12 @@ export const metadata: Metadata = {
     locale: "en_US",
     url: siteConfig.url,
     siteName: siteConfig.name,
-    title,
+    title: socialTitle,
     description: siteConfig.description,
   },
   twitter: {
     card: "summary_large_image",
-    title,
+    title: socialTitle,
     description: siteConfig.description,
     creator: "@hackher413",
   },

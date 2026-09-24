@@ -11,6 +11,9 @@ import {
   sponsorCta,
 } from "@/content/sponsors";
 
+const HEX_CLIP =
+  "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
+
 export const metadata: Metadata = {
   title: "Sponsors",
   description:
@@ -36,15 +39,28 @@ export default function SponsorsPage() {
 
             return (
               <div key={tier}>
-                <div className="mb-6">
-                  <h2 className="text-sm font-medium text-muted-foreground">
+                <div className="mb-8">
+                  <h2 className="flex items-center gap-2.5 text-sm font-medium text-muted-foreground">
+                    <span
+                      aria-hidden="true"
+                      className="inline-block size-2.5 bg-honey"
+                      style={{ clipPath: HEX_CLIP }}
+                    />
                     {meta.label}
                   </h2>
                   {meta.blurb ? (
-                    <p className="mt-1 text-muted-foreground">{meta.blurb}</p>
+                    <p className="mt-2 max-w-xl text-muted-foreground text-pretty">
+                      {meta.blurb}
+                    </p>
                   ) : null}
                 </div>
-                <RevealGrid className={cn("grid gap-4", meta.columns)}>
+                <RevealGrid
+                  className={cn(
+                    featured
+                      ? "flex flex-wrap justify-center gap-x-12 gap-y-10"
+                      : cn("grid gap-x-8 gap-y-10", meta.columns),
+                  )}
+                >
                   {tierSponsors.map((sponsor) => (
                     <SponsorCard
                       key={sponsor.name}
