@@ -1,9 +1,21 @@
 "use client";
 
 import * as React from "react";
-import { useReducedMotion } from "framer-motion";
 
 import { brand } from "@/lib/design/tokens";
+
+/** Prefer CSS media query over Framer so this island stays motion-library-free. */
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = React.useState(false);
+  React.useEffect(() => {
+    const mq = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const sync = () => setReduced(mq.matches);
+    sync();
+    mq.addEventListener("change", sync);
+    return () => mq.removeEventListener("change", sync);
+  }, []);
+  return reduced;
+}
 
 /**
  * The signature honeycomb - a faithful reimagining of the original's canvas
@@ -111,7 +123,7 @@ function strokeLuminance(count: number) {
 }
 
 export function HoneycombCanvas({ className }: { className?: string }) {
-  const reduceMotion = useReducedMotion();
+  const reduceMotion = usePrefersReducedMotion();
   const containerRef = React.useRef<HTMLDivElement | null>(null);
   const canvasRef = React.useRef<HTMLCanvasElement | null>(null);
 

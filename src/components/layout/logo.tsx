@@ -49,10 +49,10 @@ export function Logo({
   const mark = (
     <>
       <Image
-        src="/brand/bee.png"
+        src="/brand/bee-mark.webp"
         alt=""
-        width={486}
-        height={390}
+        width={80}
+        height={64}
         unoptimized
         className={cn(beeClass[size], "w-auto shrink-0")}
         style={{
@@ -74,11 +74,7 @@ export function Logo({
           (H)
         </span>
         <span>er</span>
-        <span
-          className={
-            tone === "onDark" ? "text-cream/70" : "text-foreground/55"
-          }
-        >
+        <span className={tone === "onDark" ? "text-cream" : "text-foreground"}>
           413
         </span>
       </span>

@@ -1,12 +1,10 @@
-"use client";
-
 import * as React from "react";
-import { MotionConfig } from "framer-motion";
 
 /**
- * App-wide client providers. Light-only marketing site - no theme toggle.
- * MotionConfig respects prefers-reduced-motion for every Framer animation.
+ * App-wide providers. Light-only marketing site - no theme toggle.
+ * Kept as a thin pass-through so layout stays stable if client providers
+ * are needed later (analytics, etc.).
  */
 export function Providers({ children }: { children: React.ReactNode }) {
-  return <MotionConfig reducedMotion="user">{children}</MotionConfig>;
+  return children;
 }

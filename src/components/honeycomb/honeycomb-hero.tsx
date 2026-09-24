@@ -1,14 +1,9 @@
-"use client";
-
-import * as React from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion } from "framer-motion";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
-import { fadeUp, staggerContainer } from "@/lib/motion";
-import { HoneycombCanvas } from "@/components/honeycomb/honeycomb-canvas";
+import { HoneycombCanvasDeferred } from "@/components/honeycomb/honeycomb-canvas-deferred";
 import { event } from "@/content/event";
 import { primaryCta } from "@/content/apply";
 
@@ -16,13 +11,16 @@ import { primaryCta } from "@/content/apply";
  * Signature hero: immersive honeycomb canvas with this year's lockup
  * built from clean type + the pixel bee (avoids mangling the raster logo).
  * Canvas is espresso; copy stays cream for contrast.
+ *
+ * Server Component shell so the H1 is in the initial HTML (mobile LCP).
+ * Canvas mounts after idle so it doesn't compete with first paint.
  */
 export function HoneycombHero() {
   const primary = primaryCta;
 
   return (
     <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-center overflow-hidden bg-espresso text-cream">
-      <HoneycombCanvas className="absolute inset-0" />
+      <HoneycombCanvasDeferred className="absolute inset-0" />
 
       <div
         aria-hidden="true"
@@ -34,14 +32,8 @@ export function HoneycombHero() {
       />
 
       <Container className="pointer-events-none relative z-10 text-center">
-        <motion.div
-          variants={staggerContainer}
-          initial="hidden"
-          animate="visible"
-          className="mx-auto flex max-w-3xl flex-col items-center"
-        >
-          <motion.div
-            variants={fadeUp}
+        <div className="mx-auto flex max-w-3xl flex-col items-center">
+          <div
             className="flex flex-col items-center"
             aria-label="Hack(H)er413"
           >
@@ -50,10 +42,10 @@ export function HoneycombHero() {
             </p>
             <div className="mt-3 flex items-center justify-center gap-3 sm:gap-4">
               <Image
-                src="/brand/bee.png"
+                src="/brand/bee-display.webp"
                 alt=""
-                width={486}
-                height={390}
+                width={179}
+                height={144}
                 priority
                 unoptimized
                 className="h-14 w-auto sm:h-16 md:h-[4.5rem]"
@@ -67,28 +59,19 @@ export function HoneycombHero() {
                 413
               </span>
             </div>
-          </motion.div>
+          </div>
 
-          <motion.h1
-            variants={fadeUp}
-            className="mt-6 text-display-xl font-heading text-balance"
-          >
+          <h1 className="mt-6 text-display-xl font-heading text-balance">
             Where women and gender minorities build in tech.
-          </motion.h1>
+          </h1>
 
-          <motion.p
-            variants={fadeUp}
-            className="mt-5 max-w-xl text-lead text-cream/75 text-pretty"
-          >
+          <p className="mt-5 max-w-xl text-lead text-cream/90 text-pretty">
             {event.isConcluded
               ? event.concludedMessage
               : "A collegiate hackathon at UMass Amherst - learn, build, and meet your people. Beginners welcome."}
-          </motion.p>
+          </p>
 
-          <motion.div
-            variants={fadeUp}
-            className="pointer-events-auto mt-10 flex flex-wrap justify-center gap-4"
-          >
+          <div className="pointer-events-auto mt-10 flex flex-wrap justify-center gap-4 animate-hero-cta">
             <Button asChild size="xl" variant="honey">
               {primary.external ? (
                 <a href={primary.href} target="_blank" rel="noopener noreferrer">
@@ -108,8 +91,8 @@ export function HoneycombHero() {
                 {event.isConcluded ? "See 2026 winners" : "Learn more"}
               </Link>
             </Button>
-          </motion.div>
-        </motion.div>
+          </div>
+        </div>
       </Container>
     </section>
   );

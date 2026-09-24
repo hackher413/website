@@ -32,7 +32,8 @@ export function SponsorCard({
             alt={sponsor.name}
             width={featured ? 240 : 160}
             height={featured ? 96 : 64}
-            className="max-h-16 w-auto object-contain opacity-80 transition-opacity group-hover:opacity-100"
+            sizes={featured ? "(min-width: 640px) 240px, 45vw" : "(min-width: 640px) 160px, 40vw"}
+            className="max-h-16 w-auto max-w-full object-contain opacity-80 transition-opacity group-hover:opacity-100"
           />
           <span
             className="pointer-events-none absolute bottom-2 left-1/2 -translate-x-1/2 whitespace-nowrap rounded-md bg-foreground px-2 py-1 text-xs font-medium text-background opacity-0 shadow-sm transition-opacity duration-200 group-hover:opacity-100"

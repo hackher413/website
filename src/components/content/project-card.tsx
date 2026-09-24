@@ -8,7 +8,14 @@ import type { Project } from "@/content/projects";
  * Gallery tile for a winning project. Cover image with name overlay; award as
  * quiet text rather than a floating pill.
  */
-export function ProjectCard({ project }: { project: Project }) {
+export function ProjectCard({
+  project,
+  priority = false,
+}: {
+  project: Project;
+  /** Eager-load cover for above-the-fold LCP cards. */
+  priority?: boolean;
+}) {
   return (
     <a
       href={project.url}
@@ -21,6 +28,7 @@ export function ProjectCard({ project }: { project: Project }) {
         alt={`${project.name} - Hack(H)er413 winning project`}
         fill
         sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+        priority={priority}
         className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
       />
 

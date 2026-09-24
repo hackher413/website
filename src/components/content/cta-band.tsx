@@ -1,13 +1,9 @@
-"use client";
-
 import * as React from "react";
 import Link from "next/link";
-import { motion } from "framer-motion";
 import { ArrowRight } from "lucide-react";
 
 import { Section } from "@/components/layout";
 import { Button } from "@/components/ui/button";
-import { fadeUp, inViewOnce } from "@/lib/motion";
 
 export type CtaLink = {
   label: string;
@@ -56,22 +52,17 @@ function CtaButton({
 }
 
 /**
- * Closing call-to-action on the inverted brand surface. One subtle fade-in -
- * not a full stagger stack.
+ * Closing call-to-action on the inverted brand surface.
+ * Server-rendered — motion lived below the fold but still pulled Framer into
+ * every page bundle.
  */
 export function CtaBand({ title, description, primary, secondary }: CtaBandProps) {
   return (
     <Section tone="brand" spacing="lg">
-      <motion.div
-        initial="hidden"
-        whileInView="visible"
-        viewport={inViewOnce}
-        variants={fadeUp}
-        className="mx-auto flex max-w-2xl flex-col items-center text-center"
-      >
+      <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
         <h2 className="text-display font-heading text-balance">{title}</h2>
         {description ? (
-          <p className="mt-4 text-lead text-brand-foreground/70 text-pretty">
+          <p className="mt-4 text-lead text-brand-foreground/85 text-pretty">
             {description}
           </p>
         ) : null}
@@ -85,7 +76,7 @@ export function CtaBand({ title, description, primary, secondary }: CtaBandProps
             />
           ) : null}
         </div>
-      </motion.div>
+      </div>
     </Section>
   );
 }

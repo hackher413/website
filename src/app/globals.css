@@ -12,7 +12,7 @@
 @theme inline {
   /* Fonts - Fraunces for display, Geist for UI/body. */
   --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
   --font-heading: var(--font-fraunces), var(--font-geist-sans);
 
   /* Semantic surface + text colors (values in :root) */
@@ -111,7 +111,8 @@
   --secondary-foreground: #5a4326;
 
   --muted: #ffeea8;
-  --muted-foreground: #8a6f45;
+  /* Darkened for WCAG AA (≥4.5:1) on cream + honey surfaces */
+  --muted-foreground: #7a6238;
 
   --accent: #ffe88f;
   --accent-foreground: #5a4326;
@@ -174,4 +175,20 @@
       scroll-behavior: auto !important;
     }
   }
+}
+
+/* Hero CTA only — never animate LCP text (opacity:0 gates mobile LCP). */
+@keyframes hero-cta-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-hero-cta {
+  animation: hero-cta-in 0.45s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }

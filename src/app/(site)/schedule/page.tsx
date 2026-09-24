@@ -31,17 +31,17 @@ export default function SchedulePage() {
       />
 
       <Section spacing="sm" className="pt-4 sm:pt-8">
-        <dl className="flex flex-col gap-4 sm:flex-row sm:gap-10">
+        <ul className="flex list-none flex-col gap-4 sm:flex-row sm:gap-10">
           {facts.map(({ icon: Icon, label }) => (
-            <div key={label} className="flex items-center gap-2.5">
+            <li key={label} className="flex items-center gap-2.5">
               <Icon
                 className="size-5 shrink-0 text-muted-foreground"
                 aria-hidden="true"
               />
-              <dd className="font-medium">{label}</dd>
-            </div>
+              <span className="font-medium">{label}</span>
+            </li>
           ))}
-        </dl>
+        </ul>
       </Section>
 
       <Section spacing="lg">

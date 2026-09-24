@@ -1,13 +1,10 @@
-"use client";
-
 import * as React from "react";
-import { motion } from "framer-motion";
 
 import { Container } from "@/components/layout";
-import { fadeUp, staggerContainer } from "@/lib/motion";
 
 /**
- * Top-of-page header for interior pages. Animates once on mount (above the fold).
+ * Top-of-page header for interior pages.
+ * Static markup so the H1 paints immediately on mobile (LCP).
  */
 export function PageHeader({
   eyebrow,
@@ -20,35 +17,21 @@ export function PageHeader({
 }) {
   return (
     <Container>
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={staggerContainer}
-        className="max-w-3xl pt-16 pb-10 sm:pt-24 sm:pb-12"
-      >
+      <div className="max-w-3xl pt-16 pb-10 sm:pt-24 sm:pb-12">
         {eyebrow ? (
-          <motion.span
-            variants={fadeUp}
-            className="text-sm font-medium text-muted-foreground"
-          >
+          <span className="text-sm font-medium text-muted-foreground">
             {eyebrow}
-          </motion.span>
+          </span>
         ) : null}
-        <motion.h1
-          variants={fadeUp}
-          className="mt-3 text-display-xl font-heading text-balance"
-        >
+        <h1 className="mt-3 text-display-xl font-heading text-balance">
           {title}
-        </motion.h1>
+        </h1>
         {lead ? (
-          <motion.p
-            variants={fadeUp}
-            className="mt-5 text-lead text-muted-foreground text-pretty"
-          >
+          <p className="mt-5 text-lead text-muted-foreground text-pretty">
             {lead}
-          </motion.p>
+          </p>
         ) : null}
-      </motion.div>
+      </div>
     </Container>
   );
 }

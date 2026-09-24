@@ -1,7 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Fraunces } from "next/font/google";
 import { GeistSans } from "geist/font/sans";
-import { GeistMono } from "geist/font/mono";
 
 import { Providers } from "@/components/providers";
 import { siteConfig } from "@/lib/site";
@@ -9,11 +8,16 @@ import { brand } from "@/lib/design/tokens";
 import { OrganizationJsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
 
+/**
+ * Display face for headings. Single weight + no variable axes keeps the file
+ * small so mobile LCP is not stuck in font render-delay.
+ */
 const fraunces = Fraunces({
   subsets: ["latin"],
   variable: "--font-fraunces",
   display: "swap",
-  axes: ["SOFT", "WONK", "opsz"],
+  weight: ["600"],
+  adjustFontFallback: true,
 });
 
 const title = `${siteConfig.name} - Where women and gender minorities build in tech`;
@@ -84,7 +88,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${GeistMono.variable} ${fraunces.variable} h-full`}
+      className={`${GeistSans.variable} ${fraunces.variable} h-full`}
       suppressHydrationWarning
     >
       <body className="flex min-h-full flex-col">

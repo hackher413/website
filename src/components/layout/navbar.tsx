@@ -2,23 +2,34 @@
 
 import * as React from "react";
 import Link from "next/link";
+import dynamic from "next/dynamic";
 import { usePathname } from "next/navigation";
-import { Menu } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { mainNav, siteConfig } from "@/lib/site";
 import { primaryCta } from "@/content/apply";
 import { Button } from "@/components/ui/button";
-import {
-  Sheet,
-  SheetClose,
-  SheetContent,
-  SheetHeader,
-  SheetTitle,
-  SheetTrigger,
-} from "@/components/ui/sheet";
 import { Container } from "@/components/layout/container";
 import { Logo } from "@/components/layout/logo";
+
+const MobileNav = dynamic(
+  () =>
+    import("@/components/layout/mobile-nav").then((m) => m.MobileNav),
+  {
+    ssr: false,
+    loading: () => (
+      <Button
+        variant="ghost"
+        size="icon"
+        className="md:hidden"
+        aria-label="Open menu"
+        disabled
+      >
+        <span className="size-5" />
+      </Button>
+    ),
+  },
+);
 
 function useIsActive() {
   const pathname = usePathname();
@@ -57,7 +68,6 @@ export function Navbar() {
   const pathname = usePathname();
   const isActive = useIsActive();
   const [scrolled, setScrolled] = React.useState(false);
-  const [open, setOpen] = React.useState(false);
   const overHero = pathname === "/" && !scrolled;
 
   React.useEffect(() => {
@@ -74,7 +84,8 @@ export function Navbar() {
         scrolled
           ? "border-b border-border/80 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/85"
           : overHero
-            ? "border-b border-white/10 bg-espresso/70 backdrop-blur-md supports-[backdrop-filter]:bg-espresso/55"
+            ? // Solid espresso so cream nav text stays ≥4.5:1 over the honeycomb
+              "border-b border-white/10 bg-espresso"
             : "border-b border-border/60 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/85",
       )}
     >
@@ -98,10 +109,10 @@ export function Navbar() {
                   overHero
                     ? active
                       ? "text-cream"
-                      : "text-cream/80 hover:text-cream"
+                      : "text-cream hover:text-white"
                     : active
                       ? "text-foreground"
-                      : "text-foreground/70 hover:text-foreground",
+                      : "text-foreground hover:text-foreground",
                 )}
               >
                 {item.title}
@@ -118,59 +129,7 @@ export function Navbar() {
                 "bg-honey text-honey-foreground hover:bg-honey/90",
             )}
           />
-
-          <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger asChild>
-              <Button
-                variant="ghost"
-                size="icon"
-                className={cn(
-                  "md:hidden",
-                  overHero &&
-                    "text-cream hover:bg-white/10 hover:text-cream",
-                )}
-                aria-label="Open menu"
-              >
-                <Menu className="size-5" />
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-full max-w-xs">
-              <SheetHeader>
-                <SheetTitle className="text-left">
-                  <Logo />
-                </SheetTitle>
-              </SheetHeader>
-              <nav
-                aria-label="Mobile"
-                className="mt-2 flex flex-col gap-1 px-4"
-              >
-                {mainNav.map((item) => {
-                  const active = isActive(item.href);
-                  return (
-                    <SheetClose asChild key={item.href}>
-                      <Link
-                        href={item.href}
-                        aria-current={active ? "page" : undefined}
-                        className={cn(
-                          "rounded-lg px-3 py-3 text-base font-medium transition-colors",
-                          active
-                            ? "bg-muted text-foreground"
-                            : "text-muted-foreground hover:bg-muted hover:text-foreground",
-                        )}
-                      >
-                        {item.title}
-                      </Link>
-                    </SheetClose>
-                  );
-                })}
-                <SheetClose asChild>
-                  <span className="mt-4 block">
-                    <NavCta size="xl" className="w-full" />
-                  </span>
-                </SheetClose>
-              </nav>
-            </SheetContent>
-          </Sheet>
+          <MobileNav overHero={overHero} />
         </div>
       </Container>
       <span className="sr-only">{siteConfig.name} navigation</span>

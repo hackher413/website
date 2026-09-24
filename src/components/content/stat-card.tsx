@@ -32,17 +32,17 @@ export function StatGrid({
   className?: string;
 }) {
   return (
-    <dl
+    <ul
       className={cn(
-        "grid grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4",
+        "grid list-none grid-cols-2 gap-x-8 gap-y-10 sm:grid-cols-4",
         className,
       )}
     >
       {stats.map((s) => (
-        <div key={s.label}>
+        <li key={s.label}>
           <StatCard value={s.value} label={s.label} />
-        </div>
+        </li>
       ))}
-    </dl>
+    </ul>
   );
 }
