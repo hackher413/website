@@ -10,10 +10,11 @@
 /*  Keep hex values in sync with src/lib/design/tokens.ts.                    */
 /* -------------------------------------------------------------------------- */
 @theme inline {
-  /* Fonts - Fraunces for display, Geist for UI/body. */
+  /* Body + UI: Geist. Display alias kept for any lingering class usage. */
   --font-sans: var(--font-geist-sans);
   --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-  --font-heading: var(--font-fraunces), var(--font-geist-sans);
+  --font-heading: var(--font-geist-sans);
+  --font-display: var(--font-geist-sans);
 
   /* Semantic surface + text colors (values in :root) */
   --color-background: var(--background);
@@ -65,17 +66,17 @@
   --text-display-2xl: clamp(2.75rem, 1.4rem + 5.6vw, 5.25rem);
   --text-display-2xl--line-height: 1.02;
   --text-display-2xl--letter-spacing: -0.032em;
-  --text-display-2xl--font-weight: 600;
+  --text-display-2xl--font-weight: 650;
 
   --text-display-xl: clamp(2.25rem, 1.3rem + 3.8vw, 3.75rem);
   --text-display-xl--line-height: 1.05;
   --text-display-xl--letter-spacing: -0.028em;
-  --text-display-xl--font-weight: 600;
+  --text-display-xl--font-weight: 650;
 
   --text-display: clamp(1.875rem, 1.25rem + 2.2vw, 2.875rem);
   --text-display--line-height: 1.1;
   --text-display--letter-spacing: -0.022em;
-  --text-display--font-weight: 600;
+  --text-display--font-weight: 650;
 
   --text-lead: 1.25rem;
   --text-lead--line-height: 1.65;
@@ -90,18 +91,18 @@
 }
 
 /* -------------------------------------------------------------------------- */
-/*  Light theme only - buttermilk marketing site, no dark mode.               */
+/*  Light theme - cream page, sky mute bands, honey/espresso accents.         */
 /* -------------------------------------------------------------------------- */
 :root {
-  --radius: 0.75rem;
+  --radius: 0.4rem;
 
-  --background: #fff8da;
+  --background: #fbf6ee;
   --foreground: #5a4326;
 
-  --card: #fffcee;
+  --card: #fffdf8;
   --card-foreground: #5a4326;
 
-  --popover: #fffcee;
+  --popover: #fffdf8;
   --popover-foreground: #5a4326;
 
   --primary: #5a4326;
@@ -110,17 +111,17 @@
   --secondary: #fff1b5;
   --secondary-foreground: #5a4326;
 
-  --muted: #ffeea8;
-  /* Darkened for WCAG AA (≥4.5:1) on cream + honey surfaces */
-  --muted-foreground: #7a6238;
+  /* Sky mute - honey reserved for accents, not full bands */
+  --muted: #e6f1f7;
+  --muted-foreground: #5c4a38;
 
-  --accent: #ffe88f;
+  --accent: #fff1b5;
   --accent-foreground: #5a4326;
 
   --destructive: #c0392b;
 
-  --border: #f5e39a;
-  --input: #f5e39a;
+  --border: #e4d5b8;
+  --input: #e4d5b8;
   --ring: #d9a441;
 
   --chart-1: #fff1b5;
@@ -129,13 +130,13 @@
   --chart-4: #d9a441;
   --chart-5: #7fb0c8;
 
-  --sidebar: #fff8da;
+  --sidebar: #fbf6ee;
   --sidebar-foreground: #5a4326;
   --sidebar-primary: #5a4326;
   --sidebar-primary-foreground: #fffdf2;
-  --sidebar-accent: #ffe88f;
+  --sidebar-accent: #fff1b5;
   --sidebar-accent-foreground: #5a4326;
-  --sidebar-border: #f5e39a;
+  --sidebar-border: #e4d5b8;
   --sidebar-ring: #d9a441;
 }
 
@@ -155,6 +156,12 @@
   body {
     @apply bg-background text-foreground antialiased;
     font-feature-settings: "cv11", "ss01";
+  }
+
+  /* Custom bee cursor (desktop / fine pointer only - class set by BeeCursor). */
+  html.bee-cursor-active,
+  html.bee-cursor-active * {
+    cursor: none !important;
   }
 
   ::selection {
@@ -177,7 +184,20 @@
   }
 }
 
-/* Hero CTA only — never animate LCP text (opacity:0 gates mobile LCP). */
+/* Soft honeycomb lattice for espresso / brand bands */
+@utility bg-honeycomb {
+  background-color: var(--color-espresso);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath fill='none' stroke='%23fff1b5' stroke-opacity='0.07' stroke-width='1' d='M28 0l28 16v32L28 64 0 48V16zM28 64l28 16v32L28 128 0 112V80z'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+}
+
+@utility bg-honeycomb-sky {
+  background-color: var(--color-sky-soft);
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath fill='none' stroke='%235a4326' stroke-opacity='0.06' stroke-width='1' d='M28 0l28 16v32L28 64 0 48V16zM28 64l28 16v32L28 128 0 112V80z'/%3E%3C/svg%3E");
+  background-size: 56px 100px;
+}
+
+/* Hero CTA only - never animate LCP text (opacity:0 gates mobile LCP). */
 @keyframes hero-cta-in {
   from {
     opacity: 0;

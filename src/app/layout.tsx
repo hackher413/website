@@ -1,6 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import { Fraunces } from "next/font/google";
-import { GeistSans } from "geist/font/sans";
+import localFont from "next/font/local";
 
 import { Providers } from "@/components/providers";
 import { siteConfig } from "@/lib/site";
@@ -9,15 +8,16 @@ import { OrganizationJsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
 
 /**
- * Display face for headings. Single weight + no variable axes keeps the file
- * small so mobile LCP is not stuck in font render-delay.
+ * Geist variable — preload:false so the hero LCP image owns the critical
+ * network path on mobile Slow-4G simulations. display:swap keeps text visible.
  */
-const fraunces = Fraunces({
-  subsets: ["latin"],
-  variable: "--font-fraunces",
+const geistSans = localFont({
+  src: "../fonts/geist-latin-var.woff2",
+  variable: "--font-geist-sans",
+  weight: "100 900",
   display: "swap",
-  weight: ["600"],
-  adjustFontFallback: true,
+  preload: false,
+  adjustFontFallback: "Arial",
 });
 
 const defaultTitle = siteConfig.name;
@@ -78,7 +78,7 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: brand.honeySoft,
+  themeColor: brand.cream,
 };
 
 export default function RootLayout({
@@ -89,10 +89,10 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${GeistSans.variable} ${fraunces.variable} h-full`}
+      className={`${geistSans.variable} h-full`}
       suppressHydrationWarning
     >
-      <body className="flex min-h-full flex-col">
+      <body className={`${geistSans.className} flex min-h-full flex-col`}>
         <Providers>
           <a
             href="#main"

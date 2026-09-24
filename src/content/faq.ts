@@ -14,7 +14,6 @@ export type FaqCategory = {
 };
 
 export const faqIntro = {
-  eyebrow: "FAQ",
   title: "Questions? We've got answers.",
   lead: "Practical details before you apply or show up. Still stuck? Email us - we're happy to help.",
 };

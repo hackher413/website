@@ -1,26 +1,26 @@
 import * as React from "react";
 
 import { cn } from "@/lib/utils";
+import { HexMark } from "@/components/content/hex-mark";
 
 type SectionHeadingProps = {
-  /** Small kicker above the title. */
-  eyebrow?: string;
   title: React.ReactNode;
   description?: React.ReactNode;
-  /** Center-align the block (default left). */
+  /** Center-align the block (default left). Prefer left - less template-y. */
   align?: "left" | "center";
+  /** Show a honeycomb tick before the title. */
+  hex?: boolean;
   className?: string;
 };
 
 /**
- * Standard section header - eyebrow / title / description. Static (no scroll
- * reveal) so motion stays reserved for the hero and a few key moments.
+ * Section title block. No eyebrow kicker - titles stand alone with optional hex.
  */
 export function SectionHeading({
-  eyebrow,
   title,
   description,
   align = "left",
+  hex = true,
   className,
 }: SectionHeadingProps) {
   return (
@@ -31,14 +31,23 @@ export function SectionHeading({
         className,
       )}
     >
-      {eyebrow ? (
-        <span className="text-sm font-medium text-muted-foreground">
-          {eyebrow}
-        </span>
-      ) : null}
-      <h2 className="mt-3 text-display font-heading text-balance">{title}</h2>
+      <h2 className="flex items-start gap-3 text-display text-balance">
+        {hex ? (
+          <HexMark
+            size="md"
+            tone="honey"
+            className={cn("mt-[0.55em]", align === "center" && "hidden")}
+          />
+        ) : null}
+        <span>{title}</span>
+      </h2>
       {description ? (
-        <p className="mt-4 text-lead text-muted-foreground text-pretty">
+        <p
+          className={cn(
+            "mt-4 text-lead text-muted-foreground text-pretty",
+            hex && align === "left" && "pl-[1.625rem]",
+          )}
+        >
           {description}
         </p>
       ) : null}

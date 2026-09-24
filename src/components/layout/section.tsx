@@ -7,24 +7,24 @@ const spacing = {
   none: "",
   sm: "py-12 sm:py-16",
   md: "py-16 sm:py-24",
-  lg: "py-24 sm:py-32",
+  lg: "py-20 sm:py-28",
 } as const;
 
 const tones = {
   /** Page background. */
   default: "",
-  /** Subtle warm neutral band to separate sections. */
+  /** Sky mute band - cool counterpoint to cream. */
   muted: "bg-muted",
-  /**
-   * Soft honey wash - for highlight/CTA bands. The wash is a constant light
-   * tint in both themes, so pin the text to the brand brown; otherwise dark
-   * mode's light foreground token would be invisible on it.
-   */
+  /** Soft honey wash - sparse highlights. */
   honey: "bg-honey-soft text-honey-foreground",
-  /** Soft sky wash. Same fixed-light reasoning as `honey`. */
+  /** Soft sky wash. */
   sky: "bg-sky-soft text-sky-foreground",
-  /** Inverted brand band (dark brown), used sparingly for emphasis. */
+  /** Inverted brand band (brown). */
   brand: "bg-brand text-brand-foreground",
+  /** Espresso field - carries the honeycomb language past the hero. */
+  espresso: "bg-espresso text-cream",
+  /** Espresso with faint honeycomb lattice. */
+  honeycomb: "bg-honeycomb text-cream",
 } as const;
 
 type SectionProps = React.ComponentProps<"section"> & {

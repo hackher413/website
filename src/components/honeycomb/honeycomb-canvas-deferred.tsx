@@ -1,12 +1,19 @@
 "use client";
 
 import * as React from "react";
+import dynamic from "next/dynamic";
 
-import { HoneycombCanvas } from "@/components/honeycomb/honeycomb-canvas";
+const HoneycombCanvas = dynamic(
+  () =>
+    import("@/components/honeycomb/honeycomb-canvas").then(
+      (m) => m.HoneycombCanvas,
+    ),
+  { ssr: false },
+);
 
 /**
- * Mount the canvas after first paint so hero text / LCP is not competing with
- * the canvas rAF loop and its JS parse on mobile.
+ * Mount the canvas after LCP so the hero lockup isn't competing with canvas
+ * parse + rAF. Longer delay on touch / coarse pointers; idle-first on desktop.
  */
 export function HoneycombCanvasDeferred({
   className,
@@ -18,18 +25,36 @@ export function HoneycombCanvasDeferred({
   React.useEffect(() => {
     let idleId: number | undefined;
     let timeoutId: ReturnType<typeof setTimeout> | undefined;
+    let loadHandler: (() => void) | undefined;
 
     const start = () => setReady(true);
 
-    if (typeof window !== "undefined" && "requestIdleCallback" in window) {
-      idleId = window.requestIdleCallback(start, { timeout: 900 });
+    const coarse =
+      typeof window !== "undefined" &&
+      window.matchMedia("(pointer: coarse), (hover: none)").matches;
+
+    // Mobile: wait for window load, then a beat past LCP before canvas JS.
+    // Desktop: idle callback with a short timeout so the comb arrives soon.
+    if (coarse) {
+      const afterLoad = () => {
+        timeoutId = setTimeout(start, 1200);
+      };
+      if (document.readyState === "complete") {
+        afterLoad();
+      } else {
+        loadHandler = afterLoad;
+        window.addEventListener("load", afterLoad, { once: true });
+      }
+    } else if ("requestIdleCallback" in window) {
+      idleId = window.requestIdleCallback(start, { timeout: 1500 });
     } else {
-      timeoutId = setTimeout(start, 200);
+      timeoutId = setTimeout(start, 400);
     }
 
     return () => {
       if (idleId !== undefined) window.cancelIdleCallback(idleId);
       if (timeoutId !== undefined) clearTimeout(timeoutId);
+      if (loadHandler) window.removeEventListener("load", loadHandler);
     };
   }, []);
 

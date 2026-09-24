@@ -1,23 +1,13 @@
-import {
-  HeartHandshake,
-  Lightbulb,
-  ShieldCheck,
-  Users,
-  type LucideIcon,
-} from "lucide-react";
-
 /**
  * About-page content. Copy lives here so it can change without touching JSX.
  */
 
 export const aboutIntro = {
-  eyebrow: "About us",
   title: "A front door to tech that feels like yours.",
   lead: "Hack(H)er413 is a collegiate hackathon at UMass Amherst for women and non-binary students - open to allies who share the mission.",
 };
 
 export const aboutStory = {
-  eyebrow: "Our story",
   title: "Started by students who wanted a seat at the table.",
   body: [
     "Hack(H)er413 began with a simple observation: hackathons are incredible places to learn, but too many people never walk through the door because they don't see themselves reflected inside.",
@@ -27,32 +17,27 @@ export const aboutStory = {
 };
 
 export type AboutValue = {
-  icon: LucideIcon;
   title: string;
   description: string;
 };
 
 export const aboutValues: AboutValue[] = [
   {
-    icon: HeartHandshake,
     title: "People first",
     description:
       "From track design to snacks, we choose what helps more people feel they can show up and stay.",
   },
   {
-    icon: Lightbulb,
     title: "Curiosity over credentials",
     description:
       "You don't need a perfect résumé. You need curiosity and a willingness to try.",
   },
   {
-    icon: ShieldCheck,
     title: "Safe to take risks",
     description:
       "A clear code of conduct, present organizers, and mentors mean you can experiment without fear.",
   },
   {
-    icon: Users,
     title: "Community that lasts",
     description:
       "Teammates and mentors become a network that carries well beyond Sunday night.",

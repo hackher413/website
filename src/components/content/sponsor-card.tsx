@@ -4,7 +4,7 @@ import { cn } from "@/lib/utils";
 import type { Sponsor } from "@/content/sponsors";
 
 /**
- * Open sponsor mark — logo (or wordmark) + name on the page background.
+ * Open sponsor mark - logo (or wordmark) + name on the page background.
  * No card chrome; hover lifts opacity like organizer tiles.
  */
 export function SponsorCard({

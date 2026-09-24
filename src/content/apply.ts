@@ -1,17 +1,9 @@
-import {
-  CalendarCheck,
-  FileText,
-  PartyPopper,
-  type LucideIcon,
-} from "lucide-react";
-
 /**
  * Apply-page content. The application itself lives in an external form; this
  * page sets expectations. `applyUrl` is the one link to update each cycle.
  */
 
 export const applyIntro = {
-  eyebrow: "Apply",
   title: "Applications for 2026 are closed.",
   lead: "Join the mailing list to hear when 2027 opens - no experience required, just curiosity.",
 };
@@ -46,26 +38,22 @@ export const primaryCta = applyStatus.isOpen
     };
 
 export type ApplyStep = {
-  icon: LucideIcon;
   title: string;
   description: string;
 };
 
 export const applySteps: ApplyStep[] = [
   {
-    icon: FileText,
     title: "Fill out the form",
     description:
       "Tell us a bit about you and why you want to hack with us. It's short, we promise.",
   },
   {
-    icon: CalendarCheck,
     title: "Get your decision",
     description:
       "We review on a rolling basis and email you with next steps and event details.",
   },
   {
-    icon: PartyPopper,
     title: "Show up and build",
     description:
       "Arrive at check-in, meet your people, and make something you're proud of.",

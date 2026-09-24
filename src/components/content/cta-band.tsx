@@ -1,9 +1,9 @@
 import * as React from "react";
 import Link from "next/link";
-import { ArrowRight } from "lucide-react";
 
 import { Section } from "@/components/layout";
 import { Button } from "@/components/ui/button";
+import { HexMark } from "@/components/content/hex-mark";
 
 export type CtaLink = {
   label: string;
@@ -15,67 +15,38 @@ type CtaBandProps = {
   title: React.ReactNode;
   description?: React.ReactNode;
   primary: CtaLink;
-  secondary?: CtaLink;
 };
 
-function CtaButton({
-  link,
-  variant,
-  className,
-}: {
-  link: CtaLink;
-  variant: "honey" | "outline";
-  className?: string;
-}) {
-  const content = (
-    <>
-      {link.label}
-      {variant === "honey" ? <ArrowRight aria-hidden="true" /> : null}
-    </>
-  );
-
-  if (link.external) {
-    return (
-      <Button asChild size="xl" variant={variant} className={className}>
-        <a href={link.href} target="_blank" rel="noopener noreferrer">
-          {content}
+/**
+ * Closing call-to-action on espresso + honeycomb lattice.
+ * Single CTA, left-aligned - not a centered SaaS dual-button band.
+ */
+export function CtaBand({ title, description, primary }: CtaBandProps) {
+  const button = (
+    <Button asChild size="xl" variant="honey">
+      {primary.external ? (
+        <a href={primary.href} target="_blank" rel="noopener noreferrer">
+          {primary.label}
         </a>
-      </Button>
-    );
-  }
-
-  return (
-    <Button asChild size="xl" variant={variant} className={className}>
-      <Link href={link.href}>{content}</Link>
+      ) : (
+        <Link href={primary.href}>{primary.label}</Link>
+      )}
     </Button>
   );
-}
 
-/**
- * Closing call-to-action on the inverted brand surface.
- * Server-rendered — motion lived below the fold but still pulled Framer into
- * every page bundle.
- */
-export function CtaBand({ title, description, primary, secondary }: CtaBandProps) {
   return (
-    <Section tone="brand" spacing="lg">
-      <div className="mx-auto flex max-w-2xl flex-col items-center text-center">
-        <h2 className="text-display font-heading text-balance">{title}</h2>
+    <Section tone="honeycomb" spacing="lg">
+      <div className="flex max-w-xl flex-col items-start gap-6">
+        <h2 className="flex items-start gap-3 text-display text-balance">
+          <HexMark size="md" tone="honey" className="mt-[0.55em]" />
+          <span>{title}</span>
+        </h2>
         {description ? (
-          <p className="mt-4 text-lead text-brand-foreground/85 text-pretty">
+          <p className="pl-[1.625rem] text-lead text-cream/75 text-pretty">
             {description}
           </p>
         ) : null}
-        <div className="mt-8 flex flex-wrap justify-center gap-4">
-          <CtaButton link={primary} variant="honey" />
-          {secondary ? (
-            <CtaButton
-              link={secondary}
-              variant="outline"
-              className="border-brand-foreground/25 bg-transparent text-brand-foreground hover:bg-brand-foreground/10 hover:text-brand-foreground"
-            />
-          ) : null}
-        </div>
+        <div className="pl-[1.625rem]">{button}</div>
       </div>
     </Section>
   );

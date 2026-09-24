@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 
 import { Section } from "@/components/layout";
-import { PageHeader, ProjectCard, CtaBand, RevealGrid } from "@/components/content";
+import {
+  PageHeader,
+  ProjectCard,
+  CtaBand,
+  RevealGrid,
+  HexMark,
+} from "@/components/content";
 import {
   projectYears,
   projectYearOrder,
@@ -19,7 +25,6 @@ export default function ProjectsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Winners"
         title="What our hackers built."
         lead="A weekend, an idea, and a room full of people cheering you on. Here are the projects that stood out."
       />
@@ -33,7 +38,8 @@ export default function ProjectsPage() {
             return (
               <div key={year}>
                 <div className="mb-6">
-                  <h2 className="text-sm font-medium text-muted-foreground">
+                  <h2 className="flex items-center gap-2.5 text-sm font-medium text-muted-foreground">
+                    <HexMark size="sm" tone="sky" />
                     {year} winners
                   </h2>
                 </div>
@@ -56,7 +62,6 @@ export default function ProjectsPage() {
         title={projectsCta.title}
         description={projectsCta.description}
         primary={primaryCta}
-        secondary={{ label: "See the schedule", href: "/schedule" }}
       />
     </>
   );

@@ -38,7 +38,7 @@ export function Logo({
   linked = true,
 }: LogoProps) {
   const classes = cn(
-    "group inline-flex items-center gap-2 font-heading font-semibold tracking-tight rounded-sm",
+    "group inline-flex items-center gap-2 font-semibold tracking-tight rounded-sm",
     sizeClass[size],
     tone === "onDark" ? "text-cream" : "text-foreground",
     linked &&
@@ -49,10 +49,10 @@ export function Logo({
   const mark = (
     <>
       <Image
-        src="/brand/bee-mark.webp"
+        src="/brand/bee-cursor.png"
         alt=""
-        width={80}
-        height={64}
+        width={73}
+        height={54}
         unoptimized
         className={cn(beeClass[size], "w-auto shrink-0")}
         style={{

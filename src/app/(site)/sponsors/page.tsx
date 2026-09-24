@@ -1,7 +1,13 @@
 import type { Metadata } from "next";
 
 import { Section } from "@/components/layout";
-import { PageHeader, SponsorCard, CtaBand, RevealGrid } from "@/components/content";
+import {
+  PageHeader,
+  SponsorCard,
+  CtaBand,
+  RevealGrid,
+  HexMark,
+} from "@/components/content";
 import { cn } from "@/lib/utils";
 import { siteConfig } from "@/lib/site";
 import {
@@ -10,9 +16,6 @@ import {
   tierOrder,
   sponsorCta,
 } from "@/content/sponsors";
-
-const HEX_CLIP =
-  "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
 
 export const metadata: Metadata = {
   title: "Sponsors",
@@ -24,7 +27,6 @@ export default function SponsorsPage() {
   return (
     <>
       <PageHeader
-        eyebrow="Sponsors"
         title="Partners who invest in the next builders."
         lead="Our sponsors fund the weekend and help more people walk through the door."
       />
@@ -41,11 +43,7 @@ export default function SponsorsPage() {
               <div key={tier}>
                 <div className="mb-8">
                   <h2 className="flex items-center gap-2.5 text-sm font-medium text-muted-foreground">
-                    <span
-                      aria-hidden="true"
-                      className="inline-block size-2.5 bg-honey"
-                      style={{ clipPath: HEX_CLIP }}
-                    />
+                    <HexMark size="sm" tone="honey" />
                     {meta.label}
                   </h2>
                   {meta.blurb ? (
@@ -83,7 +81,6 @@ export default function SponsorsPage() {
           href: siteConfig.social.email,
           external: true,
         }}
-        secondary={{ label: "Meet the team", href: "/team" }}
       />
     </>
   );

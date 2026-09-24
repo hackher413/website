@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 
 import { Section } from "@/components/layout";
-import { PageHeader, FaqAccordion } from "@/components/content";
+import { PageHeader, FaqAccordion, HexMark } from "@/components/content";
 import { siteConfig } from "@/lib/site";
 import { faq, faqIntro } from "@/content/faq";
 
@@ -13,11 +13,7 @@ export const metadata: Metadata = {
 export default function FaqPage() {
   return (
     <>
-      <PageHeader
-        eyebrow={faqIntro.eyebrow}
-        title={faqIntro.title}
-        lead={faqIntro.lead}
-      />
+      <PageHeader title={faqIntro.title} lead={faqIntro.lead} />
 
       <Section spacing="lg" className="pt-4 sm:pt-8">
         <div className="flex flex-col gap-14">
@@ -26,7 +22,8 @@ export default function FaqPage() {
               key={category.name}
               className="grid gap-6 lg:grid-cols-[minmax(0,16rem)_1fr] lg:gap-12"
             >
-              <h2 className="text-sm font-medium text-muted-foreground lg:pt-4">
+              <h2 className="flex items-center gap-2.5 text-sm font-medium text-muted-foreground lg:pt-4">
+                <HexMark size="sm" tone={i % 2 === 0 ? "honey" : "sky"} />
                 {category.name}
               </h2>
               <FaqAccordion items={category.items} idPrefix={`faq-${i}`} />
@@ -35,19 +32,20 @@ export default function FaqPage() {
         </div>
       </Section>
 
-      <Section spacing="lg">
-        <div className="border-t border-border pt-12">
-          <p className="text-lg text-muted-foreground text-pretty">
+      <Section tone="espresso" spacing="lg">
+        <p className="flex items-start gap-3 text-lg text-cream/75 text-pretty">
+          <HexMark size="sm" tone="honey" className="mt-1.5" />
+          <span>
             Still stuck? We&apos;re real people -{" "}
             <a
               href={siteConfig.social.email}
-              className="font-medium text-foreground underline underline-offset-4"
+              className="font-medium text-cream underline underline-offset-4 hover:text-honey"
             >
               email us
             </a>{" "}
             anytime.
-          </p>
-        </div>
+          </span>
+        </p>
       </Section>
     </>
   );

@@ -15,7 +15,7 @@ export function StatCard({
 }: Stat & { className?: string }) {
   return (
     <div className={cn("flex flex-col", className)}>
-      <span className="text-display font-heading tabular-nums">{value}</span>
+      <span className="text-display tabular-nums tracking-tight">{value}</span>
       <span className="mt-1 text-sm font-medium text-muted-foreground">
         {label}
       </span>

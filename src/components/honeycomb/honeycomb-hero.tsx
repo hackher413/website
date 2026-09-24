@@ -1,77 +1,89 @@
-import Image from "next/image";
 import Link from "next/link";
 
 import { Button } from "@/components/ui/button";
 import { Container } from "@/components/layout/container";
+import { HexMark } from "@/components/content/hex-mark";
 import { HoneycombCanvasDeferred } from "@/components/honeycomb/honeycomb-canvas-deferred";
 import { event } from "@/content/event";
 import { primaryCta } from "@/content/apply";
 
 /**
- * Signature hero: immersive honeycomb canvas with this year's lockup
- * built from clean type + the pixel bee (avoids mangling the raster logo).
- * Canvas is espresso; copy stays cream for contrast.
+ * Signature hero: immersive honeycomb as the visual plane.
+ * Brand lockup is the hero signal; one line of support + one CTA.
+ * Asymmetric bottom-left — not a centered marketing stack.
  *
- * Server Component shell so the H1 is in the initial HTML (mobile LCP).
- * Canvas mounts after idle so it doesn't compete with first paint.
+ * Server Component shell so the LCP lockup is in the initial HTML.
+ * Native <picture> + fetchPriority=high (Next/Image was dropping the hint
+ * with unoptimized). Canvas mounts after idle so it doesn't compete.
  */
 export function HoneycombHero() {
   const primary = primaryCta;
 
   return (
-    <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-center overflow-hidden bg-espresso text-cream">
+    <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-end overflow-hidden bg-espresso text-cream">
+      {/* LCP preload — fetchpriority on the preload, not only the img */}
+      <link
+        rel="preload"
+        as="image"
+        href="/brand/logo-on-dark-sm.webp"
+        type="image/webp"
+        fetchPriority="high"
+        media="(max-width: 639px)"
+      />
+      <link
+        rel="preload"
+        as="image"
+        href="/brand/logo-on-dark.webp"
+        type="image/webp"
+        fetchPriority="high"
+        media="(min-width: 640px)"
+      />
+
       <HoneycombCanvasDeferred className="absolute inset-0" />
 
+      {/* Read plane on the left/bottom; right third stays open so the comb reads */}
       <div
         aria-hidden="true"
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(ellipse 70% 55% at 50% 42%, rgba(27,18,16,0.78) 0%, rgba(27,18,16,0.4) 50%, rgba(27,18,16,0.18) 100%)",
+            "linear-gradient(105deg, rgba(27,18,16,0.82) 0%, rgba(27,18,16,0.42) 34%, rgba(27,18,16,0.1) 58%, transparent 78%), linear-gradient(to top, rgba(27,18,16,0.55) 0%, transparent 42%)",
         }}
       />
 
-      <Container className="pointer-events-none relative z-10 text-center">
-        <div className="mx-auto flex max-w-3xl flex-col items-center">
-          <div
-            className="flex flex-col items-center"
-            aria-label="Hack(H)er413"
-          >
-            <p className="text-[clamp(2.5rem,9vw,4rem)] font-black uppercase leading-none tracking-[-0.045em] text-cream">
-              HACK(H)ER
-            </p>
-            <div className="mt-3 flex items-center justify-center gap-3 sm:gap-4">
-              <Image
-                src="/brand/bee-display.webp"
-                alt=""
-                width={179}
-                height={144}
-                priority
-                unoptimized
-                className="h-14 w-auto sm:h-16 md:h-[4.5rem]"
-                style={{
-                  imageRendering: "pixelated",
-                  filter:
-                    "drop-shadow(0 0 0.6px rgba(251,246,238,0.85)) drop-shadow(0 0 0.6px rgba(251,246,238,0.85))",
-                }}
-              />
-              <span className="text-[clamp(2.25rem,8vw,3.5rem)] font-black leading-none tracking-[-0.045em] text-cream">
-                413
-              </span>
-            </div>
-          </div>
+      <Container className="pointer-events-none relative z-10 w-full pb-14 pt-28 sm:pb-20 sm:pt-32">
+        <div className="flex max-w-lg flex-col items-start text-left">
+          <h1 className="sr-only">Hack(H)er413</h1>
+          <picture>
+            <source
+              type="image/webp"
+              media="(max-width: 639px)"
+              srcSet="/brand/logo-on-dark-sm.webp"
+            />
+            <source type="image/webp" srcSet="/brand/logo-on-dark.webp" />
+            <source
+              media="(max-width: 639px)"
+              srcSet="/brand/logo-on-dark-sm.png"
+            />
+            {/* eslint-disable-next-line @next/next/no-img-element -- LCP lockup needs fetchPriority + pixelated; next/image dropped the hint when unoptimized */}
+            <img
+              src="/brand/logo-on-dark.png"
+              alt=""
+              width={493}
+              height={314}
+              fetchPriority="high"
+              decoding="async"
+              className="h-32 w-auto sm:h-40 md:h-48"
+              style={{ imageRendering: "pixelated" }}
+            />          </picture>
 
-          <h1 className="mt-6 text-display-xl font-heading text-balance">
-            Where women and gender minorities build in tech.
-          </h1>
-
-          <p className="mt-5 max-w-xl text-lead text-cream/90 text-pretty">
+          <p className="mt-6 max-w-sm text-base text-cream/80 text-pretty sm:mt-8 sm:text-lg">
             {event.isConcluded
               ? event.concludedMessage
-              : "A collegiate hackathon at UMass Amherst - learn, build, and meet your people. Beginners welcome."}
+              : "UMass Amherst · women & gender minorities in tech · beginners welcome"}
           </p>
 
-          <div className="pointer-events-auto mt-10 flex flex-wrap justify-center gap-4 animate-hero-cta">
+          <div className="pointer-events-auto mt-8 animate-hero-cta sm:mt-10">
             <Button asChild size="xl" variant="honey">
               {primary.external ? (
                 <a href={primary.href} target="_blank" rel="noopener noreferrer">
@@ -81,19 +93,15 @@ export function HoneycombHero() {
                 <Link href={primary.href}>{primary.label}</Link>
               )}
             </Button>
-            <Button
-              asChild
-              size="xl"
-              variant="outline"
-              className="border-white/25 bg-white/5 text-cream hover:bg-white/10 hover:text-white"
-            >
-              <Link href={event.isConcluded ? "/projects" : "/about"}>
-                {event.isConcluded ? "See 2026 winners" : "Learn more"}
-              </Link>
-            </Button>
           </div>
         </div>
       </Container>
+
+      {/* Desktop / fine-pointer only — permission, not a sticker */}
+      <p className="pointer-events-none absolute bottom-5 right-5 z-10 hidden items-center gap-2 text-sm text-cream/45 motion-reduce:hidden [@media(hover:hover)_and_(pointer:fine)]:flex sm:bottom-8 sm:right-8">
+        <HexMark size="sm" tone="honey" className="opacity-70" />
+        Move to light the comb
+      </p>
     </section>
   );
 }

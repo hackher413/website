@@ -1,7 +1,7 @@
+import { CtaBand } from "@/components/content";
 import { HoneycombHero } from "@/components/honeycomb/honeycomb-hero";
 import { Mission } from "@/components/home/mission";
 import { Features } from "@/components/home/features";
-import { CtaBand } from "@/components/content";
 import { homeCta } from "@/content/home";
 import { primaryCta } from "@/content/apply";
 
@@ -20,7 +20,6 @@ export default function Home() {
         title={homeCta.title}
         description={homeCta.description}
         primary={primaryCta}
-        secondary={{ label: "Meet the team", href: "/team" }}
       />
     </>
   );

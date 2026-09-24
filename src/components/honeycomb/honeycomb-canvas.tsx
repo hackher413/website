@@ -235,9 +235,11 @@ export function HoneycombCanvas({ className }: { className?: string }) {
       ctx.globalCompositeOperation = "lighter";
       ctx.translate(hex.x, hex.y);
       drawHexPath();
-      // Faint base so the comb is always visible (warm brown baseline).
-      ctx.fillStyle = `hsla(20, 30%, ${LUM_MIN}%, 0.1)`;
+      // Base comb - readable on the open right without competing with copy.
+      ctx.fillStyle = `hsla(28, 35%, ${LUM_MIN + 4}%, 0.16)`;
       ctx.fill();
+      ctx.strokeStyle = `hsla(40, 45%, 28%, 0.14)`;
+      ctx.stroke();
 
       drawSelections(hex.selections);
       drawSelections(hex.sources);
@@ -359,9 +361,17 @@ export function HoneycombCanvas({ className }: { className?: string }) {
       return () => window.removeEventListener("resize", onResize);
     }
 
-    // Seed one gentle ripple so it's quietly alive on load.
-    if (hexes.length) {
-      hexes[rand(0, hexes.length)].select(46);
+    // Prefer the open right half so idle life shows where copy isn't.
+    const sparkPool = () => {
+      const right = hexes.filter((h) => h.x > width * 0.38);
+      return right.length ? right : hexes;
+    };
+
+    // Seed a couple of gentle ripples so the open field feels alive on load.
+    const pool = sparkPool();
+    if (pool.length) {
+      pool[rand(0, pool.length)].select(46);
+      if (pool.length > 1) pool[rand(0, pool.length)].select(200);
     }
 
     // Run the rAF loop and idle sparks only while the hero is on screen. Once
@@ -372,8 +382,9 @@ export function HoneycombCanvas({ className }: { className?: string }) {
       if (running) return;
       running = true;
       idleTimer = window.setInterval(() => {
-        if (hexes.length) hexes[rand(0, hexes.length)].select(brandHue());
-      }, 2600);
+        const targets = sparkPool();
+        if (targets.length) targets[rand(0, targets.length)].select(brandHue());
+      }, 2200);
       loop();
     };
     const stop = () => {

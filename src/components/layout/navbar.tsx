@@ -82,11 +82,11 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-50 w-full transition-colors duration-300",
         scrolled
-          ? "border-b border-border/80 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/85"
+          ? "border-b border-border bg-background"
           : overHero
             ? // Solid espresso so cream nav text stays ≥4.5:1 over the honeycomb
               "border-b border-white/10 bg-espresso"
-            : "border-b border-border/60 bg-background/95 backdrop-blur-md supports-[backdrop-filter]:bg-background/85",
+            : "border-b border-border bg-background",
       )}
     >
       <Container className="flex h-16 items-center justify-between gap-4">

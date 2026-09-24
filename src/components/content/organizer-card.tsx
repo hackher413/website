@@ -1,11 +1,9 @@
 import Image from "next/image";
 
 import { cn } from "@/lib/utils";
+import { HEX_CLIP } from "@/lib/design/tokens";
 import { LinkedInIcon } from "@/components/icons/brand-icons";
 import type { Organizer } from "@/content/team";
-
-const HEX_CLIP =
-  "polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%)";
 
 function initials(name: string) {
   return name
@@ -38,6 +36,7 @@ export function OrganizerCard({
           "relative aspect-[0.866] w-full transition-transform duration-300 ease-out group-hover:-translate-y-1",
           featured ? "max-w-44 sm:max-w-52" : "max-w-28 sm:max-w-32",
         )}
+        style={{ clipPath: HEX_CLIP }}
       >
         <div
           aria-hidden="true"

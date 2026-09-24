@@ -25,13 +25,12 @@ export function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="mt-auto border-t border-border bg-muted/40">
-      <Container className="py-16">
+    <footer className="mt-auto border-t border-border bg-espresso text-cream">
+      <Container className="py-14">
         <div className="grid gap-12 md:grid-cols-[1.5fr_1fr_1fr]">
-          {/* Brand column */}
           <div className="max-w-sm">
-            <Logo />
-            <p className="mt-4 text-sm text-muted-foreground text-pretty">
+            <Logo tone="onDark" />
+            <p className="mt-4 text-sm text-cream/65 text-pretty">
               {siteConfig.description}
             </p>
             <div className="mt-6 flex items-center gap-2">
@@ -44,7 +43,7 @@ export function Footer() {
                   rel={
                     href.startsWith("http") ? "noopener noreferrer" : undefined
                   }
-                  className="inline-flex size-9 items-center justify-center rounded-lg text-muted-foreground transition-colors hover:bg-muted hover:text-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                  className="inline-flex size-9 items-center justify-center rounded-md text-cream/65 transition-colors hover:bg-white/10 hover:text-cream focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-honey"
                 >
                   <Icon className="size-4" />
                 </a>
@@ -52,18 +51,15 @@ export function Footer() {
             </div>
           </div>
 
-          {/* Link groups */}
           {footerNav.map((group) => (
             <nav key={group.title} aria-label={group.title}>
-              <h2 className="text-sm font-semibold text-foreground">
-                {group.title}
-              </h2>
+              <h2 className="text-sm font-semibold text-cream">{group.title}</h2>
               <ul className="mt-4 space-y-3">
                 {group.items.map((item) => (
                   <li key={item.href}>
                     <Link
                       href={item.href}
-                      className="text-sm text-muted-foreground transition-colors hover:text-foreground"
+                      className="text-sm text-cream/65 transition-colors hover:text-cream"
                     >
                       {item.title}
                     </Link>
@@ -74,14 +70,11 @@ export function Footer() {
           ))}
         </div>
 
-        <div className="mt-12 flex flex-col items-start justify-between gap-2 border-t border-border pt-8 text-sm text-muted-foreground sm:flex-row sm:items-center">
+        <div className="mt-12 flex flex-col items-start justify-between gap-2 border-t border-white/10 pt-8 text-sm text-cream/50 sm:flex-row sm:items-center">
           <p>
-            © {year} {siteConfig.name}. All rights reserved.
+            © {year} {siteConfig.name}
           </p>
-          <p>
-            Made with ♥ at the College of Information &amp; Computer Sciences,
-            UMass Amherst.
-          </p>
+          <p>College of Information &amp; Computer Sciences, UMass Amherst</p>
         </div>
       </Container>
     </footer>

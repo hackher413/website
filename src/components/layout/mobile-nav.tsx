@@ -38,7 +38,7 @@ function NavCta({ className }: { className?: string }) {
 }
 
 /**
- * Mobile drawer — isolated so Radix Sheet stays out of the initial bundle
+ * Mobile drawer - isolated so Radix Sheet stays out of the initial bundle
  * until the menu button is pressed (or this chunk is prefetched).
  */
 export function MobileNav({ overHero }: { overHero: boolean }) {
