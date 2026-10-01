@@ -9,6 +9,8 @@ import { cn } from "@/lib/utils";
 import { mainNav } from "@/lib/site";
 import { primaryCta } from "@/content/apply";
 import { Button } from "@/components/ui/button";
+import { AuthControls } from "@/components/layout/auth-controls";
+import { Logo } from "@/components/layout/logo";
 import {
   Sheet,
   SheetClose,
@@ -17,7 +19,6 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
-import { Logo } from "@/components/layout/logo";
 
 function NavCta({ className }: { className?: string }) {
   const cta = primaryCta;
@@ -89,6 +90,10 @@ export function MobileNav({ overHero }: { overHero: boolean }) {
               </SheetClose>
             );
           })}
+          <div className="mt-4 flex items-center justify-between gap-3 px-3">
+            <span className="text-sm text-muted-foreground">Account</span>
+            <AuthControls />
+          </div>
           <SheetClose asChild>
             <span className="mt-4 block">
               <NavCta className="w-full" />

@@ -1,4 +1,5 @@
 import * as React from "react";
+import { ClerkProvider } from "@clerk/nextjs";
 
 import { BeeCursorLazy } from "@/components/bee-cursor-lazy";
 
@@ -8,9 +9,9 @@ import { BeeCursorLazy } from "@/components/bee-cursor-lazy";
  */
 export function Providers({ children }: { children: React.ReactNode }) {
   return (
-    <>
+    <ClerkProvider>
       {children}
       <BeeCursorLazy />
-    </>
+    </ClerkProvider>
   );
 }

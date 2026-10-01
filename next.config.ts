@@ -13,6 +13,8 @@ const nextConfig: NextConfig = {
   },
   experimental: {
     optimizePackageImports: ["lucide-react", "radix-ui"],
+    // Enables `forbidden()` / `unauthorized()` for auth helpers (403 UI).
+    authInterrupts: true,
   },
 };
 

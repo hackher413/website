@@ -164,6 +164,23 @@
     cursor: none !important;
   }
 
+  /*
+   * Clerk UI renders in portals above the bee overlay (z-9999). While the bee
+   * is covered, `cursor: none` would leave no pointer — restore system cursors.
+   */
+  html.bee-cursor-active [class*="cl-"],
+  html.bee-cursor-active [class*="cl-"] * {
+    cursor: auto !important;
+  }
+
+  html.bee-cursor-active [class*="cl-"] :is(a, button, label, select, summary, [role="button"]) {
+    cursor: pointer !important;
+  }
+
+  html.bee-cursor-active [class*="cl-"] :is(input, textarea) {
+    cursor: text !important;
+  }
+
   ::selection {
     background-color: var(--color-honey);
     color: var(--color-honey-foreground);

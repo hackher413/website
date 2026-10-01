@@ -100,6 +100,19 @@ export function BeeCursor() {
     };
 
     const onMove = (e: PointerEvent) => {
+      // Clerk portals sit above this overlay; hide the bee and let CSS restore
+      // the system cursor while the pointer is over Clerk UI.
+      const overClerk = Boolean(
+        e.target instanceof Element && e.target.closest("[class*='cl-']"),
+      );
+      if (overClerk) {
+        if (visible.current) {
+          visible.current = false;
+          rootRef.current?.style.setProperty("opacity", "0");
+        }
+        return;
+      }
+
       mouse.current.x = e.clientX;
       mouse.current.y = e.clientY;
       if (!visible.current) {

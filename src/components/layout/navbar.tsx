@@ -9,6 +9,7 @@ import { cn } from "@/lib/utils";
 import { mainNav, siteConfig } from "@/lib/site";
 import { primaryCta } from "@/content/apply";
 import { Button } from "@/components/ui/button";
+import { AuthControls } from "@/components/layout/auth-controls";
 import { Container } from "@/components/layout/container";
 import { Logo } from "@/components/layout/logo";
 
@@ -122,6 +123,10 @@ export function Navbar() {
         </nav>
 
         <div className="flex items-center gap-2">
+          <AuthControls
+            className="hidden sm:flex"
+            onDark={overHero}
+          />
           <NavCta
             className={cn(
               "hidden md:inline-flex",
