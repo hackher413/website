@@ -1,6 +1,6 @@
 # Hack(H)er413 website
 
-Next.js site for [Hack(H)er413](https://hackher413.com) — marketing pages plus the Applications MVP (auth, DB, apply/organizer flows).
+Next.js site for [Hack(H)er413](https://hackher413.com): marketing pages plus the Applications MVP (auth, DB, apply/organizer flows).
 
 ## Getting started
 
@@ -30,5 +30,5 @@ See **[docs/env.md](docs/env.md)** for local `.env.local`, Vercel Development / 
 
 ## Platform helpers
 
-- **Auth** (`src/lib/auth.ts`): `requireUser()`, `requireOrganizer()` — Clerk session wiring in `src/proxy.ts`
-- **Email** (`src/lib/email.ts`): `sendEmail({ to, subject, html })` — Resend
+- **Auth** (`src/lib/auth.ts`): `requireUser()`, `requireOrganizer()` (Clerk session wiring in `src/proxy.ts`)
+- **Email** (`src/lib/email.ts`): `sendEmail({ to, subject, html })` via Resend

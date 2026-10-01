@@ -53,7 +53,7 @@ Set the same keys in the Vercel project → **Settings → Environment Variables
 
 ### Neon notes
 
-- Preview and Production may share one Neon project with separate branches, or separate projects — document the choice in the vault.
+- Preview and Production may share one Neon project with separate branches, or separate projects. Document the choice in the vault.
 - After schema changes: migrate the DB that Preview points at before relying on PR demos (`npm run db:migrate` with that URL).
 
 ### Resend notes
@@ -75,11 +75,11 @@ Confirm each inbox receives the message and that Resend Dashboard → Domains sh
 After env vars are saved in Vercel, open a PR Preview URL and confirm:
 
 1. **Build succeeds** (missing `NEXT_PUBLIC_*` / Clerk keys often fail at runtime on first page load).
-2. **Clerk** — “Sign in” works on the Preview URL (add the Preview host in Clerk if prompted).
-3. **DB** — from a machine with Preview’s `DATABASE_URL`, `npm run db:studio` (or a tiny server query) sees the `applications` table.
-4. **Resend** — key present in Preview env (send test can wait for the email helper commit).
+2. **Clerk**: “Sign in” works on the Preview URL (add the Preview host in Clerk if prompted).
+3. **DB**: from a machine with Preview’s `DATABASE_URL`, `npm run db:studio` (or a tiny server query) sees the `applications` table.
+4. **Resend**: key present in Preview env (send test can wait for the email helper commit).
 
-If Preview auth fails with redirect/origin errors, fix Clerk allowed origins first — not the Next code.
+If Preview auth fails with redirect/origin errors, fix Clerk allowed origins first, not the Next code.
 
 ## Rotating secrets
 

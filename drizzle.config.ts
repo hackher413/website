@@ -1,7 +1,7 @@
 import { config as loadEnv } from "dotenv";
 import { defineConfig } from "drizzle-kit";
 
-// Kit runs outside Next.js — load local env files explicitly.
+// Kit runs outside Next.js - load local env files explicitly.
 loadEnv({ path: ".env.local" });
 loadEnv({ path: ".env" });
 

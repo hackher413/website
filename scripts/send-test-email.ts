@@ -27,10 +27,10 @@ async function main() {
   for (const to of recipients) {
     const { id } = await sendEmail({
       to,
-      subject: "Hack(H)er413 — Resend test",
-      html: `<p>Hi — this is a shared <code>sendEmail()</code> smoke test.</p>
+      subject: "Hack(H)er413 - Resend test",
+      html: `<p>Hi - this is a shared <code>sendEmail()</code> smoke test.</p>
 <p>If you got this, Preview/local Resend wiring works.</p>`,
-      text: "Hi — this is a shared sendEmail() smoke test. If you got this, Resend wiring works.",
+      text: "Hi - this is a shared sendEmail() smoke test. If you got this, Resend wiring works.",
     });
     console.log(`Sent to ${to} → id ${id}`);
   }

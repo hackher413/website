@@ -7,7 +7,7 @@ import { cn } from "@/lib/utils";
 
 /**
  * Compact auth controls for the marketing navbar.
- * Keep visual weight low — Apply / mailing-list CTA stays primary.
+ * Keep visual weight low. Apply / mailing-list CTA stays primary.
  *
  * Clerk Core 3: use `<Show when="signed-in|signed-out">` instead of
  * the removed `<SignedIn>` / `<SignedOut>` components.

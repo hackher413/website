@@ -10,7 +10,7 @@ import { primaryCta } from "@/content/apply";
 /**
  * Signature hero: immersive honeycomb as the visual plane.
  * Brand lockup is the hero signal; one line of support + one CTA.
- * Asymmetric bottom-left — not a centered marketing stack.
+ * Asymmetric bottom-left - not a centered marketing stack.
  *
  * Server Component shell so the LCP lockup is in the initial HTML.
  * Native <picture> + fetchPriority=high (Next/Image was dropping the hint
@@ -21,7 +21,7 @@ export function HoneycombHero() {
 
   return (
     <section className="relative flex min-h-[calc(100svh-4rem)] w-full items-end overflow-hidden bg-espresso text-cream">
-      {/* LCP preload — fetchpriority on the preload, not only the img */}
+      {/* LCP preload - fetchpriority on the preload, not only the img */}
       <link
         rel="preload"
         as="image"
@@ -97,7 +97,7 @@ export function HoneycombHero() {
         </div>
       </Container>
 
-      {/* Desktop / fine-pointer only — permission, not a sticker */}
+      {/* Desktop / fine-pointer only - permission, not a sticker */}
       <p className="pointer-events-none absolute bottom-5 right-5 z-10 hidden items-center gap-2 text-sm text-cream/45 motion-reduce:hidden [@media(hover:hover)_and_(pointer:fine)]:flex sm:bottom-8 sm:right-8">
         <HexMark size="sm" tone="honey" className="opacity-70" />
         Move to light the comb

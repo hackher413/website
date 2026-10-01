@@ -9,7 +9,7 @@ import { OrganizationJsonLd } from "@/components/seo/json-ld";
 import "./globals.css";
 
 /**
- * Geist variable — preload:false so the hero LCP image owns the critical
+ * Geist variable - preload:false so the hero LCP image owns the critical
  * network path on mobile Slow-4G simulations. display:swap keeps text visible.
  */
 const geistSans = localFont({

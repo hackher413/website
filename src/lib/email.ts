@@ -34,7 +34,7 @@ function getFromAddress() {
 
 /**
  * Shared Resend sender for confirmation + decision emails.
- * Server-only — do not import from Client Components.
+ * Server-only - do not import from Client Components.
  */
 export async function sendEmail(
   input: SendEmailInput,

@@ -2,8 +2,8 @@ import { clerkMiddleware } from "@clerk/nextjs/server";
 
 /**
  * Next.js 16+ uses `proxy.ts` (middleware.ts is deprecated).
- * Route protection lives in `requireUser` / `requireOrganizer`, not here —
- * this only wires Clerk session handling for the app.
+ * Route protection lives in `requireUser` / `requireOrganizer`, not here.
+ * This only wires Clerk session handling for the app.
  */
 export default clerkMiddleware();
 
