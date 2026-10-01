@@ -63,6 +63,13 @@ export const team: TeamGroup[] = [
         linkedin: "https://www.linkedin.com/in/iriscabral/",
       },
       {
+        name: "Bhashita Sri Golla",
+        role: "Assistant Head of Sponsorship",
+        pronouns: "she/her",
+        image: "/team/2027/bhashita-sri-golla.jpg",
+        linkedin: "https://www.linkedin.com/in/bhashita-sri-golla-07089231a/",
+      },
+      {
         name: "Naysa Arora",
         role: "Head of Finance",
         pronouns: "she/her",
@@ -82,13 +89,6 @@ export const team: TeamGroup[] = [
         linkedin: "https://www.linkedin.com/in/rakshita-saroha/",
       },
       {
-        name: "Miranda Liskov",
-        role: "Assistant Head of Outreach",
-        pronouns: "she/her",
-        image: "/team/2027/miranda-liskov.jpg",
-        linkedin: "https://www.linkedin.com/in/miranda-liskov-05a230376/",
-      },
-      {
         name: "Nandita Lajeesh",
         role: "Assistant Head of Outreach",
         pronouns: "she/her",
@@ -102,8 +102,16 @@ export const team: TeamGroup[] = [
         image: "/team/2027/hiya-dagli.jpg",
         linkedin: "https://www.linkedin.com/in/hiyadagli/",
       },
+      {
+        name: "Miranda Liskov",
+        role: "Head of Social Media",
+        pronouns: "she/her",
+        image: "/team/2027/miranda-liskov.jpg",
+        linkedin: "https://www.linkedin.com/in/miranda-liskov-05a230376/",
+      },
     ],
   },
+
   {
     name: "Technology",
     members: [
