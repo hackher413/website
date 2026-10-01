@@ -1,36 +1,37 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Hack(H)er413 website
 
-## Getting Started
+Next.js site for [Hack(H)er413](https://hackher413.com) — marketing pages plus the Applications MVP (auth, DB, apply/organizer flows).
 
-First, run the development server:
+## Getting started
 
 ```bash
+npm install
+cp .env.example .env.local   # then fill secrets from the vault
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Useful scripts
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+| Script | Purpose |
+| --- | --- |
+| `npm run dev` | Local Next.js |
+| `npm run build` / `start` | Production build |
+| `npm run lint` | ESLint |
+| `npm run db:generate` | Drizzle: schema → SQL migration |
+| `npm run db:migrate` | Apply migrations to Neon |
+| `npm run db:studio` | Drizzle Studio |
 
-## Learn More
+## Environment & Preview deploys
 
-To learn more about Next.js, take a look at the following resources:
+See **[docs/env.md](docs/env.md)** for local `.env.local`, Vercel Development / Preview / Production wiring (Neon, Clerk, Resend), and the Preview verification checklist.
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Auth helpers
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+Server-side gates for other feature slices:
 
-## Deploy on Vercel
+- `requireUser()` — signed-in Clerk user (else redirect to sign-in)
+- `requireOrganizer()` — `publicMetadata.role` is `organizer` or `admin` (else 403)
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Defined in `src/lib/auth.ts`. Clerk session wiring lives in `src/proxy.ts` (Next.js 16 proxy).
