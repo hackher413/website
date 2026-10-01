@@ -1,12 +1,13 @@
 import Image from "next/image";
 import { ArrowUpRight } from "lucide-react";
 
-import { cn } from "@/lib/utils";
+import { HexMark } from "@/components/content/hex-mark";
 import type { Project } from "@/content/projects";
 
 /**
- * Gallery tile for a winning project. Sharp edge, espresso caption bar -
- * not a soft rounded card with gradient overlay.
+ * Gallery tile for a winning project. Sharp edge, espresso caption bar,
+ * honey hover accents. Description overlays the cover on hover so sibling
+ * cards in the same grid row never stretch with empty caption space.
  */
 export function ProjectCard({
   project,
@@ -21,7 +22,7 @@ export function ProjectCard({
       href={project.url}
       target="_blank"
       rel="noopener noreferrer"
-      className="group block overflow-hidden border border-border bg-card transition-colors hover:border-brand/40"
+      className="group block overflow-hidden border border-border bg-espresso transition-[border-color,box-shadow,transform] duration-300 ease-out hover:-translate-y-1 hover:border-honey hover:shadow-[4px_4px_0_0_var(--color-honey)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-honey"
     >
       <div className="relative aspect-[4/3] overflow-hidden bg-espresso">
         <Image
@@ -32,31 +33,34 @@ export function ProjectCard({
           priority={priority}
           className="object-cover transition-transform duration-500 ease-out group-hover:scale-[1.03]"
         />
+
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 bg-gradient-to-t from-espresso via-espresso/90 to-transparent px-4 pt-16 pb-4 opacity-0 transition-opacity duration-300 group-hover:opacity-100 group-focus-visible:opacity-100 motion-reduce:opacity-100"
+          aria-hidden="true"
+        >
+          <p className="text-sm text-cream/85 text-pretty">{project.description}</p>
+        </div>
       </div>
 
-      <div className="flex flex-col gap-1 border-t border-border bg-background p-4">
+      <div className="flex flex-col gap-1 border-t border-honey/25 bg-espresso px-4 py-3.5 text-cream">
         {project.award ? (
-          <span className="text-xs font-medium tracking-wide text-muted-foreground">
+          <span className="flex items-center gap-1.5 text-xs font-medium tracking-wide text-honey">
+            <HexMark size="sm" tone="honey" />
             {project.award}
           </span>
         ) : null}
-        <div className="flex items-center gap-1.5">
-          <h3 className="text-lg font-semibold tracking-tight">{project.name}</h3>
+        <div className="flex items-center gap-2">
+          {!project.award ? <HexMark size="sm" tone="honey" /> : null}
+          <h3 className="text-lg font-semibold tracking-tight text-cream">
+            {project.name}
+          </h3>
           <ArrowUpRight
-            className="size-4 text-muted-foreground transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+            className="size-4 shrink-0 text-honey/70 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-honey"
             aria-hidden="true"
           />
         </div>
-        <p
-          className={cn(
-            "text-sm text-muted-foreground text-pretty",
-            "max-h-0 overflow-hidden opacity-0 transition-all duration-300",
-            "group-hover:max-h-32 group-hover:opacity-100 group-focus-visible:max-h-32 group-focus-visible:opacity-100",
-            "motion-reduce:max-h-32 motion-reduce:opacity-100",
-          )}
-        >
-          {project.description}
-        </p>
+        {/* Screen-reader / reduced-motion: description lives in the overlay visually */}
+        <span className="sr-only">{project.description}</span>
       </div>
     </a>
   );

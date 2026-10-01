@@ -29,7 +29,11 @@ export default function ProjectsPage() {
         lead="A weekend, an idea, and a room full of people cheering you on. Here are the projects that stood out."
       />
 
-      <Section spacing="lg" className="pt-4 sm:pt-8">
+      <Section
+        tone="sky"
+        spacing="lg"
+        className="bg-honeycomb-sky pt-4 sm:pt-8"
+      >
         <div className="flex flex-col gap-16">
           {projectYearOrder.map((year) => {
             const group = projectYears.find((y) => y.year === year);
@@ -38,12 +42,12 @@ export default function ProjectsPage() {
             return (
               <div key={year}>
                 <div className="mb-6">
-                  <h2 className="flex items-center gap-2.5 text-sm font-medium text-muted-foreground">
-                    <HexMark size="sm" tone="sky" />
+                  <h2 className="flex items-center gap-2.5 text-sm font-medium text-sky-foreground/70">
+                    <HexMark size="sm" tone="honey" />
                     {year} winners
                   </h2>
                 </div>
-                <RevealGrid className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <RevealGrid className="grid items-start gap-5 sm:grid-cols-2 lg:grid-cols-3">
                   {group.projects.map((project, index) => (
                     <ProjectCard
                       key={project.name}
