@@ -28,13 +28,13 @@ export function OrganizerCard({
     <div
       className={cn(
         "group flex flex-col items-center text-center",
-        featured && "w-44 sm:w-52",
+        featured ? "w-44 sm:w-52" : "w-full max-w-[11rem] justify-self-center",
       )}
     >
       <div
         className={cn(
           "relative aspect-[0.866] w-full transition-transform duration-300 ease-out group-hover:-translate-y-1",
-          featured ? "max-w-44 sm:max-w-52" : "max-w-28 sm:max-w-32",
+          featured ? "max-w-44 sm:max-w-52" : "mx-auto max-w-32",
         )}
         style={{ clipPath: HEX_CLIP }}
       >
@@ -69,17 +69,22 @@ export function OrganizerCard({
         </div>
       </div>
 
-      <h3 className={cn("mt-4 font-semibold", featured && "text-lg")}>
+      <h3
+        className={cn(
+          "mt-4 text-pretty font-semibold",
+          featured ? "text-lg" : "text-[0.95rem] leading-snug",
+        )}
+      >
         {organizer.name}
         {organizer.pronouns ? (
-          <span className="ml-1.5 text-xs font-normal text-muted-foreground">
-            ({organizer.pronouns})
+          <span className="mt-0.5 block text-xs font-normal text-muted-foreground">
+            {organizer.pronouns}
           </span>
         ) : null}
       </h3>
       <p
         className={cn(
-          "text-sm text-muted-foreground",
+          "mt-1 text-sm text-pretty text-muted-foreground",
           featured && "font-medium text-foreground",
         )}
       >

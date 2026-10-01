@@ -18,12 +18,18 @@ export default function TeamPage() {
       <PageHeader title={teamIntro.title} lead={teamIntro.lead} />
 
       <Section spacing="lg" className="pt-4 sm:pt-8">
-        <div className="flex flex-col gap-16">
+        <div className="flex flex-col gap-12">
           {team.map((group) => {
             const featured = group.name === "Directors";
             return (
               <div key={group.name}>
-                <h2 className="mb-8 flex items-center gap-2.5 text-sm font-medium text-muted-foreground">
+                <h2
+                  className={
+                    featured
+                      ? "mb-6 flex items-center justify-center gap-2.5 text-sm font-medium text-muted-foreground"
+                      : "mb-6 flex items-center gap-2.5 text-sm font-medium text-muted-foreground"
+                  }
+                >
                   <HexMark size="sm" tone="honey" />
                   {group.name}
                 </h2>
@@ -31,7 +37,8 @@ export default function TeamPage() {
                   className={
                     featured
                       ? "flex flex-wrap justify-center gap-x-12 gap-y-10"
-                      : "grid grid-cols-2 gap-x-8 gap-y-12 sm:grid-cols-3"
+                      : // Shared track: 2-up until lg, then 4-up so fours fill a row (no 3+1 orphan).
+                        "grid grid-cols-2 gap-x-6 gap-y-10 lg:grid-cols-4 lg:gap-x-8 lg:gap-y-12"
                   }
                 >
                   {group.members.map((member) => (
