@@ -9,6 +9,10 @@ import {
   uuid,
 } from "drizzle-orm/pg-core";
 
+import type { ApplicationCustomFields } from "@/lib/applications/map-form-to-db";
+
+export type { ApplicationCustomFields };
+
 /**
  * Application lifecycle. `draft` / `submitted` are applicant-facing;
  * decision statuses are set by organizers later.
@@ -25,14 +29,12 @@ export type ApplicationStatus =
   (typeof applicationStatusEnum.enumValues)[number];
 
 /**
- * Year-specific answers that are not worth promoting to columns.
- * Field keys should match the application-form config SSOT (task 14/16).
- */
-export type ApplicationCustomFields = Record<string, unknown>;
-
-/**
- * One row per Clerk user. Core columns are stable across years;
- * everything else lives in `customFields` JSON.
+ * One row per Clerk user.
+ *
+ * Form → DB (see `src/lib/applications/map-form-to-db.ts`):
+ * - core form fields: firstName, lastName, resumeUrl
+ * - system: clerkUserId, email, status, flagged, timestamps
+ * - all other form answers: customFields JSON
  */
 export const applications = pgTable(
   "applications",
@@ -47,7 +49,7 @@ export const applications = pgTable(
       .$type<ApplicationCustomFields>()
       .notNull()
       .default({}),
-    /** Optional until resume upload vs URL is decided (tracker task 29). */
+    /** Optional suggested resume link (upload can replace this later). */
     resumeUrl: text("resume_url"),
     flagged: boolean("flagged").notNull().default(false),
     submittedAt: timestamp("submitted_at", { withTimezone: true }),

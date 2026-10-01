@@ -1,9 +1,10 @@
 /**
  * Application form config - single source of truth for fields (task 14).
- * UI (Zod + form) and DB mapping (task 16) should follow this file.
+ * UI (Zod + form) and DB mapping should follow this file.
+ * Field → column map: `src/lib/applications/map-form-to-db.ts`.
  *
  * Storage:
- * - `core` → dedicated `applications` columns
+ * - `core` → dedicated `applications` columns (firstName, lastName, resumeUrl)
  * - `customFields` → `applications.custom_fields` JSON
  */
 
@@ -308,14 +309,14 @@ export const applicationFormSections: ApplicationFormSection[] = [
       },
       {
         id: "projectInterest",
-        label: "Tech project you’re interested in building",
+        label: "Tech project you're interested in building",
         type: "textarea",
         required: false,
         storage: "customFields",
       },
       {
         id: "skillAreas",
-        label: "Areas you’re interested in",
+        label: "Areas you're interested in",
         type: "multiselect",
         required: false,
         storage: "customFields",
