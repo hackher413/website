@@ -19,6 +19,7 @@ import {
   SheetTitle,
   SheetTrigger,
 } from "@/components/ui/sheet";
+import { authUiEnabled } from "@/lib/features";
 
 function NavCta({ className }: { className?: string }) {
   const cta = primaryCta;
@@ -90,10 +91,12 @@ export function MobileNav({ overHero }: { overHero: boolean }) {
               </SheetClose>
             );
           })}
-          <div className="mt-4 flex items-center justify-between gap-3 px-3">
-            <span className="text-sm text-muted-foreground">Account</span>
-            <AuthControls />
-          </div>
+          {authUiEnabled ? (
+            <div className="mt-4 flex items-center justify-between gap-3 px-3">
+              <span className="text-sm text-muted-foreground">Account</span>
+              <AuthControls />
+            </div>
+          ) : null}
           <SheetClose asChild>
             <span className="mt-4 block">
               <NavCta className="w-full" />

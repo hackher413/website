@@ -3,6 +3,7 @@
 import { Show, SignInButton, UserButton } from "@clerk/nextjs";
 
 import { Button } from "@/components/ui/button";
+import { authUiEnabled } from "@/lib/features";
 import { cn } from "@/lib/utils";
 
 /**
@@ -11,6 +12,8 @@ import { cn } from "@/lib/utils";
  *
  * Clerk Core 3: use `<Show when="signed-in|signed-out">` instead of
  * the removed `<SignedIn>` / `<SignedOut>` components.
+ *
+ * Hidden on Production (`authUiEnabled`) until applications launch.
  */
 export function AuthControls({
   className,
@@ -19,6 +22,8 @@ export function AuthControls({
   className?: string;
   onDark?: boolean;
 }) {
+  if (!authUiEnabled) return null;
+
   return (
     <div className={cn("flex items-center", className)}>
       <Show when="signed-out">
