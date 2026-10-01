@@ -22,16 +22,13 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run db:generate` | Drizzle: schema → SQL migration |
 | `npm run db:migrate` | Apply migrations to Neon |
 | `npm run db:studio` | Drizzle Studio |
+| `npm run email:test -- you@email.com` | Resend smoke test via `sendEmail()` |
 
 ## Environment & Preview deploys
 
 See **[docs/env.md](docs/env.md)** for local `.env.local`, Vercel Development / Preview / Production wiring (Neon, Clerk, Resend), and the Preview verification checklist.
 
-## Auth helpers
+## Platform helpers
 
-Server-side gates for other feature slices:
-
-- `requireUser()` — signed-in Clerk user (else redirect to sign-in)
-- `requireOrganizer()` — `publicMetadata.role` is `organizer` or `admin` (else 403)
-
-Defined in `src/lib/auth.ts`. Clerk session wiring lives in `src/proxy.ts` (Next.js 16 proxy).
+- **Auth** (`src/lib/auth.ts`): `requireUser()`, `requireOrganizer()` — Clerk session wiring in `src/proxy.ts`
+- **Email** (`src/lib/email.ts`): `sendEmail({ to, subject, html })` — Resend

@@ -59,7 +59,16 @@ Set the same keys in the Vercel project → **Settings → Environment Variables
 ### Resend notes
 
 - From-address must use a **verified** domain (e.g. `hackher413.com`).
-- Shared helper lands in a later commit (`sendEmail`); Preview still needs the env vars so that PR can work.
+- Shared helper: `sendEmail()` in `src/lib/email.ts`.
+- Smoke test (does not expose an HTTP endpoint):
+
+```bash
+npm run email:test -- you@example.com
+# or all three teammates:
+npm run email:test -- a@x.com b@y.com c@z.com
+```
+
+Confirm each inbox receives the message and that Resend Dashboard → Domains shows the sending domain as **Verified**.
 
 ## Preview verification checklist (task 11)
 
