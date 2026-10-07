@@ -31,7 +31,9 @@ export type ApplicationCustomFields = {
   gender?: string;
   levelOfStudy?: string;
   school?: string;
+  schoolOther?: string;
   major?: string;
+  majorOther?: string;
   dietaryRestrictions?: string[];
   dietaryNotes?: string;
   tshirtSize?: string;

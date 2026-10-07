@@ -7,7 +7,6 @@ import { ApplySteps } from "@/components/apply/steps";
 import { Button } from "@/components/ui/button";
 import {
   applyIntro,
-  applyUrl,
   applyStatus,
   applyEligibility,
   mailingListUrl,
@@ -20,7 +19,7 @@ export const metadata: Metadata = {
 
 export default function ApplyPage() {
   const isOpen = applyStatus.isOpen;
-  const ctaHref = isOpen ? applyUrl : mailingListUrl;
+  const ctaHref = isOpen ? "/apply/form" : mailingListUrl;
   const ctaLabel = isOpen ? "Start your application" : "Join the mailing list";
 
   return (
