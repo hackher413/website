@@ -1,9 +1,8 @@
 import type { Metadata } from "next";
-import Link from "next/link";
 
+import { ApplyForm } from "@/components/apply/application-form";
 import { PageHeader } from "@/components/content";
 import { Section } from "@/components/layout";
-import { Button } from "@/components/ui/button";
 import { requireUser } from "@/lib/auth";
 
 export const metadata: Metadata = {
@@ -13,8 +12,8 @@ export const metadata: Metadata = {
 };
 
 /**
- * Auth-gated apply form stub (task 13).
- * Real fields + Zod land in later applicant tasks.
+ * Auth-gated apply form. Fields + validation come from the application-form
+ * config; persistence and submit wiring land in the server-action task.
  */
 export default async function ApplyFormPage() {
   await requireUser();
@@ -23,24 +22,11 @@ export default async function ApplyFormPage() {
     <>
       <PageHeader
         title="Your application"
-        lead="Signed in. The full form ships next - this route is the shell."
+        lead="About ten minutes. Answer what you can - everything is validated before it counts."
       />
 
       <Section spacing="md" className="pt-4 sm:pt-8">
-        <div className="flex max-w-xl flex-col gap-6">
-          <p className="text-lead text-muted-foreground text-pretty">
-            Form fields will load from the application-form config. For now,
-            confirm auth and navigation work.
-          </p>
-          <div className="flex flex-wrap gap-3">
-            <Button variant="honey" size="lg" disabled>
-              Submit (coming soon)
-            </Button>
-            <Button asChild variant="outline" size="lg">
-              <Link href="/apply/status">Check status</Link>
-            </Button>
-          </div>
-        </div>
+        <ApplyForm />
       </Section>
     </>
   );

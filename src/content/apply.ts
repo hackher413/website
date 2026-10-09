@@ -8,8 +8,8 @@ export const applyIntro = {
   lead: "Join the mailing list to hear when 2027 opens - no experience required, just curiosity.",
 };
 
-/** External application link on the participant dashboard. */
-export const applyUrl = "https://dashboard.hackher413.com/apply";
+/** Application link; the in-repo flow lives at `/apply`. */
+export const applyUrl = "/apply";
 
 export const applyStatus = {
   isOpen: false,

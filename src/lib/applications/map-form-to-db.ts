@@ -31,7 +31,9 @@ export type ApplicationCustomFields = {
   gender?: string;
   levelOfStudy?: string;
   school?: string;
+  schoolOther?: string;
   major?: string;
+  majorOther?: string;
   dietaryRestrictions?: string[];
   dietaryNotes?: string;
   tshirtSize?: string;
@@ -43,8 +45,7 @@ export type ApplicationCustomFields = {
   underrepresented?: string;
   workshopInterest?: boolean;
   workshopDetails?: string;
-  projectInterest?: string;
-  skillAreas?: string[];
+  projectType?: string;
   hasTeam?: string;
   howHeard?: string;
   hackherTerms?: boolean;
