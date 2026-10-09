@@ -73,14 +73,9 @@ const tshirtOptions: ApplicationFieldOption[] = [
   { value: "3xl", label: "3XL" },
 ];
 
-const skillAreaOptions: ApplicationFieldOption[] = [
-  { value: "frontend", label: "Frontend" },
-  { value: "backend", label: "Backend" },
-  { value: "mobile", label: "Mobile" },
+const projectTypeOptions: ApplicationFieldOption[] = [
   { value: "hardware", label: "Hardware" },
-  { value: "design", label: "Design" },
-  { value: "data_ml", label: "Data / ML" },
-  { value: "other", label: "Other" },
+  { value: "software", label: "Software" },
 ];
 
 const schoolOptions: ApplicationFieldOption[] = [
@@ -370,20 +365,12 @@ export const applicationFormSections: ApplicationFormSection[] = [
         showWhen: { fieldId: "workshopInterest", equals: true },
       },
       {
-        id: "projectInterest",
-        label: "Tech project you're interested in building",
-        type: "textarea",
+        id: "projectType",
+        label: "Do you want to build a hardware or software project?",
+        type: "select",
         required: false,
         storage: "customFields",
-      },
-      {
-        id: "skillAreas",
-        label: "Areas you're interested in",
-        type: "multiselect",
-        required: false,
-        storage: "customFields",
-        options: skillAreaOptions,
-        helpText: "Frontend, backend, mobile, hardware, etc.",
+        options: projectTypeOptions,
       },
       {
         id: "hasTeam",

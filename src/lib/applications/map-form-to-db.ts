@@ -45,8 +45,7 @@ export type ApplicationCustomFields = {
   underrepresented?: string;
   workshopInterest?: boolean;
   workshopDetails?: string;
-  projectInterest?: string;
-  skillAreas?: string[];
+  projectType?: string;
   hasTeam?: string;
   howHeard?: string;
   hackherTerms?: boolean;
