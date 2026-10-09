@@ -31,7 +31,7 @@ export type NavItem = {
 /** Primary navigation. Order defines display order in the Navbar. */
 export const mainNav: NavItem[] = [
   { title: "About", href: "/about" },
-  { title: "Schedule", href: "/schedule" },
+  // Schedule kept at /schedule but hidden until 2027 times are set.
   { title: "Sponsors", href: "/sponsors" },
   { title: "Winners", href: "/projects" },
   { title: "Team", href: "/team" },
@@ -47,7 +47,6 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     title: "Event",
     items: [
       { title: "About", href: "/about" },
-      { title: "Schedule", href: "/schedule" },
       { title: "FAQ", href: "/faq" },
     ],
   },
