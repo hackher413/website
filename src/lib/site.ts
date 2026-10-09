@@ -36,6 +36,7 @@ export const mainNav: NavItem[] = [
   { title: "Winners", href: "/projects" },
   { title: "Team", href: "/team" },
   { title: "FAQ", href: "/faq" },
+  { title: "Application", href: "/application" },
 ];
 
 /** The primary conversion action - prefer `primaryCta` from content/apply. */
@@ -48,6 +49,7 @@ export const footerNav: { title: string; items: NavItem[] }[] = [
     items: [
       { title: "About", href: "/about" },
       { title: "FAQ", href: "/faq" },
+      { title: "Application", href: "/application" },
     ],
   },
   {

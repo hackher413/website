@@ -4,8 +4,8 @@
  */
 
 export const applyIntro = {
-  title: "Applications for 2026 are closed.",
-  lead: "Join the mailing list to hear when 2027 opens - no experience required, just curiosity.",
+  title: "Applications are now open.",
+  lead: "No experience required, just curiosity. Tell us a bit about yourself and why you want to build with us.",
 };
 
 /** Application link; the in-repo flow lives at `/apply`. */
@@ -15,7 +15,7 @@ export const applyStatus = {
   isOpen: false,
   /** Shown near the CTA. */
   deadline:
-    "Applications for 2026 are now closed. Join our mailing list to be the first to know when 2027 opens.",
+    "Applications are now open. We review on a rolling basis and will email you with decisions and next steps.",
 };
 
 /** Mailing-list signup, surfaced while applications are closed. */
