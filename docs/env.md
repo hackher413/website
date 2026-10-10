@@ -60,12 +60,16 @@ Set the same keys in the Vercel project → **Settings → Environment Variables
 
 - From-address must use a **verified** domain (e.g. `hackher413.com`).
 - Shared helper: `sendEmail()` in `src/lib/email.ts`.
+- Templates + chrome: `src/lib/emails/` (confirmation, accepted, denied). From display name comes from `RESEND_FROM_EMAIL`; Reply-To from `RESEND_REPLY_TO` or the team Gmail.
 - Smoke test (does not expose an HTTP endpoint):
 
 ```bash
 npm run email:test -- you@example.com
 # or all three teammates:
 npm run email:test -- a@x.com b@y.com c@z.com
+# preview chrome without sending (works before domain verify):
+npm run email:test -- --preview confirmation --out /tmp/confirm.html
+npm run email:test -- --template accepted you@example.com
 ```
 
 Confirm each inbox receives the message and that Resend Dashboard → Domains shows the sending domain as **Verified**.
