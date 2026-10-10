@@ -23,6 +23,8 @@ Open [http://localhost:3000](http://localhost:3000).
 | `npm run db:migrate` | Apply migrations to Neon |
 | `npm run db:studio` | Drizzle Studio |
 | `npm run email:test -- you@email.com` | Resend smoke test via `sendEmail()` |
+| `npm run email:test -- --preview confirmation` | Dump shared-chrome HTML (no Resend) |
+| `npm run email:test -- --template accepted you@email.com` | Send a decision/confirm template |
 
 ## Environment & Preview deploys
 
@@ -32,3 +34,4 @@ See **[docs/env.md](docs/env.md)** for local `.env.local`, Vercel Development / 
 
 - **Auth** (`src/lib/auth.ts`): `requireUser()`, `requireOrganizer()` (Clerk session wiring in `src/proxy.ts`)
 - **Email** (`src/lib/email.ts`): `sendEmail({ to, subject, html })` via Resend
+- **Email templates** (`src/lib/emails/`): shared chrome (from-name, header, footer) + confirmation / accepted / denied bodies
