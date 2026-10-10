@@ -11,6 +11,10 @@ export const emailBrand = {
   name: siteConfig.name,
   /** Cycle the application emails refer to (next event). */
   cycleYear: 2027,
+  /** Display date range on Hive Admit + decision copy. */
+  eventDates: "February 27–28, 2027",
+  /** Short form for ticket meta row. */
+  eventDatesShort: "Feb 27–28, 2027",
   url: siteConfig.url,
   /** Human contact inbox (also default Reply-To). */
   contactEmail: siteConfig.social.email.replace(/^mailto:/i, ""),

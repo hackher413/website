@@ -18,3 +18,10 @@ export {
   type ApplicantEmailVars,
   type EmailTemplateId,
 } from "@/lib/emails/templates";
+
+export {
+  hiveAdmitSize,
+  hiveAdmitImageUrl,
+  renderHiveAdmitTicket,
+  type HiveAdmitVars,
+} from "@/lib/emails/hive-admit";

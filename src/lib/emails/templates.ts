@@ -4,11 +4,14 @@ import {
   wrapEmailHtml,
   wrapEmailText,
 } from "@/lib/emails/chrome";
+import { hiveAdmitImageUrl } from "@/lib/emails/hive-admit";
 
 /**
  * Confirmation + decision templates. Bodies are copy placeholders for
  * director sign-off; all share the same chrome (from-name, header, footer).
  * Inspired by Dashboard user_mailer bodies in hackher413-2020-config.
+ *
+ * Acceptance mail includes a Hive Admit ticket image (see hive-admit.tsx).
  */
 
 export type BuiltEmail = {
@@ -20,6 +23,7 @@ export type BuiltEmail = {
 
 export type ApplicantEmailVars = {
   firstName: string;
+  lastName?: string;
   /** Optional CTA (e.g. status page or RSVP). */
   statusUrl?: string;
 };
@@ -82,21 +86,33 @@ export function buildConfirmationEmail(vars: ApplicantEmailVars): BuiltEmail {
   };
 }
 
-/** Organizer accepted the application. */
+/** Organizer accepted the application — includes Hive Admit ticket. */
 export function buildAcceptedEmail(vars: ApplicantEmailVars): BuiltEmail {
   const { name, cycleYear, url } = emailBrand;
-  const subject = `Congratulations! You're in for ${name} ${cycleYear}`;
+  const subject = `You're in! Your ${name} ${cycleYear} Hive Admit`;
+  const ticketUrl = hiveAdmitImageUrl({
+    firstName: vars.firstName,
+    lastName: vars.lastName,
+  });
+  const linkHref = vars.statusUrl || url;
   const nextStep = vars.statusUrl
     ? cta(vars.statusUrl, "View your status")
     : cta(url, `Visit ${name}`);
 
+  const ticketHtml = `<p style="margin:0 0 20px;">
+  <a href="${linkHref}" style="text-decoration:none;">
+    <img src="${ticketUrl}" alt="Your ${name} Hive Admit ticket" width="560" style="display:block;width:100%;max-width:560px;height:auto;border:0;border-radius:8px;" />
+  </a>
+</p>`;
+
   const bodyHtml = [
     p(greeting(vars.firstName)),
     p(
-      `Congratulations — you've been <strong>accepted</strong> to participate in <strong>${name} ${cycleYear}</strong>!`,
+      `Welcome to the hive — you've been <strong>accepted</strong> to <strong>${name} ${cycleYear}</strong>. Here's your Hive Admit:`,
     ),
+    ticketHtml,
     p(
-      `Next steps and event details will be on our site. Keep an eye on this inbox for travel, Discord, and day-of info.`,
+      `${name} ${cycleYear} is <strong>${emailBrand.eventDates}</strong> at UMass Amherst. Next steps (travel, Discord, day-of) will land here and on our site.`,
     ),
     nextStep,
     p(`We're excited to build with you.<br />— The ${name} Team`),
@@ -105,9 +121,11 @@ export function buildAcceptedEmail(vars: ApplicantEmailVars): BuiltEmail {
   const bodyText = [
     greeting(vars.firstName),
     "",
-    `Congratulations — you've been accepted to participate in ${name} ${cycleYear}!`,
+    `Welcome to the hive — you've been accepted to ${name} ${cycleYear}.`,
     "",
-    `Next steps and event details will be on our site. Keep an eye on this inbox for travel, Discord, and day-of info.`,
+    `Your Hive Admit: ${ticketUrl}`,
+    "",
+    `${name} ${cycleYear} is ${emailBrand.eventDates} at UMass Amherst. Next steps will land here and on our site.`,
     vars.statusUrl ? `\nStatus: ${vars.statusUrl}` : `\nWebsite: ${url}`,
     "",
     `We're excited to build with you.`,
@@ -117,8 +135,8 @@ export function buildAcceptedEmail(vars: ApplicantEmailVars): BuiltEmail {
   return {
     subject,
     html: wrapEmailHtml({
-      title: "You're accepted",
-      preheader: `Welcome to ${name} ${cycleYear}.`,
+      title: "Hive Admit",
+      preheader: `You're in for ${name} ${cycleYear} — open for your ticket.`,
       bodyHtml,
     }),
     text: wrapEmailText(bodyText),

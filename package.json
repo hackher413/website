@@ -10,7 +10,8 @@
     "db:generate": "drizzle-kit generate",
     "db:migrate": "drizzle-kit migrate",
     "db:studio": "drizzle-kit studio",
-    "email:test": "tsx scripts/send-test-email.ts"
+    "email:test": "tsx scripts/send-test-email.ts",
+    "email:hive-admit": "tsx scripts/send-test-email.ts --preview hive-admit --out /tmp/hive-admit.png"
   },
   "dependencies": {
     "@clerk/nextjs": "^7.9.9",

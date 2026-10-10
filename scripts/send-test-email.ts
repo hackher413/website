@@ -6,6 +6,7 @@
  *   npx tsx scripts/send-test-email.ts --template confirmation you@example.com
  *   npx tsx scripts/send-test-email.ts --preview accepted
  *   npx tsx scripts/send-test-email.ts --preview denied --out /tmp/denied.html
+ *   npx tsx scripts/send-test-email.ts --preview hive-admit --out /tmp/hive-admit.png
  *
  * Loads `.env.local` then `.env`. Sending requires RESEND_API_KEY +
  * RESEND_FROM_EMAIL and a verified domain. `--preview` needs neither.
@@ -17,7 +18,7 @@ import { config as loadEnv } from "dotenv";
 loadEnv({ path: ".env.local" });
 loadEnv({ path: ".env" });
 
-const TEMPLATE_IDS = ["confirmation", "accepted", "denied"] as const;
+const TEMPLATE_IDS = ["confirmation", "accepted", "denied", "hive-admit"] as const;
 type TemplateId = (typeof TEMPLATE_IDS)[number];
 
 function isTemplateId(value: string): value is TemplateId {
@@ -27,9 +28,10 @@ function isTemplateId(value: string): value is TemplateId {
 function printUsage(): never {
   console.error(`Usage:
   npx tsx scripts/send-test-email.ts [--template <id>] <email> [email2...]
-  npx tsx scripts/send-test-email.ts --preview <id> [--out path.html]
+  npx tsx scripts/send-test-email.ts --preview <id> [--out path]
 
-Templates: ${TEMPLATE_IDS.join(", ")}`);
+Templates: confirmation, accepted, denied
+Ticket PNG: hive-admit`);
   process.exit(1);
 }
 
@@ -44,7 +46,7 @@ async function main() {
     const arg = args[i];
     if (arg === "--template") {
       const id = args[++i];
-      if (!id || !isTemplateId(id)) printUsage();
+      if (!id || !isTemplateId(id) || id === "hive-admit") printUsage();
       template = id;
     } else if (arg === "--preview") {
       preview = true;
@@ -61,23 +63,52 @@ async function main() {
     }
   }
 
-  const { buildEmailTemplate, getFromDisplayName } = await import(
-    "../src/lib/emails"
-  );
+  const sample = {
+    firstName: "Alex",
+    lastName: "Bee",
+    statusUrl: "https://www.hackher413.com/apply/status",
+  };
+
+  if (preview && template === "hive-admit") {
+    const { renderHiveAdmitTicket } = await import("../src/lib/emails");
+    const image = await renderHiveAdmitTicket({
+      firstName: sample.firstName,
+      lastName: sample.lastName,
+    });
+    const bytes = Buffer.from(await image.arrayBuffer());
+    const dest = outPath || "/tmp/hive-admit.png";
+    writeFileSync(dest, bytes);
+    console.log(`Wrote Hive Admit ticket → ${dest}`);
+    return;
+  }
+
+  const { buildEmailTemplate, getFromDisplayName, renderHiveAdmitTicket } =
+    await import("../src/lib/emails");
 
   if (preview) {
-    if (template === "smoke") printUsage();
-    const built = buildEmailTemplate(template, {
-      firstName: "Alex",
-      statusUrl: "https://www.hackher413.com/apply/status",
-    });
+    if (template === "smoke" || template === "hive-admit") printUsage();
+    let html = buildEmailTemplate(template, sample).html;
+
+    // Embed ticket as data URL so file:// previews show the graphic.
+    if (template === "accepted") {
+      const image = await renderHiveAdmitTicket({
+        firstName: sample.firstName,
+        lastName: sample.lastName,
+      });
+      const dataUrl = `data:image/png;base64,${Buffer.from(await image.arrayBuffer()).toString("base64")}`;
+      html = html.replace(
+        /src="https?:\/\/[^"]*\/api\/emails\/hive-admit[^"]*"/,
+        `src="${dataUrl}"`,
+      );
+    }
+
     if (outPath) {
-      writeFileSync(outPath, built.html, "utf8");
+      writeFileSync(outPath, html, "utf8");
       console.log(
         `Wrote ${template} preview → ${outPath} (from-name: ${getFromDisplayName()})`,
       );
     } else {
-      process.stdout.write(built.html);
+      process.stdout.write(html);
     }
     return;
   }
@@ -100,10 +131,9 @@ async function main() {
       continue;
     }
 
-    const built = buildEmailTemplate(template, {
-      firstName: "Alex",
-      statusUrl: "https://www.hackher413.com/apply/status",
-    });
+    if (template === "hive-admit") printUsage();
+
+    const built = buildEmailTemplate(template, sample);
     const { id } = await sendEmail({
       to,
       subject: `[test] ${built.subject}`,
