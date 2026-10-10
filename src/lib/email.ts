@@ -1,10 +1,13 @@
 import { Resend } from "resend";
 
+import { getFromDisplayName, getReplyToAddress } from "@/lib/emails/chrome";
+
 export type SendEmailInput = {
   to: string | string[];
   subject: string;
   html: string;
   text?: string;
+  /** Defaults to RESEND_REPLY_TO or the team contact inbox. */
   replyTo?: string | string[];
 };
 
@@ -22,6 +25,11 @@ function getClient() {
   return new Resend(apiKey);
 }
 
+/**
+ * Canonical From for all applicant mail. Prefer
+ * `Hack(H)er413 <noreply@hackher413.com>` so display name stays consistent
+ * across confirmation + decision templates.
+ */
 function getFromAddress() {
   const from = process.env.RESEND_FROM_EMAIL;
   if (!from) {
@@ -35,6 +43,7 @@ function getFromAddress() {
 /**
  * Shared Resend sender for confirmation + decision emails.
  * Server-only - do not import from Client Components.
+ * Templates: `@/lib/emails` (shared chrome + bodies).
  */
 export async function sendEmail(
   input: SendEmailInput,
@@ -46,7 +55,7 @@ export async function sendEmail(
     subject: input.subject,
     html: input.html,
     text: input.text,
-    replyTo: input.replyTo,
+    replyTo: input.replyTo ?? getReplyToAddress(),
   });
 
   if (error) {
@@ -59,3 +68,5 @@ export async function sendEmail(
 
   return { id: data.id };
 }
+
+export { getFromDisplayName, getReplyToAddress };
