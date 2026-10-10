@@ -16,6 +16,11 @@ export const emailBrand = {
   contactEmail: siteConfig.social.email.replace(/^mailto:/i, ""),
   /** Display name shown in inboxes when RESEND_FROM_EMAIL is unset/malformed. */
   fromDisplayName: siteConfig.name,
+  /**
+   * Absolute logo URL for email clients (relative /public paths do not work).
+   * Uses the on-dark mark for the espresso header band.
+   */
+  logoUrl: `${siteConfig.url}/brand/logo-on-dark.png`,
 } as const;
 
 export type EmailChromeInput = {
@@ -89,10 +94,15 @@ export function wrapEmailHtml(input: EmailChromeInput): string {
         <table role="presentation" cellpadding="0" cellspacing="0" border="0" width="100%" style="max-width:560px;background-color:#ffffff;border-radius:8px;overflow:hidden;border:1px solid ${brand.sky};">
           <tr>
             <td style="background-color:${brand.espresso};padding:20px 24px;">
-              <p style="margin:0 0 4px;font-family:Georgia,'Times New Roman',serif;font-size:20px;line-height:1.3;color:${brand.cream};font-weight:700;">
-                ${escapeHtml(emailBrand.name)}
-              </p>
-              <p style="margin:0;font-family:Georgia,'Times New Roman',serif;font-size:13px;line-height:1.4;color:${brand.honey};">
+              <a href="${escapeHtml(emailBrand.url)}" style="text-decoration:none;">
+                <img
+                  src="${escapeHtml(emailBrand.logoUrl)}"
+                  width="180"
+                  alt="${escapeHtml(emailBrand.name)}"
+                  style="display:block;width:180px;max-width:70%;height:auto;border:0;outline:none;"
+                />
+              </a>
+              <p style="margin:12px 0 0;font-family:Georgia,'Times New Roman',serif;font-size:13px;line-height:1.4;color:${brand.honey};">
                 ${title}
               </p>
             </td>
