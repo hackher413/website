@@ -114,8 +114,9 @@ export const applicationSchema = z.object(shape).superRefine((values, ctx) => {
       ctx.addIssue({
         code: "custom",
         path: [field.id],
-        message:
-          result.error.issues[0]?.message ?? requiredMessage(field.label),
+        message: values[field.id] === undefined
+          ? requiredMessage(field.label)
+          : result.error.issues[0]?.message ?? requiredMessage(field.label),
       });
     }
   }
