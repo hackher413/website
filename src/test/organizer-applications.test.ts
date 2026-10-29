@@ -265,6 +265,11 @@ describe("search page", () => {
     expect(text(html)).toContain("Clear search");
     expect(session.query.mock.calls[0][1]).toEqual(Array(3).fill("%Priya%"));
   });
+  it("links Download CSV to the export using the same search", async () => {
+    expect(text(await renderList("  Priya  "))).toContain("Download CSV");
+    expect(await renderList("  Priya  ")).toContain('href="/api/organizer/applications/export?q=Priya" download');
+    expect(await renderList()).toContain('href="/api/organizer/applications/export" download');
+  });
   it("distinguishes no search results from an empty application queue", async () => {
     rows = [];
     const noMatch = await renderList("nobody");
