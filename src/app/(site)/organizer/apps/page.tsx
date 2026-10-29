@@ -24,6 +24,8 @@ export default async function OrganizerAppsPage({ searchParams }: PageProps) {
   const params = await searchParams;
   const query = (typeof params.q === "string" ? params.q : "").trim();
   const appLst = await fetchAppsList(query);
+  const exportParams = query ? `?${new URLSearchParams({ q: query })}` : "";
+  const exportHref = `/api/organizer/applications/export${exportParams}`;
 
   return (
     <>
@@ -52,10 +54,15 @@ export default async function OrganizerAppsPage({ searchParams }: PageProps) {
             ) : null}
           </div>
         </form>
-        <p className="mb-4 text-sm text-muted-foreground">
-          {appLst.length} application{appLst.length === 1 ? "" : "s"}
-          {query ? ` matching “${query}”` : ""}
-        </p>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm text-muted-foreground">
+            {appLst.length} application{appLst.length === 1 ? "" : "s"}
+            {query ? ` matching “${query}”` : ""}
+          </p>
+          <Button asChild variant="outline">
+            <a href={exportHref} download>Download CSV</a>
+          </Button>
+        </div>
         {appLst.length === 0 ? (
           <p className="border-y border-border py-8 text-muted-foreground">
             {query
