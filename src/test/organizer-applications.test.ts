@@ -350,6 +350,18 @@ describe("search page", () => {
     expect(text(html)).not.toContain("Drafts");
     expect(listQueryCall()[1].slice(1)).toEqual(Array(3).fill("%Priya%"));
   });
+  it("links Download CSV to the export using the same search and tab", async () => {
+    expect(text(await renderList("  Priya  "))).toContain("Download CSV");
+    expect(await renderList("  Priya  ")).toContain(
+      'href="/api/organizer/applications/export?q=Priya" download',
+    );
+    expect(await renderList()).toContain(
+      'href="/api/organizer/applications/export" download',
+    );
+    expect(await renderList(undefined, "accepted")).toContain(
+      'href="/api/organizer/applications/export?status=accepted" download',
+    );
+  });
   it("distinguishes no search results from an empty submitted queue", async () => {
     rows = [];
     const noMatch = await renderList("nobody");
