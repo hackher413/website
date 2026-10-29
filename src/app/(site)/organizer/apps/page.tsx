@@ -3,7 +3,6 @@ import Link from "next/link";
 
 import { PageHeader } from "@/components/content";
 import { Section } from "@/components/layout";
-import { requireOrganizer } from "@/lib/auth";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -20,8 +19,8 @@ type PageProps = {
   searchParams: Promise<{ q?: string | string[] }>;
 };
 
+/** Authorization lives in `fetchAppsList` (same pattern as the detail loader). */
 export default async function OrganizerAppsPage({ searchParams }: PageProps) {
-  await requireOrganizer();
   const params = await searchParams;
   const query = (typeof params.q === "string" ? params.q : "").trim();
   const appLst = await fetchAppsList(query);
@@ -63,25 +62,26 @@ export default async function OrganizerAppsPage({ searchParams }: PageProps) {
               ? "No applications match your search. Try a different name or email."
               : "No applications yet."}
           </p>
-        ) : null}
-        <ul className="divide-y divide-border border-y border-border">
-          {appLst.map((app) => (
-            <li key={app.id}>
-              <Link
-                href={`/organizer/apps/${app.id}`}
-                className="flex flex-col gap-1 py-4 transition-colors hover:bg-muted/50 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
-              >
-                <div>
-                  <p className="font-medium text-foreground">{[app.firstName, app.lastName].filter(Boolean).join(" ") || app.email}</p>
-                  <p className="text-sm text-muted-foreground">{app.email}</p>
-                </div>
-                <p className="text-sm capitalize text-muted-foreground">
-                  {app.status}
-                </p>
-              </Link>
-            </li>
-          ))}
-        </ul>
+        ) : (
+          <ul className="divide-y divide-border border-y border-border">
+            {appLst.map((app) => (
+              <li key={app.id}>
+                <Link
+                  href={`/organizer/apps/${app.id}`}
+                  className="flex flex-col gap-1 py-4 transition-colors hover:bg-muted/50 sm:flex-row sm:items-center sm:justify-between sm:gap-4"
+                >
+                  <div>
+                    <p className="font-medium text-foreground">{[app.firstName, app.lastName].filter(Boolean).join(" ") || app.email}</p>
+                    <p className="text-sm text-muted-foreground">{app.email}</p>
+                  </div>
+                  <p className="text-sm capitalize text-muted-foreground">
+                    {app.status}
+                  </p>
+                </Link>
+              </li>
+            ))}
+          </ul>
+        )}
       </Section>
     </>
   );

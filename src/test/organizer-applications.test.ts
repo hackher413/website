@@ -267,10 +267,13 @@ describe("search page", () => {
   });
   it("distinguishes no search results from an empty application queue", async () => {
     rows = [];
-    expect(text(await renderList("nobody"))).toContain("No applications match your search.");
+    const noMatch = await renderList("nobody");
+    expect(text(noMatch)).toContain("No applications match your search.");
+    expect(noMatch).not.toContain("<ul");
     const html = await renderList();
     expect(text(html)).toContain("No applications yet.");
     expect(text(html)).not.toContain("Clear search");
+    expect(html).not.toContain("<ul");
   });
   it("handles repeated query parameters and multiple results", async () => {
     rows.push(applicationFixture({ id: "22222222-2222-4222-8222-222222222222", firstName: "Sam" }));
