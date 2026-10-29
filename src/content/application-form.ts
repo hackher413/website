@@ -211,7 +211,7 @@ export const applicationFormSections: ApplicationFormSection[] = [
         id: "schoolOther",
         label: "School (other)",
         type: "text",
-        required: false,
+        required: true,
         storage: "customFields",
         placeholder: "Name of your school",
         showWhen: { fieldId: "school", equals: "other" },
