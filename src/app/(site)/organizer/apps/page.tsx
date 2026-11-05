@@ -41,6 +41,16 @@ function tabHref(status: ReviewTabStatus, query: string) {
   return qs ? `/organizer/apps?${qs}` : "/organizer/apps";
 }
 
+function exportHref(status: ReviewTabStatus, query: string) {
+  const params = new URLSearchParams();
+  if (query) params.set("q", query);
+  if (status !== DEFAULT_REVIEW_TAB) params.set("status", status);
+  const qs = params.toString();
+  return qs
+    ? `/api/organizer/applications/export?${qs}`
+    : "/api/organizer/applications/export";
+}
+
 function emptyMessage(status: ReviewTabStatus, query: string) {
   if (query) {
     return `No ${REVIEW_TAB_LABELS[status].toLowerCase()} applications match your search.`;
@@ -137,11 +147,18 @@ export default async function OrganizerAppsPage({ searchParams }: PageProps) {
           </ul>
         </nav>
 
-        <p className="mb-4 text-sm text-muted-foreground">
-          {apps.length} {REVIEW_TAB_LABELS[status].toLowerCase()} application
-          {apps.length === 1 ? "" : "s"}
-          {query ? ` matching “${query}”` : ""}
-        </p>
+        <div className="mb-4 flex flex-wrap items-center justify-between gap-3">
+          <p className="text-sm text-muted-foreground">
+            {apps.length} {REVIEW_TAB_LABELS[status].toLowerCase()} application
+            {apps.length === 1 ? "" : "s"}
+            {query ? ` matching “${query}”` : ""}
+          </p>
+          <Button asChild variant="outline">
+            <a href={exportHref(status, query)} download>
+              Download CSV
+            </a>
+          </Button>
+        </div>
         {apps.length === 0 ? (
           <p className="border-y border-border py-8 text-muted-foreground">
             {emptyMessage(status, query)}
