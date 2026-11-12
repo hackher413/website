@@ -8,6 +8,7 @@ import {
   applications,
   type ApplicationStatus,
 } from "@/db/schema";
+import { trySendApplicationDecisionEmail } from "@/lib/applications/applicant-emails";
 import {
   isNotUniversityStudent,
   SYSTEM_FLAGGED_BY,
@@ -153,18 +154,34 @@ export async function updateApplicationStatus(
     throw new Error("Invalid application status.");
   }
 
-  const updated = await db
+  const [existing] = await db
+    .select({
+      id: applications.id,
+      email: applications.email,
+      firstName: applications.firstName,
+      lastName: applications.lastName,
+      status: applications.status,
+    })
+    .from(applications)
+    .where(eq(applications.clerkUserId, clerkUserId))
+    .limit(1);
+
+  if (!existing) {
+    throw new Error("Application not found.");
+  }
+
+  await db
     .update(applications)
     .set({
       status,
       statusUpdatedBy: admin.userId,
       statusUpdatedAt: new Date(),
     })
-    .where(eq(applications.clerkUserId, clerkUserId))
-    .returning({ id: applications.id });
+    .where(eq(applications.clerkUserId, clerkUserId));
 
-  if (updated.length === 0) {
-    throw new Error("Application not found.");
+  // Skip re-sends when organizers re-click the same decision.
+  if (existing.status !== status) {
+    await trySendApplicationDecisionEmail(existing, status);
   }
 
   revalidatePath("/organizer/apps", "layout");
@@ -188,6 +205,17 @@ export async function bulkUpdateApplicationStatus(
     throw new Error(`You can update at most ${BULK_LIMIT} applications at once.`);
   }
 
+  const recipients = await db
+    .select({
+      email: applications.email,
+      firstName: applications.firstName,
+      lastName: applications.lastName,
+      status: applications.status,
+    })
+    .from(applications)
+    .where(inArray(applications.clerkUserId, ids))
+    .limit(BULK_LIMIT);
+
   const updated = await db
     .update(applications)
     .set({
@@ -197,6 +225,12 @@ export async function bulkUpdateApplicationStatus(
     })
     .where(inArray(applications.clerkUserId, ids))
     .returning({ id: applications.id });
+
+  await Promise.all(
+    recipients
+      .filter((row) => row.status !== status)
+      .map((row) => trySendApplicationDecisionEmail(row, status)),
+  );
 
   revalidatePath("/organizer/apps", "layout");
   return { updated: updated.length };

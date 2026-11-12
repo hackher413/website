@@ -7,6 +7,7 @@ import { notFound, redirect } from "next/navigation";
 import { applyStatus } from "@/content/apply";
 import { db } from "@/db";
 import { applications } from "@/db/schema";
+import { trySendApplicationConfirmationEmail } from "@/lib/applications/applicant-emails";
 import { applicationSchema } from "@/lib/applications/application-schema";
 import {
   isNotUniversityStudent,
@@ -161,11 +162,18 @@ export async function submitApplication(values: Record<string, unknown>) {
         eq(applications.status, "draft"),
       ),
     )
-    .returning({ id: applications.id });
+    .returning({
+      id: applications.id,
+      email: applications.email,
+      firstName: applications.firstName,
+      lastName: applications.lastName,
+    });
 
   if (!updated) {
     throw new Error("Unable to submit application. Please try again.");
   }
+
+  await trySendApplicationConfirmationEmail(updated);
 
   redirect("/apply/status");
 }
