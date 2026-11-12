@@ -12,6 +12,8 @@ const session = vi.hoisted(() => ({
   updateWhere: vi.fn(),
   returning: vi.fn(),
   revalidatePath: vi.fn(),
+  trySendDecision: vi.fn(),
+  selectRows: [] as Record<string, unknown>[],
 }));
 
 vi.mock("@clerk/nextjs/server", () => ({
@@ -32,6 +34,9 @@ vi.mock("@/db", () => ({
     update: session.update,
   },
 }));
+vi.mock("@/lib/applications/applicant-emails", () => ({
+  trySendApplicationDecisionEmail: session.trySendDecision,
+}));
 
 import {
   bulkUpdateApplicationStatus,
@@ -39,22 +44,33 @@ import {
   updateApplicationStatus,
 } from "@/app/(site)/organizer/apps/actions";
 
+const priya = {
+  id: "11111111-1111-4111-8111-111111111111",
+  email: "priya@example.edu",
+  firstName: "Priya",
+  lastName: "Patel",
+  status: "submitted",
+};
+
 beforeEach(() => {
   vi.clearAllMocks();
+  session.selectRows = [priya];
   session.protect.mockResolvedValue({ userId: "user_reviewer" });
   session.currentUser.mockResolvedValue({ publicMetadata: { role: "organizer" } });
   session.select.mockReturnValue({ from: session.from });
   session.from.mockReturnValue({ where: session.where });
   session.where.mockReturnValue({ limit: session.limit });
+  session.limit.mockImplementation(async () => session.selectRows);
   session.update.mockReturnValue({ set: session.set });
   session.set.mockReturnValue({ where: session.updateWhere });
   session.updateWhere.mockReturnValue({ returning: session.returning });
-  session.returning.mockResolvedValue([{ id: "11111111-1111-4111-8111-111111111111" }]);
+  session.returning.mockResolvedValue([{ id: priya.id }]);
+  session.trySendDecision.mockResolvedValue(undefined);
 });
 
 describe("updateApplicationStatus", () => {
   it.each(["accepted", "denied"] as const)(
-    "allows decision status %s and records audit fields",
+    "allows decision status %s, records audit fields, and emails once",
     async (status) => {
       await updateApplicationStatus(status, "user_priya");
 
@@ -65,9 +81,19 @@ describe("updateApplicationStatus", () => {
           statusUpdatedAt: expect.any(Date),
         }),
       );
+      expect(session.trySendDecision).toHaveBeenCalledWith(priya, status);
       expect(session.revalidatePath).toHaveBeenCalledWith("/organizer/apps", "layout");
     },
   );
+
+  it("skips decision email when status is unchanged", async () => {
+    session.selectRows = [{ ...priya, status: "accepted" }];
+
+    await updateApplicationStatus("accepted", "user_priya");
+
+    expect(session.set).toHaveBeenCalled();
+    expect(session.trySendDecision).not.toHaveBeenCalled();
+  });
 
   it.each(["draft", "submitted", "waitlisted"] as const)(
     "rejects non-decision status %s",
@@ -76,14 +102,16 @@ describe("updateApplicationStatus", () => {
         "Invalid application status.",
       );
       expect(session.update).not.toHaveBeenCalled();
+      expect(session.trySendDecision).not.toHaveBeenCalled();
     },
   );
 
   it("rejects missing applications", async () => {
-    session.returning.mockResolvedValue([]);
+    session.selectRows = [];
     await expect(updateApplicationStatus("accepted", "missing")).rejects.toThrow(
       "Application not found.",
     );
+    expect(session.update).not.toHaveBeenCalled();
   });
 
   it("requires an organizer", async () => {
@@ -94,7 +122,17 @@ describe("updateApplicationStatus", () => {
 });
 
 describe("bulkUpdateApplicationStatus", () => {
-  it("updates many applications with the same decision", async () => {
+  it("updates many applications and emails only status changes", async () => {
+    session.selectRows = [
+      { ...priya, email: "a@example.edu", status: "submitted" },
+      {
+        id: "22222222-2222-4222-8222-222222222222",
+        email: "b@example.edu",
+        firstName: "Sam",
+        lastName: "Lee",
+        status: "accepted",
+      },
+    ];
     session.returning.mockResolvedValue([
       { id: "11111111-1111-4111-8111-111111111111" },
       { id: "22222222-2222-4222-8222-222222222222" },
@@ -109,6 +147,11 @@ describe("bulkUpdateApplicationStatus", () => {
         status: "accepted",
         statusUpdatedBy: "user_reviewer",
       }),
+    );
+    expect(session.trySendDecision).toHaveBeenCalledTimes(1);
+    expect(session.trySendDecision).toHaveBeenCalledWith(
+      expect.objectContaining({ email: "a@example.edu" }),
+      "accepted",
     );
     expect(session.revalidatePath).toHaveBeenCalledWith("/organizer/apps", "layout");
   });
@@ -133,7 +176,7 @@ describe("bulkUpdateApplicationStatus", () => {
 
 describe("flagApplication", () => {
   it("flags an unflagged application and records who flagged it", async () => {
-    session.limit.mockResolvedValue([{ flagged: false }]);
+    session.selectRows = [{ flagged: false }];
 
     await flagApplication("user_priya");
 
@@ -146,7 +189,7 @@ describe("flagApplication", () => {
   });
 
   it("unflags a flagged application and clears audit fields", async () => {
-    session.limit.mockResolvedValue([{ flagged: true }]);
+    session.selectRows = [{ flagged: true }];
 
     await flagApplication("user_priya");
 
@@ -158,7 +201,7 @@ describe("flagApplication", () => {
   });
 
   it("rejects missing applications", async () => {
-    session.limit.mockResolvedValue([]);
+    session.selectRows = [];
     await expect(flagApplication("missing")).rejects.toThrow("Application not found.");
     expect(session.update).not.toHaveBeenCalled();
   });

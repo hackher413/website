@@ -8,6 +8,7 @@ const boundary = vi.hoisted(() => ({
   protect: vi.fn(), currentUser: vi.fn(), redirect: vi.fn(),
   select: vi.fn(), selectWhere: vi.fn(), limit: vi.fn(),
   update: vi.fn(), set: vi.fn(), updateWhere: vi.fn(), returning: vi.fn(),
+  trySendConfirmation: vi.fn(),
   isOpen: true,
 }));
 
@@ -25,6 +26,9 @@ vi.mock("next/navigation", () => ({
 // Most cases exercise an open window; a separate case verifies the closed gate.
 vi.mock("@/content/apply", () => ({
   applyStatus: { get isOpen() { return boundary.isOpen; } },
+}));
+vi.mock("@/lib/applications/applicant-emails", () => ({
+  trySendApplicationConfirmationEmail: boundary.trySendConfirmation,
 }));
 vi.mock("@/components/layout", async () => ({
   ...await import("@/components/layout/container"),
@@ -84,9 +88,15 @@ beforeEach(() => {
     // from formInput(). This keeps a dropped field from passing via the mock.
     const patch = boundary.set.mock.lastCall?.[0] as Partial<Application>;
     saved = { ...saved, ...structuredClone(patch) };
-    return [{ id: saved.id }];
+    return [{
+      id: saved.id,
+      email: saved.email,
+      firstName: saved.firstName,
+      lastName: saved.lastName,
+    }];
   });
   boundary.redirect.mockImplementation(() => { throw redirectSignal; });
+  boundary.trySendConfirmation.mockResolvedValue(undefined);
 });
 
 function renderedField(html: string, label: string): string {
@@ -105,6 +115,13 @@ async function submitAndReadAsOrganizer(input: Record<string, unknown>) {
   expect(boundary.redirect).toHaveBeenCalledExactlyOnceWith("/apply/status");
   expect(boundary.set).toHaveBeenCalledTimes(1);
   expect(boundary.returning).toHaveBeenCalledTimes(1);
+  expect(boundary.trySendConfirmation).toHaveBeenCalledExactlyOnceWith(
+    expect.objectContaining({
+      email: saved.email,
+      firstName: saved.firstName,
+      lastName: saved.lastName,
+    }),
+  );
   expect(saved.status).toBe("submitted");
   expect(saved.submittedAt).toBeInstanceOf(Date);
 
