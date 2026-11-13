@@ -27,7 +27,7 @@ export const applyPrivacyNote =
   "We use your information only for Hack(H)er413 admissions and event logistics. We never sell it.";
 
 /** Mailing-list signup, surfaced while applications are closed. */
-export const mailingListUrl = "https://forms.gle/YmY38wRxLSWWFQkKA";
+export const mailingListUrl = "https://forms.gle/tGWo3TyTp1F9HRjw9";
 
 /**
  * Sitewide primary conversion action. Navbar, hero, and page CTAs should use
